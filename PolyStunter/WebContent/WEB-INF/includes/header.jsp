@@ -18,7 +18,7 @@
 				<div id="searchBar">
 					<form name="searchBar" action="/search" method="POST">
 						<a id="logoSearch" href="javascript:;" onclick="parentNode.submit();"></a>
-						<input type="search" value="Rechercher un produit" onclick="this.value=''"/>
+						<input type="search" value="Rechercher un produit" name="search" onclick="parentNode.submit();"/>
 					</form>
 				</div>
 				<div id="basket">
