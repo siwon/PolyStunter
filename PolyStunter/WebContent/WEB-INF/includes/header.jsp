@@ -16,9 +16,9 @@
 		<c:if test="${not empty userSession and userSession.isCustomer()}">
 			<div style="width: 100%;">
 				<div id="searchBar">
-					<form name="searchBar" action="/search" method="POST">
+					<form name="searchBar" action="<c:url value='/search' />" method="POST">
 						<a id="logoSearch" href="javascript:;" onclick="parentNode.submit();"></a>
-						<input type="search" value="Rechercher un produit" name="search" onclick="parentNode.submit();"/>
+						<input type="search" value="Rechercher un produit" name="search" onclick="this.value='';"/>
 					</form>
 				</div>
 				<div id="basket">
