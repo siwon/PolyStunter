@@ -1,0 +1,8 @@
+*.class
+PolyStunter/build/*
+*/.Thumbs.bd
+Servers/*
+.DS_Store
+
+# Package Files #
+*.ear
