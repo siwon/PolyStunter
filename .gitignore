@@ -1,5 +1,6 @@
 *.class
-PolyStunter/build/*
+PolyStunter/bin/*
+PolyStunter/.metadata/*
 */.Thumbs.bd
 Servers/*
 .DS_Store
