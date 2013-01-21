@@ -1,0 +1,2055 @@
+
+<!-- saved from url=(0069)http://www.vogella.com/articles/EGit/article.html#eclipseinstallation -->
+<html><meta style="visibility: hidden !important; display: block !important; width: 0px !important; height: 0px !important; border-style: none !important;"><object id="__IDM__" type="application/x-idm-downloader" width="1" height="1" style="visibility: hidden !important; display: block !important; width: 1px !important; height: 1px !important; border-style: none !important; position: absolute !important; top: 0px !important; left: 0px !important;"></object></meta><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+      
+   
+      <title>Git with Eclipse (EGit) - Tutorial</title>
+      <link rel="stylesheet" type="text/css" href="./Git with Eclipse (EGit) - Tutorial_files/articles.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
+      <meta name="description" content="Git with Eclipse (EGit) This tutorial describes the usage of EGit; an Eclipse plug-in to use the distributed version control system Git. This tutorial is based on Eclipse 4.2 (Juno).">
+      <link rel="shortcut icon" href="http://www.vogella.de/img/favicon.ico">
+   <style type="text/css"></style></head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      
+      
+      <!-- Jennifers Analytics -->
+      
+      <script src="./Git with Eclipse (EGit) - Tutorial_files/cb=gapi.loaded_0" async=""></script><script type="text/javascript" async="" src="./Git with Eclipse (EGit) - Tutorial_files/ga.js"></script><script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-3967758-1']);_gaq.push(['_trackPageview']);_gaq.push(['_trackPageLoadTime']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();</script>
+      
+      <script src="./Git with Eclipse (EGit) - Tutorial_files/flattr.js" type="text/javascript"></script>
+      
+      
+      <!-- Load jQuery -->
+      <script type="text/javascript" src="./Git with Eclipse (EGit) - Tutorial_files/jquery.js"></script> 
+      
+      <!-- jQuery Up Button -->
+      <script src="./Git with Eclipse (EGit) - Tutorial_files/jqueryup.js" type="text/javascript"></script>
+      
+      
+      
+      
+      <!-- Lake Quincy Ads -->
+      <script type="text/javascript" language="Javascript" src="http://s1.lqcdn.com/m.min.js?dt=2.3.110104.1"></script>
+      
+      <div id="headerpart">
+         	
+         <div id="topnav">
+            	  
+            <ul id="home" class="topnav">
+               		
+               <li>
+                  			<a class="homebutton" title="Home" href="http://www.vogella.com/">vogella.com</a>
+                  		
+               </li>
+               		
+               <li>
+                  			<a title="Tutorials" href="http://www.vogella.com/tutorials.html"> Tutorials
+                     			</a>
+                  		
+               </li>
+               		
+               		
+               <li>
+                  			<a title="Training" href="http://www.vogella.com/training/index.html">
+                     				Training
+                     			</a>
+                  		
+               </li>
+               		
+               <li>
+                  			<a title="Services" href="http://www.vogella.com/services/index.html">
+                     				Services
+                     			</a>
+                  		
+               </li>
+               		
+               <li>
+                  			<a title="Books" href="http://www.vogella.com/books.html">
+                     				Publications
+                     			</a>
+                  		
+               </li>
+               		
+               <li>
+                  			<a title="Connect" href="http://www.vogella.com/social.html">
+                     				Connect
+                     			</a>
+                  		
+               </li>
+               	
+            </ul>
+            
+            	
+         </div>
+         
+         	
+         <div id="logo">
+            		<a title="vogella.com" href="http://www.vogella.com/">
+               			<img src="./Git with Eclipse (EGit) - Tutorial_files/vogella_current_logo.png" alt="vogella.com"> 
+               		</a>
+            	
+         </div>
+         
+         
+      </div> 
+      <!-- headerpart -->
+      
+      
+      
+      
+      <div id="leftcol">
+         
+         	
+         <div class="sidebar">
+            		
+            <div id="intro">
+               		<br>
+               		
+               <!-- GooglePlus - Place this tag in your head or just before your close body tag -->
+               		<script type="text/javascript" src="./Git with Eclipse (EGit) - Tutorial_files/plusone.js" gapi_processed="true"></script>
+               
+               		
+               <!-- Place this tag where you want the +1 button to render -->
+               		<div style="height: 24px; width: 106px; display: inline-block; text-indent: 0px; margin: 0px; padding: 0px; background-color: transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; background-position: initial initial; background-repeat: initial initial;" id="___plusone_0"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 106px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 24px;" tabindex="0" vspace="0" width="100%" id="I0_1358771432078" name="I0_1358771432078" src="./Git with Eclipse (EGit) - Tutorial_files/fastbutton.htm" allowtransparency="true" data-gapiattached="true" title="+1"></iframe></div>
+               
+               		
+            </div> 
+            <!--intro-->
+            
+            		
+            		
+            		<br>
+            		Free tutorial, donate to support
+            		<br><br>
+            		
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+               		<input type="hidden" name="cmd" value="_s-xclick">
+               		<input type="hidden" name="hosted_button_id" value="10463995">
+               		<input type="image" src="./Git with Eclipse (EGit) - Tutorial_files/btn_donateCC_LG.gif" border="0" name="submit" alt="Donation">
+               		<img alt="" border="0" src="./Git with Eclipse (EGit) - Tutorial_files/pixel.gif" width="1" height="1">
+                                       				
+               		
+            </form>
+            		<br>
+             			
+            <div class="figure">
+                                
+                              
+               <p><a rel="author" href="http://www.vogella.com/about.html"> 
+                                          		<img src="./Git with Eclipse (EGit) - Tutorial_files/LarsVogelArticle8.png" height="115" width="125" alt="About Lars Vogel">
+                                          	</a>
+                                    	
+                                 
+               </p>
+                                
+                              
+               <p>by Lars Vogel</p>
+                              
+                   
+            </div>
+             		
+            		
+            	
+         </div> 
+         <!--sidebar-->
+         	
+         
+         
+         <script type="text/javascript">google_ad_client="ca-pub-3851443674951530";google_ad_slot="6294971031";google_ad_width=160;google_ad_height=600;</script>
+         <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+         
+         
+         <br>
+         <br>
+         <br>
+         <br>
+         
+         
+         
+         <!-- Lake Quincy-->
+         
+         <div class="lqm_ad" lqm_publisher="lqm.javaeclipseandroid.site" lqm_zone="ron" lqm_tags="Android%2cMobile%2cJava" lqm_format="160x600"></div>
+         
+         <p></p>
+         
+         
+         <p id="back-top" style="display: block;"><a href="http://www.vogella.com/articles/EGit/article.html#top"><span></span> Back to top </a>
+            
+         </p>
+         
+         
+         
+      </div> 
+      <!-- leftcolumn -->
+      
+      
+      
+      
+      <div id="rightcol">
+         
+         
+         <p class="training-bg">
+                     
+                        <a class="image-z" href="http://www.vogella.com/training/overview.html"> 
+                                <img src="./Git with Eclipse (EGit) - Tutorial_files/vogellatraining_ad.png" height="364" width="200" alt="vogella training">
+               	
+                           </a>
+                        <a class="btn-training button1" href="http://www.vogella.com/training/overview.html">Training</a>
+                        <a class="btn-training button2" href="http://www.vogella.com/books.html">Books</a>
+            
+         </p>
+         
+         
+         <div class="twitter">
+                
+            <div class="twitt">
+                               <a href="http://www.twitter.com/vogella"> 
+                                      <img src="./Git with Eclipse (EGit) - Tutorial_files/twitter.png" alt="Follow me on twitter">  
+                                  </a>
+                   
+            </div>
+                        
+                
+            <div class="googleplus">
+                               <a rel="me" href="https://profiles.google.com/104044918586174763681">
+                                      <img src="./Git with Eclipse (EGit) - Tutorial_files/google.png" alt="Lars Vogel on Google+"> 
+                                  </a>
+                  
+            </div>
+            
+         </div>
+         
+         
+      </div> 
+      <!--rightcol-->
+      
+      
+      
+      <div class="article">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="d3960e1"></a>Git with Eclipse (EGit) - Tutorial
+                  </h2>
+               </div>
+               <div>
+                  <div class="author">
+                     <h3 class="author"><span class="firstname">Lars</span> <span class="surname">Vogel</span></h3>
+                  </div>
+               </div>
+               <div>
+                  <p class="releaseinfo">
+                           
+                  </p>
+                  <p>Version 3.1</p>
+                  <p class="releaseinfo">
+                         
+                  </p>
+               </div>
+               <div>
+                  <p class="copyright">Copyright © 2009, 2010, 2011, 2012, 2013 Lars Vogel</p>
+               </div>
+               <div>
+                  <p class="pubdate">13.01.2013</p>
+               </div>
+               <div>
+                  <div class="revhistory">
+                     <table summary="Revision History">
+                        <tbody><tr>
+                           <th align="left" valign="top" colspan="4"><b>Revision History</b></th>
+                        </tr>
+                        <tr>
+                           <td align="left">Revision 0.1</td>
+                           <td align="left">11.12.2009</td>
+                           <td align="left"><span class="firstname">Lars<br></span><span class="surname">Vogel<br></span></td>
+                           <td align="left">Created</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Revision 0.2 - 3.1</td>
+                           <td align="left">12.12.2009 - 13.01.2013</td>
+                           <td align="left"><span class="firstname">Lars<br></span><span class="surname">Vogel<br></span></td>
+                           <td align="left">bug fixes and enhancements</td>
+                        </tr>
+                     </tbody></table>
+                  </div>
+               </div>
+               <div>
+                  <div class="abstract"><a name="abstract"></a><p class="title"><b>Git with Eclipse (EGit)</b></p>
+                     <p> This tutorial describes the usage of EGit; an Eclipse plug-in
+                                to
+                                use the distributed version control system Git. This tutorial is
+                                based on
+                                Eclipse 4.2 (Juno).
+                              
+                     </p>
+                  </div>
+               </div>
+            </div>
+            <hr>
+         </div>
+         <div class="toc">
+            <p><b>Table of Contents</b></p>
+            <dl>
+               <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#git">1. What is EGit</a></span></dt>
+               <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#commandline_git">2. Command line Git</a></span></dt>
+               <dt><span class="section"><a href="./Git with Eclipse (EGit) - Tutorial_files/Git with Eclipse (EGit) - Tutorial.htm">3. EGit Installation</a></span></dt>
+               <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#egitconfiguration">4. Setting up EGit</a></span></dt>
+               <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#usingegit">5. Using EGit for a local Git repository </a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#usingegit_overview">5.1. Overview</a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#usingegit_createproject">5.2. Creating an Eclipse project </a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#usingegit_shareproject">5.3. Creating a local Git repository </a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#firstegit_gitignore">5.4. Create .gitignore file </a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#usingegit_initialcommit">5.5. Initial commit</a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#usingegit_commitchanges">5.6. Making changes and commiting them</a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#usingegit_history">5.7. Commmiting files directly</a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#firstegit_history">5.8. Show changes</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#commitmessages">6. Commit messages</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#commitmessages_content">6.1. Importance of Git commit messages</a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#commitmessages_content">6.2. Guidelines for useful commit messages</a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#commitmessages_repo">6.3. Example</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#respository_view">7. Repository view</a></span></dt>
+               <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#clone_respository">8. Clone existing project </a></span></dt>
+               <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#team_operations">9. Using EGit</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#team_basic">9.1. Basic operations</a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#team_merge">9.2. Merge </a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#team_mergeconflicts">9.3. Solving Merge Conflicts</a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#eex">9.4. Git amend</a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#using_history">9.5. View the resource history</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#team_operations_branch">10. Branching</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#gitbranch_def">10.1. What are branches?</a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#team_operations_branch_switch">10.2. Switch Branches</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#team_createpatch">11. Create Patches</a></span></dt>
+               <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#team_annotations">12. Blame annotations</a></span></dt>
+               <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#stash">13. Stash support for uncommited changes</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#stash_def">13.1. Stash to save uncommitted changes</a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#stash_gitrepo">13.2. Stash via the Git repository view</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#multiprojects">14. Git repository for multiple projects
+                          </a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#multiprojects_create">14.1. Create a new repository
+                                  </a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#multiprojects_add">14.2. Add a project to an existing Git repository
+                                  </a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#tutorial_multiprojects">15. Tutorial: Create Git repository for multiple projects
+                          </a></span></dt>
+               <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#github">16. Using EGit with Github</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#github_overview">16.1. Github</a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#github_createrepo">16.2. Create Repository in Github</a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#github_push">16.3. Push project to Github</a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#github_pull">16.4. Clone repository from Github</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#github_mylyn">17. Mylyn integration with Github</a></span></dt>
+               <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#egitsource">18. Hacking EGit - Getting the source code</a></span></dt>
+               <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#thankyou">19. Thank you </a></span></dt>
+               <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#questions">20. Questions and Discussion</a></span></dt>
+               <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#resources">21. Links and Literature</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#resources_egit">21.1. EGit and Git Resources</a></span></dt>
+                     <dt><span class="section"><a href="http://www.vogella.com/articles/EGit/article.html#resources_general">21.2. vogella Resources</a></span></dt>
+                  </dl>
+               </dd>
+            </dl>
+         </div> 
+         
+         
+         
+         
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="git"></a>1.&nbsp;What is EGit
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+               <em class="wordasword">EGit</em>
+               is an Eclipse plug-in (software component) which allows you to use the
+               
+               distributed version control system
+               <em class="wordasword">Git</em>
+               directly within the Eclipse IDE.
+               .
+               
+            </p>
+            <p>
+               <em class="wordasword">EGit</em>
+               is based on the
+               <em class="wordasword">JGit</em>
+               library.
+               <em class="wordasword">JGit</em>
+               is
+               a
+               library which implements the
+               <em class="wordasword">Git</em>
+               functionality in
+               Java.
+               
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="commandline_git"></a>2.&nbsp;Command line Git
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+               This tutorial describes the usage of
+               <em class="wordasword">EGit</em>. If you want to learn about
+               the usage of the Git command line you can
+               use the
+               <a class="ulink" href="http://www.vogella.com/articles/Git/article.html" target="_top"> Git Tutorial </a>
+               as a reference.
+               
+            </p>
+            <p>This tutorial also explains the basic Git terminology, e.g. what
+               is a commit, branch, etc.
+               
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="eclipseinstallation"></a>3.&nbsp;EGit Installation
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+               <em class="wordasword">EGit</em>
+               can be installed into every Eclipse IDE installation.
+               Most Eclipse 4.2
+               packages from Eclipse.org contain
+               <em class="wordasword">EGit</em>
+               in there
+               default
+               configuration. In this case no additional installation
+               is
+               required.
+               
+            </p>
+            <p>
+               If EGit is missing in your Eclipse installation, you can install it
+               via
+               the Eclipse Update
+               Manager via:
+               <span class="guimenu">Help</span> &#8594; <span class="guisubmenu">Install new Software</span>. EGit can be installed from the following URL.
+               
+               
+            </p>
+            <p>
+               
+            </p><pre class="programlisting">http:<em class="hl-comment" style="color: #080">//download.eclipse.org/egit/updates </em></pre><p>
+               
+            </p>
+            <p>
+               
+            </p>
+            <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/installation10.png" alt="Installing EGit"></div>
+            <p>
+               
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="egitconfiguration"></a>4.&nbsp;Setting up EGit
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+               <em class="wordasword">EGit</em>
+               allow you to configure your default user and email address for each
+               commit. To setup your user and email address select
+               <span class="guimenu">Window</span> &#8594; <span class="guisubmenu">Preferences</span> &#8594; <span class="guisubmenu">Team</span> &#8594; <span class="guisubmenu">Git</span> &#8594; <span class="guisubmenu">Configuration</span>
+               
+            </p>
+            <p>
+               <em class="wordasword">EGit</em>
+               will automatically read your default
+               <code class="filename">.gitconfig</code>
+               in which your global Git settings are stored.
+               
+            </p>
+            <p>
+               You can add entries via pressing the
+               <span class="guibutton">Add Entries</span>
+               button. To add your user, use the
+               <em class="parameter"><code>user.name</code></em>
+               as key and your real name as value. Repeat the procedure via your
+               email address.
+               
+            </p>
+            <p>
+               
+            </p>
+            <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/egitconfig10.png" alt="Configuration of EGit user and email default"></div>
+            <p>
+               
+            </p>
+            <p>You can add more values in this dialog. These values are also
+               valid for the Git command line in case you are also using the command
+               line.  
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="usingegit"></a>5.&nbsp;Using EGit for a local Git repository 
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="usingegit_overview"></a>5.1.&nbsp;Overview
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p> The following section explains how to create a local Git
+                  repository for
+                  one
+                  Eclipse project with EGit. This allows you to keep
+                  locally track of change you do to your repository and allows you to
+                  revert to another state at a later point in time.
+                  
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="usingegit_createproject"></a>5.2.&nbsp;Creating an Eclipse project 
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                  Create a new Java project called
+                  <em class="wordasword">de.vogella.git.first</em>
+                  in
+                  Eclipse. Create the
+                  <code class="code">de.vogella.git.first</code>
+                  package and the following
+                  class.
+                  
+               </p>
+               <p>
+                  
+               </p><pre class="programlisting"><span class="hl-keyword">package</span> de.vogella.git.first;
+
+<span class="hl-keyword">public</span> <span class="hl-keyword">class</span> GitTest {
+  <span class="hl-keyword">public</span> <span class="hl-keyword">static</span> <span class="hl-keyword">void</span> main(String[] args) {
+    System.out.println(<span class="hl-string" style="color:blue">"Git is fun"</span>);
+  }
+} </pre><p>
+                  
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="usingegit_shareproject"></a>5.3.&nbsp;Creating a local Git repository 
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                  To put your new project under version control with Git, right click
+                  on your
+                  project, select
+                  <span class="guimenu">Team</span> &#8594; <span class="guisubmenu">Share Project</span> &#8594; <span class="guisubmenu">Git</span>.
+                  
+               </p>
+               <p>
+                  Depending on your installation you may have to select which
+                  version control
+                  system you want to use.
+                  
+               </p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/gitfirst02.png" alt="Git repository creation wizard - Step 1"></div>
+               <p>
+                  
+               </p>
+               <p>
+                  On the next dialog press the
+                  <span class="guibutton">Create</span>
+                  button.
+                  
+               </p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/gitfirst10.png" alt="Git repository creation wizard - Step 1"></div>
+               <p>
+                  
+               </p>
+               <p>
+                  EGit will propose an directory outside your workspace. It is
+                  recommended to place your Git repositories outside the Eclipse
+                  workspace to avoid that you add unwanted data created by the Eclipse
+                  IDE. Enter your
+                  project name as
+                  <em class="parameter"><code>Name</code></em>
+                  for your local Git repository. Select the
+                  <span class="guibutton">Finish</span>
+                  button.
+                  
+               </p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/gitfirst20.png" alt="Git repository creation wizard - Step 2"></div>
+               <p>
+                  
+               </p>
+               <p>
+                  After pressing Finish the The wizard shows you the settings for your
+                  local Git repository.
+                  Select the
+                  <span class="guibutton">Finish</span>
+                  button to put your repository under Git version control.
+                  
+               </p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/gitfirst30.png" alt="Git repository creation wizard - Step 3"></div>
+               <p>
+                  
+               </p>
+               <p>
+                  You
+                  have created a local Git repository. The Git repository is in
+                  this
+                  case directly stored in the specified folder in a
+                  <code class="filename">.git</code>
+                  folder. The following screenshot shows the directory structure .
+                  
+               </p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/gitfirst40.png" alt="Git repository creation result"></div>
+               <p>
+                  
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="firstegit_gitignore"></a>5.4.&nbsp;Create .gitignore file 
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                  Git can be configured to ignore certain files and directories.
+                  This is
+                  configured via the
+                  <code class="filename">.gitignore </code>
+                  file.
+                  
+               </p>
+               <p>
+                  Create a
+                  <code class="filename">.gitignore </code>
+                  file in your project with the following
+                  content.
+                  
+               </p>
+               <p>
+                  
+               </p><pre class="programlisting">bin
+.metadata </pre><p>
+                  
+               </p>
+               <p>
+                  All files and
+                  directories which apply to the pattern described
+                  in this
+                  file will be
+                  ignored by
+                  <em class="wordasword">Git</em>. In this example all files in the
+                  <code class="filename">bin</code>
+                  and the
+                  <code class="filename">.metadata</code>
+                  directory will
+                  be ignored.
+                  
+               </p>
+               <p>
+                  You can also use EGit to add files and folder to a local
+                  <code class="filename">.gitignore</code>
+                  via right-mouse click on the file or folder and by selecting
+                  <span class="guimenu">Team</span> &#8594; <span class="guisubmenu">Ignore</span>
+                  but the Git convension is to have one
+                  <code class="filename">.gitignore</code>
+                  in the root directly which describes the files which should get
+                  ignored.
+                  
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="usingegit_initialcommit"></a>5.5.&nbsp;Initial commit
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                  EGit gives you several option to stage and commit your files.
+                  The
+                  <span class="guilabel">Git Staging</span>
+                  <em class="wordasword">View</em>
+                  is an convinient way for staging and commiting changes.
+                  
+               </p>
+               <p>
+                  Open the
+                  <span class="guilabel">Git Staging</span>
+                  <em class="wordasword">View</em>
+                  via the menu
+                  <span class="guimenu">Window</span> &#8594; <span class="guisubmenu">Show View</span> &#8594; <span class="guisubmenu">Other</span> &#8594; <span class="guisubmenu">Git</span> &#8594; <span class="guisubmenu">Git Staging</span>.
+                  
+               </p>
+               <p>
+                  In this
+                  <em class="wordasword">View</em>
+                  select all files which have changed and drag them into the
+                  <span class="guilabel">Staged Changes</span>
+                  area.
+                  
+               </p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/gitstaging10.png" alt="Git Staging View - Add to staging index"></div>
+               <p>
+                  
+               </p>
+               <p>
+                  Write a descriptive commmit message and press the
+                  <span class="guibutton">Commit</span>
+                  button which is hightlighted in the following screenshot.
+                  
+               </p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/gitstaging20.png" alt="Git Staging View - Commit"></div>
+               <p>
+                  
+               </p>
+               <p>Now the first version of your Java project is under version
+                  control. If you don't experience any hardware error you data is now
+                  savely stored in your Git repository and you can always restore your
+                  Eclipse project to this initial point.
+                  
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="usingegit_commitchanges"></a>5.6.&nbsp;Making changes and commiting them
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                  Change the
+                  <code class="code">System.out.println</code>
+                  message in your
+                  <code class="code">GitTest</code>
+                  class.
+                  
+               </p>
+               <p>
+                  
+               </p><pre class="programlisting"><span class="hl-keyword">package</span> de.vogella.git.first;
+
+<span class="hl-keyword">public</span> <span class="hl-keyword">class</span> GitTest {
+  <span class="hl-keyword">public</span> <span class="hl-keyword">static</span> <span class="hl-keyword">void</span> main(String[] args) {
+    System.out.println(<span class="hl-string" style="color:blue">"Git is cool"</span>);
+  }
+} </pre><p>
+                  
+               </p>
+               <p>
+                  Also create a new file called
+                  <code class="filename">readme.txt</code>
+                  
+               </p>
+               <p>
+                  We want to commit the changes of
+                  <code class="code">GitTest</code>
+                  class
+                  but not add and commit the
+                  <code class="filename">readme.txt</code>
+                  file to the Git repository.
+                  
+               </p>
+               <p>
+                  Using the
+                  <span class="guilabel">Git Staging</span>
+                  <em class="wordasword">View</em>
+                  drag only the
+                  <code class="code">GitTest</code>
+                  class into the
+                  <span class="guilabel">Staged Changes</span>
+                  area, write a good commit message and press the commit button.
+                  
+               </p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/gitstaging30.png" alt="Git Staging View - Add to staging index"></div>
+               <p>
+                  
+               </p>
+               <p>
+                  This change is now also stored in your local
+                  <em class="wordasword">Git</em>
+                  repository.
+                  
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="usingegit_history"></a>5.7.&nbsp;Commmiting files directly
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                  Alternatively to using the
+                  <span class="guilabel">Git Staging</span>
+                  <em class="wordasword">View</em>
+                  you can committed changes of individual files, by selecting the
+                  file,
+                  right-mouse
+                  clicking on it and selecting
+                  <span class="guimenu">Team</span> &#8594; <span class="guisubmenu">Commmit</span>
+                  
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="firstegit_history"></a>5.8.&nbsp;Show changes
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                  Open the Git repository view via the following menu entries:
+                  <span class="guimenu">Window</span> &#8594; <span class="guisubmenu">Show View</span> &#8594; <span class="guisubmenu">Other</span> &#8594; <span class="guisubmenu">Git</span> &#8594; <span class="guisubmenu">Git Staging</span>.
+                  
+               </p>
+               <p>
+                  Select your project, right click on it and select
+                  <span class="guimenu">Show in </span> &#8594; <span class="guisubmenu">History</span>
+                  to see the timeline of changes.
+                  
+               </p>
+               <p>If you select a commit you see the commit message and the
+                  involved files.
+                  
+               </p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/githistoryview10.png" alt="History View"></div>
+               <p>
+                  
+               </p>
+               <p>Via right mouse click on an individual file you can compare
+                  this
+                  file with its ancestor (the commit before that) or with the current
+                  version in the workspace.
+                  
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="commitmessages"></a>6.&nbsp;Commit messages
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="commitmessages_content"></a>6.1.&nbsp;Importance of Git commit messages
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>The commit message describes the changes done by a commit and is
+                  used as the
+                  first point of checking the history of
+                  a Git repository.
+                  
+               </p>
+               <p> 
+                  A commit
+                  message should therefore be descriptive and informative
+                  without repeating the
+                  code changes.
+                  
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="commitmessages_content"></a>6.2.&nbsp;Guidelines for useful commit messages
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>A commit message should have a header and a body. The header
+                  should be less than 50 characters and the body should wrap its text
+                  at 72 so that the commit messages is displayed well on the command
+                  line. The body should be separated by the header with an empty line.
+                  
+               </p>
+               <p>The body should contain the reason why the change was made.</p>
+               <p>The commit message should be in present tense, e.g. "Add better
+                  error handling" instead of "Added better error handling".
+                  
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="commitmessages_repo"></a>6.3.&nbsp;Example
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>The following can serve as an example for a commit message.
+                  
+               </p>
+               <p>
+                  
+               </p><pre class="programlisting">Short summary (less than <span class="hl-number">50</span> characters)
+
+Detailed explanation, <span class="hl-keyword">if</span> required, line <span class="hl-keyword">break</span> at around <span class="hl-number">72</span> characters
+more stuff to describe... </pre><p>
+                  
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="respository_view"></a>7.&nbsp;Repository view
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+               EGit has a
+               <span class="guilabel">Git repository</span>
+               view which allow you to browse your
+               repositories, checkout projects
+               and manage your branches.
+               
+            </p>
+            <p>
+               
+            </p>
+            <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/repositoryview10.gif"></div>
+            <p>
+               
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="clone_respository"></a>8.&nbsp;Clone existing project 
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+               <em class="wordasword">EGit</em>
+               allows to clone an existing Git repository.
+               
+            </p>
+            <p>
+               Select
+               <span class="guimenu">File</span> &#8594; <span class="guisubmenu">Import</span> &#8594; <span class="guisubmenu">Git</span> &#8594; <span class="guisubmenu">Project from Git</span>.
+               
+            </p>
+            <p>
+               
+            </p>
+            <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/egit_import08.png" alt="Importing projects via EGit"></div>
+            <p>
+               
+            </p>
+            <p>
+               Select
+               <span class="guilabel">URI</span>
+               in the next dialog.
+               
+            </p>
+            <p>
+               
+            </p>
+            <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/egit_import09.png" alt="URI selected in EGit"></div>
+            <p>
+               
+            </p>
+            <p>
+               
+               Press clone and
+               enter the URL to your Git repository. Git supports
+               several protocols, e.g.
+               <em class="parameter"><code>git://</code></em>
+               and
+               <em class="parameter"><code>https://</code></em>.
+               You only have to paste the URL to the first line of the dialog, the
+               rest will be filled out automatically.
+               
+            </p>
+            <p>
+               Please note that some proxy servers block the
+               <em class="parameter"><code>git://</code></em>
+               protocol. If you face issues, please try to use the <em class="parameter"><code>https://</code></em> protocol.
+               
+            </p>
+            <p>
+               For example the following URI
+               can be used to clone the example
+               projects of the Eclipse 4 application development book:
+               git@github.com:vogella/eclipse4book.git
+               
+            </p>
+            <p>
+               
+            </p>
+            <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/egit_import10.png" alt="URI entered in the dialog"></div>
+            <p>
+               
+            </p>
+            <p>
+               After pressing next the system will allow you to import the
+               existing
+               branches. You should select at least
+               <span class="guilabel">master</span>
+               as this is typically the main development branch.
+               
+            </p>
+            <p>
+               
+            </p>
+            <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/egit_import20.png" alt="URI entered in the dialog"></div>
+            <p>
+               
+            </p>
+            <p> The next dialog allows you to specify where the project should
+               be
+               copied to and which branch should be initially selected.
+               
+            </p>
+            <p>
+               
+            </p>
+            <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/egit_import30.png" alt="Define target directory for Git repository"></div>
+            <p>
+               
+            </p>
+            <p>
+               After the Git repository is cloned,
+               <em class="wordasword">EGit</em>
+               opens an additional
+               import dialog which allows to import the Eclipse
+               projects from the
+               Git
+               repository.
+               
+            </p>
+            <p>
+               
+            </p>
+            <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/egit_import40.png" alt="Importing projects"></div>
+            <p>
+               
+            </p>
+            <p> Once this dialog is completed, you have checked out (cloned) the
+               projects
+               into a local Git repository
+               and you can use Git
+               operation on
+               these
+               projects.
+               
+            </p>
+         </div> 
+         <script type="text/javascript">google_ad_client="pub-3851443674951530";google_ad_slot="8639282357";google_ad_width=728;google_ad_height=90;</script>
+         <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="team_operations"></a>9.&nbsp;Using EGit
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="team_basic"></a>9.1.&nbsp;Basic operations
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                  Once you have placed a project under version control you can
+                  start
+                  using team operations on your project. The team operations are
+                  available via right mouse click on your project. You can:
+                  
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Select
+                           <span class="guimenu">Team</span> &#8594; <span class="guisubmenu">Add</span>, on the project node
+                           to
+                           add all
+                           files
+                           to
+                           version control.
+                           
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Select "Team" -&gt; "Commit", to commit your changes to the
+                           local Git
+                           repository.
+                           
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Select "Team" -&gt; "Push" to push your change to a remote Git
+                           repository (see the GitHub chapter).
+                           
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>"Team" -&gt; "Tag" allows you to create and manage tags.  </p>
+                     </li>
+                  </ul>
+               </div>
+               <p>
+                  
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="team_merge"></a>9.2.&nbsp;Merge 
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                  EGit supports merging of branches to add the changes of one
+                  branch
+                  into another if this branch
+                  has not been changed. Select your project
+                  and
+                  <span class="guimenu">Team</span> &#8594; <span class="guisubmenu">Merge</span>
+                  to start the merge dialog.
+                  
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="team_mergeconflicts"></a>9.3.&nbsp;Solving Merge Conflicts
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p> If you pull in
+                  changes or merge a branch and you have
+                  conflicting changes, EGit will
+                  highlight the affected files. EGit also
+                  supports the resolution of these merge conflicts.
+                  
+               </p>
+               <p>
+                  Right click on a file with merge conflicts and select
+                  <span class="guimenu">Team</span> &#8594; <span class="guisubmenu">Merge Tool</span>.
+                  
+               </p>
+               <p>
+                  This opens a dialog, asking you which merge mode you would like to
+                  use.
+                  The easiest way to see the conflicting changes is
+                  to use the
+                  <span class="guilabel">Use HEAD (the last local version) of conflicting files
+                     </span>
+                  as merge mode. This way you see the original changes on the left
+                  side
+                  and the conflicting changes on the right side.
+                  
+               </p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/egitmerge08.png" alt="Selecting the merge model"></div>
+               <p>
+                  
+               </p>
+               <p>
+                  You can manually edit the text on
+                  the left side or use the
+                  <span class="guilabel">Copy current change from right to left</span>
+                  button to copy the conflicting changes from right to left.
+                  
+               </p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/egitmerge10.png" alt="Seeing merge conflicts"></div>
+               <p>
+                  
+               </p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/egitmerge20.png" alt="Copy changes from right to left"></div>
+               <p>
+                  
+               </p>
+               <p>
+                  Once you have manually merged the changes, select
+                  <span class="guimenu">Team</span> &#8594; <span class="guisubmenu">Add</span>
+                  from the context menu of the resource to mark the conflicts as
+                  resolved and
+                  commit the merge resolution via
+                  <span class="guimenu">Team</span> &#8594; <span class="guisubmenu">Commit</span>.
+                  
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="eex"></a>9.4.&nbsp;Git amend
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Git amend allows to adjust the last commit. For example you can
+                  change the commit message. The Git Staging view allows to perform the
+                  Git amend command via the the highlighted button in the following
+                  screenshot.
+                  
+               </p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/egitamend10.png" alt="Git amend in the Git Staging view"></div>
+               <p>
+                  
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="using_history"></a>9.5.&nbsp;View the resource history
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p> Select a resource and select Show in (Alt+Shift+W) -&gt; History
+                  to see the commit history of this resource.
+                  
+               </p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/history10.gif"></div>
+               <p>
+                  
+               </p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/history20.gif"></div>
+               <p>
+                  
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="team_operations_branch"></a>10.&nbsp;Branching
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="gitbranch_def"></a>10.1.&nbsp;What are branches?
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                  Git allows you to create
+                  <em class="wordasword">branches</em>, i.e. independent copies of the source code which can be changed
+                  independently from each other. The default branch is called
+                  <em class="wordasword">master</em>.
+                  
+               </p>
+               <p>
+                  Git allows you to create branches very
+                  fast and cheaply in terms of
+                  resource consumption. Developers are
+                  encouraged to use branches
+                  frequently.
+                  
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="team_operations_branch_switch"></a>10.2.&nbsp;Switch Branches
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                  Right-click your project and select
+                  <span class="guimenu">Team</span> &#8594; <span class="guisubmenu">Branch</span>
+                  to create new branches or to switch between existing
+                  branches.
+                  
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="team_createpatch"></a>11.&nbsp;Create Patches
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+               A patch is a text file which contains instructions how to update
+               a set of files to a different state.
+               
+            </p>
+            <p>If you use Git you can create a patch for the changes you did and
+               this patch can be applied on another Git repository.
+               
+            </p>
+            <p>
+               To create a patch for a set of changes with EGit, select the
+               elements
+               which should be include in the patch in the package explorer,
+               right
+               click on it and select
+               <span class="guimenu">Team</span> &#8594; <span class="guisubmenu">Create Patch</span>
+               
+            </p>
+            <p>
+               
+            </p>
+            <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/egit_createpatch10.png" alt="Create Patch via EGit menu path"></div>
+            <p>
+               
+            </p>
+            <p>
+               
+            </p>
+            <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/egit_createpatch20.png" alt="Create Patch via EGit"></div>
+            <p>
+               
+            </p>
+            <p>
+               This file can be used to get applied to another Git repository, via
+               <span class="guimenu">Team</span> &#8594; <span class="guisubmenu">Apply Patch</span>
+               
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="team_annotations"></a>12.&nbsp;Blame annotations
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+               EGit allows to add annotations to see which line was changed by
+               whom
+               and which commit. To enable this, right click on your file and
+               select
+               <span class="guimenu">Team</span> &#8594; <span class="guisubmenu">Show Annotations</span>.
+               
+            </p>
+            <p>Afterwards you can place the mouse on the left side of the editor
+               and a popup will
+               show the commit information.
+               
+            </p>
+            <p>
+               
+            </p>
+            <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/blameannotations10.png" alt="Blame annotations in EGit"></div>
+            <p>
+               
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="stash"></a>13.&nbsp;Stash support for uncommited changes
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="stash_def"></a>13.1.&nbsp;Stash to save uncommitted changes
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                  Git provides the
+                  <code class="code">stash</code>
+                  command which allows to save the current uncommmitted changes and
+                  checkout
+                  the last committed revision.
+                  
+               </p>
+               <p> This allows you to pull in the latest changes or to develop an
+                  urgent fix. Afterwards you can restore the stashed changes, which will
+                  reapply
+                  the changes to the current version of the source code.
+                  
+               </p>
+               <p>In general using the stash command should be the exception in
+                  using
+                  Git. Typically you would create new branches for new features
+                  and
+                  switch between branches.
+                  
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="stash_gitrepo"></a>13.2.&nbsp;Stash via the Git repository view
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p> 
+                  Stashing is available in the
+                  <span class="guilabel"></span>
+                  Git repository
+                  <em class="wordasword">View</em>.
+                  
+               </p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/egit_stash10.png" alt="Stash changes in EGit"></div>
+               <p>
+                  
+               </p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/egit_stash20.png" alt="Stash changes in EGit"></div>
+               <p>
+                  
+               </p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/egit_stash30.png" alt="Stash changes in EGit"></div>
+               <p>
+                  
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="multiprojects"></a>14.&nbsp;Git repository for multiple projects
+                        
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="multiprojects_create"></a>14.1.&nbsp;Create a new repository
+                           
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Eclipse allows to work with projects which are not included in
+                  the workspace.
+                  
+               </p>
+               <p>
+                  To put several Eclipse projects into the same Git repository you
+                  can
+                  create a folder inside or outside your workspace and create the
+                  projects inside this folder. You can create a Git repository for this
+                  folder and all projects in this folder will be handled by the same
+                  repository. The best practice is to put the Git repository outsite of
+                  the Eclipse workspace.
+                  
+               </p>
+               <p>
+                  You can import these projects into your workspace via
+                  <span class="guimenu">File</span> &#8594; <span class="guisubmenu">Import</span> &#8594; <span class="guisubmenu">Git</span> &#8594; <span class="guisubmenu">Projects from Git</span>
+                  
+               </p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/importprojectsgit10.png" alt="Import project from Git repository"></div>
+               <p>
+                  
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="multiprojects_add"></a>14.2.&nbsp;Add a project to an existing Git repository
+                           
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                  To add a new Eclipse project to an existing Git repository, select
+                  the
+                  project, right click on it and select
+                  <span class="guimenu">Team</span> &#8594; <span class="guisubmenu">Share</span> &#8594; <span class="guisubmenu">Git</span>
+                  and select the existing Git repository.
+                  
+               </p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/addprojecttogitrepo10.png" alt="Adding a project to an existing Git repository"></div>
+               <p>
+                  
+               </p>
+               <p>EGit moves the projects to the repository and imports the
+                  project
+                  automatically into your workspace.
+                  
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="tutorial_multiprojects"></a>15.&nbsp;Tutorial: Create Git repository for multiple projects
+                        
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+               Create two Java projects called
+               <em class="wordasword">de.vogella.egit.multi.java1</em>
+               and
+               <em class="wordasword">de.vogella.egit.multi.java2</em>. Do
+               not use the default location (which would be the workspace) but
+               use a
+               subfolder called 
+               <code class="filename">gitmulti</code>.
+               
+            </p>
+            <p>
+               
+            </p>
+            <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/multi10.png"></div>
+            <p>
+               
+            </p>
+            <p>
+               
+            </p>
+            <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/multi20.png"></div>
+            <p>
+               
+            </p>
+            <p>
+               Create at least on Java class in each project. Git is
+               not able to
+               save empty folders.
+               
+               
+            </p>
+            <p>
+               Afterwards
+               select both projects, right click on
+               them and select
+               <span class="guimenu">Team</span> &#8594; <span class="guisubmenu">Share</span> &#8594; <span class="guisubmenu">Git</span>.
+               
+            </p>
+            <p>
+               
+            </p>
+            <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/multi30.png"></div>
+            <p>
+               
+            </p>
+            <p> You create a new Git repository which contains both projects.
+               
+            </p>
+            <p>
+               
+            </p>
+            <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/multi40.png"></div>
+            <p>
+               
+            </p>
+         </div>
+         <!-- Lake Quincy Ads -->
+         <div class="lqm_ad" lqm_publisher="lqm.javaeclipseandroid.site" lqm_tags="Java%20Mobile%20Android" lqm_zone="ron" lqm_format="728x90"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="github"></a>16.&nbsp;Using EGit with Github
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="github_overview"></a>16.1.&nbsp;Github
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                  <a class="ulink" href="https://github.com/" target="_top">Github </a>
+                  is a popular hosting provider for Git projects and if you repository
+                  is public to everyone Github hosting is free. To use GitHub create an
+                  account on the
+                  <a class="ulink" href="https://github.com/" target="_top">Github Website</a>. During
+                  the
+                  sign-up you will be asked to
+                  provide a "passphase". This
+                  "passphase" is
+                  later needed to
+                  push to
+                  Github from your local
+                  repository.
+                  
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="github_createrepo"></a>16.2.&nbsp;Create Repository in Github
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p> Create a new repository on Github, e.g.
+                  "de.vogella.git.github". 
+               </p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/github20.gif"></div>
+               <p>
+                  
+               </p>
+               <p>After creation of your new repository Github tells you what to
+                  do if you would inport via the command line. As we are going to use
+                  EGit we can ignore this information.
+                  
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="github_push"></a>16.3.&nbsp;Push project to Github
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p> Create a new project "de.vogella.git.github" and put it under
+                  version control.
+                  Right-mouse click on your project and select "Team"
+                  -&gt; "Push".
+                  A dialog pops up. Maintain the following data. Adjust the
+                  hightlighted
+                  line so
+                  that you are using your user and your project
+                  name.
+                  
+               </p>
+               <p>
+                  
+               </p><pre class="programlisting">git+ssh:<em class="hl-comment" style="color: #080">//git@github.com/vogella/de.vogella.git.github </em></pre><p>
+                  
+               </p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/github40.gif"></div>
+               <p>
+                  
+               </p>
+               <p> Maintain your passphase which you maintained during the Github
+                  setup. 
+               </p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/github50.gif"></div>
+               <p>
+                  
+               </p>
+               <p> Select your branch (you should currently only have master if
+                  you
+                  followed my tutorial), press "Add all branches spec" and select
+                  next.
+                  
+               </p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/github60.gif"></div>
+               <p>
+                  
+               </p>
+               <p> Press finish.</p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/github70.gif"></div>
+               <p>
+                  
+               </p>
+               <p> If you now select your github Dashboard and then your project
+                  you should see the commited files. 
+               </p>
+               <p>
+                  
+               </p>
+               <div class="mediaobject"><img src="./Git with Eclipse (EGit) - Tutorial_files/github80.gif"></div>
+               <p>
+                  
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="github_pull"></a>16.4.&nbsp;Clone repository from Github
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Use the same URI you use to push to Github to clone the project
+                  into another workspace. 
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="github_mylyn"></a>17.&nbsp;Mylyn integration with Github
+                     </h2>
+                  </div>
+               </div>
+            </div><a class="ulink" href="http://www.vogella.com/articles//Mylyn/article.html" target="_top">Eclipse Mylyn </a>
+                is a productively tool for programmers. There is a GitHub connector
+                for Mylyn available, please see
+                <a class="ulink" href="http://wiki.eclipse.org/EGit/GitHub/UserGuide" target="_top"> http://wiki.eclipse.org/EGit/GitHub/UserGuide
+               </a>
+                for details.
+                .
+              
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="egitsource"></a>18.&nbsp;Hacking EGit - Getting the source code
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+               EGit is self-hosted on
+               <a class="ulink" href="git://egit.eclipse.org" target="_top"> git://egit.eclipse.org</a>. You can clone the EGit code from the repository using EGit using the
+               following URL
+               <a class="ulink" href="git://egit.eclipse.org/jgit.git" target="_top"> git://egit.eclipse.org/jgit.git</a>
+               and
+               <a class="ulink" href="git://egit.eclipse.org/egit.git" target="_top"> git://egit.eclipse.org/egit.git</a>.
+               
+            </p>
+            <p>
+               You also need some libraries from Orbit. See
+               
+               <a class="ulink" href="http://wiki.eclipse.org/EGit/Contributor_Guide#Libraries_from_Orbit" target="_top"> Libraries from Orbit</a>
+               for getting these libraries.
+               
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="thankyou"></a>19.&nbsp;Thank you 
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+               
+               	
+            </p>
+            <p></p>
+            <p>
+               	Please help me to support this article:
+               	
+            </p>
+            <table>
+               <tbody><tr>
+                  			
+                  <td>
+                     				<a href="http://flattr.com/thing/49772/Tutorials-for-Eclipse-Java-Android-and-Webprogramming" target="_blank">
+                        					<img src="./Git with Eclipse (EGit) - Tutorial_files/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0">
+                        				</a>
+                     			
+                  </td>
+                  
+                  			
+                  <td>
+                     				
+                     <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                        					<input type="hidden" name="cmd" value="_s-xclick">
+                        					<input type="hidden" name="hosted_button_id" value="10463995">
+                        					<input type="image" src="./Git with Eclipse (EGit) - Tutorial_files/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                        					<img alt="" border="0" src="./Git with Eclipse (EGit) - Tutorial_files/pixel.gif" width="1" height="1">
+                        				
+                     </form>
+                     			
+                  </td>
+                  		
+               </tr>
+            </tbody></table>
+            <p>
+               
+               
+               
+               
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="questions"></a>20.&nbsp;Questions and Discussion
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>
+               Before posting questions, please see the
+               <a class="ulink" href="http://www.vogella.com/faq.html" target="_top"> vogella FAQ</a>. If you have questions or find an error in this article please
+               use the
+               <a class="ulink" href="http://groups.google.com/group/vogella" target="_top"> www.vogella.com Google Group</a>. I have created a short list
+               <a class="ulink" href="http://www.vogella.com/blog/2010/03/09/asking-community-questions/" target="_top"> how to create good questions
+                  </a> which might also help you.
+               
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title"><a name="resources"></a>21.&nbsp;Links and Literature
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="resources_egit"></a>21.1.&nbsp;EGit and Git Resources
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                  <a class="ulink" href="http://www.vogella.com/articles/Eclipse/article.html" target="_top">http://www.vogella.com/articles/Eclipse/article.html
+                     </a>
+                  EGit IDE Tutorial
+                  
+               </p>
+               <p>
+                  <a class="ulink" href="http://wiki.eclipse.org/EGit/User_Guide" target="_top"> http://wiki.eclipse.org/EGit/User_Guide
+                     </a>
+                  EGit User Guide
+                  
+               </p>
+               <p>
+                  <a class="ulink" href="http://wiki.eclipse.org/EGit/Contributor_Guide" target="_top"> http://wiki.eclipse.org/EGit/Contributor_Guide
+                     </a>
+                  EGit contributor guide
+                  
+               </p>
+               <p>
+                  <a class="ulink" href="http://www.vogella.com/articles/Git/article.html" target="_top"> Git Tutorial</a>
+                  
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="resources_general"></a>21.2.&nbsp;vogella Resources
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>
+                  <a class="ulink" href="http://www.vogella.com/training/overview.html" target="_top"> vogella Training </a>Android and Eclipse Training from the vogella team
+                  
+               </p>
+               <p>
+                  <a class="ulink" href="http://www.vogella.com/articles/Android/article.html" target="_top"> Android Tutorial
+                     </a> Introduction to Android Programming
+                  
+               </p>
+               <p>
+                  <a class="ulink" href="http://www.vogella.com/articles/GWT/article.html" target="_top"> GWT Tutorial
+                     </a> Program in Java and compile to JavaScript and HTML
+                  
+               </p>
+               <p>
+                  <a class="ulink" href="http://www.vogella.com/articles/EclipseRCP/article.html" target="_top"> Eclipse RCP Tutorial
+                     </a> Create native applications in Java
+                  
+               </p>
+               <p>
+                  <a class="ulink" href="http://www.vogella.com/articles/JUnit/article.html" target="_top"> JUnit Tutorial
+                     </a> Test your application
+                  
+               </p>
+               <p>
+                  <a class="ulink" href="http://www.vogella.com/articles/Git/article.html" target="_top"> Git Tutorial
+                     </a> Put everything you have under distributed version control system
+                  
+               </p>
+            </div>
+         </div>
+      </div>
+      
+      
+      
+   
+</body></html>
