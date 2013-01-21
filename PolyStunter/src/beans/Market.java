@@ -20,12 +20,12 @@ public class Market {
 	private List<Product> products;
 
 	private static Market market = null;
-	
+
 	private Market() {
 		this.products = new ArrayList<Product>();
 		this.refresh();
 	}
-	
+
 	public static Market getInstance() {
 		if(Market.market == null)
 			return new Market();
@@ -37,6 +37,17 @@ public class Market {
 		return this.products;
 	}
 
+	public List<Product> getProductsOfSeller(int idSeller) {
+		List<Product> p = new ArrayList<Product>();
+
+		for (Product product : products) {
+			if(product.getIdSeller() == idSeller) {
+				p.add(product);
+			}
+		}
+		return p;
+	}
+
 	public void refresh() {
 		java.sql.PreparedStatement preparedStatement;
 		try {
@@ -44,7 +55,7 @@ public class Market {
 			ResultSet result = null;
 			result = preparedStatement.executeQuery();
 			products.clear();
-			if(result.next()) {
+			while(result.next()) {
 				products.add(new Product(result.getInt("idProduct"),result.getInt("idSeller"),result.getDouble("priceProduct"),
 						result.getString("nameProduct"),result.getString("referenceProduct"),
 						result.getInt("quantityProduct"),result.getString("informationProduct"),
@@ -56,7 +67,7 @@ public class Market {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public Product getProduct(int id) {
 		boolean find = false;
 		Product p = null;

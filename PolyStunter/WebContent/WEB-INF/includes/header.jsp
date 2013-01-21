@@ -35,13 +35,13 @@
 						<c:when test="${empty userSession}">
 							<!-- Si non connecté -->
 							<ul>
-								<li class='active'><a href="<c:url value="/login" />"><span>Connexion</span></a></li>
+								<li><a href="<c:url value="/login" />"><span>Connexion</span></a></li>
 								<li><a href="<c:url value="/register" />"><span>S'inscrire</span></a></li>
 							</ul>
 						</c:when>
 						<c:when test="${userSession.isCustomer()}">
 							<ul>
-								<li class='active'><a href="<c:url value="/home" />"><span>Home</span></a></li>
+								<li><a href="<c:url value="/home" />"><span>Home</span></a></li>
 								<li><a href="<c:url value="/profile" />"><span>Mon
 											profil</span></a></li>
 								<li><a href="<c:url value="/products" />"><span>Produits</span></a></li>
@@ -50,7 +50,7 @@
 						</c:when>
 						<c:when test="${userSession.isSeller()}">
 							<ul>
-								<li class='active'><a href="<c:url value="home" />"><span>Home</span></a></li>
+								<li><a href="<c:url value="home" />"><span>Home</span></a></li>
 								<li><a href="<c:url value="/profile" />"><span>Mon
 											profil</span></a></li>
 								<li><a href='<c:url value="/store" />'><span>Gerer
@@ -59,7 +59,7 @@
 						</c:when>
 						<c:otherwise>
 							<ul>
-								<li class='active'><a href="<c:url value="home" />"><span>Home</span></a></li>
+								<li><a href="<c:url value="home" />"><span>Home</span></a></li>
 								<li><a href="<c:url value="/profile" />"><span>Mon
 											profil</span></a></li>
 								<li><a href='#'><span>Pense-Bête</span></a></li>

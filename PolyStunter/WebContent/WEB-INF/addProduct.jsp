@@ -6,29 +6,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" dir="ltr">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <link href="/PolyStunter/design/design.css" rel="stylesheet"
 	type="text/css">
 <link href="/PolyStunter/design/form.css" rel="stylesheet"
 	type="text/css">
 <script type="text/javascript" src="/PolyStunter/js/form.js"></script>
 <title>Gérer ma boutique : ajout produit</title>
-<script type="text/javascript"
-	src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script type="text/javascript">
-	function initialize() {
-		var mapOptions = {
-			center : new google.maps.LatLng(-34.397, 150.644),
-			zoom : 8,
-			mapTypeId : google.maps.MapTypeId.ROADMAP
-		};
-		var map = new google.maps.Map(document.getElementById("map_canvas"),
-				mapOptions);
-	}
-</script>
 </head>
-<body onload="initialize()">
+<body>
 	<%@include file="/WEB-INF/includes/header.jsp"%>
+	
 	<div id="content">
 		<div class="titlePage">Ajouter un produit</div>
 
@@ -91,12 +78,14 @@
 					<li><input type="hidden" name="form_id" value="557391" /></li>
 					<input id="saveForm" class="button" type="submit" name="submit"
 						value="Ajouter" />
-						
+
 				</ul>
 			</form>
+			<% if(request.getAttribute("errors") != null) {
+			%><div class="error"><%=request.getAttribute("errors") %></div>
+			<%}%>
 		</div>
 		<img id="bottom" src="/PolyStunter/images/bottom.png" alt="">
-		<div id="map_canvas" style="width: 100%; height: 100%"></div>
 	</div>
 	<%@include file="/WEB-INF/includes/footer.jsp"%>
 </body>

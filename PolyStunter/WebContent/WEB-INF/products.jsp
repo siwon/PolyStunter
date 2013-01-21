@@ -20,7 +20,12 @@
 				<c:forEach var="product" items="${market.getProducts()}">
 					<div class="market">
 						<img src="/PolyStunter/products/${product.getPhoto()}" width="100px" height="100px"/>
-						<b>${product.getName()}</b> <br/>
+						<c:if test="${product.getName().length() > 20}">
+							<b>${product.getName().substring(0,20)}...</b> <br/>
+						</c:if>
+						<c:if test="${product.getName().length() <= 20}">
+							<b>${product.getName()}</b> <br/>
+						</c:if>
 						<b style="color:red;">Prix :</b> ${product.getPrice()} &euro;
 						<c:if test="${product.inStock()}">
 						<span style="color:green;">En stock</span>

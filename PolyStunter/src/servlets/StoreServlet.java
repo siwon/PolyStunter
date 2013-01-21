@@ -6,6 +6,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import beans.Market;
+import beans.User;
 
 /**
  * Servlet implementation class StoreServlet
@@ -27,6 +31,10 @@ public class StoreServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Market.getInstance().refresh();
+		User u = (User) session.getAttribute("userSession");
+		request.setAttribute("productsOfSeller", Market.getInstance().getProductsOfSeller(u.getId()));
 		getServletContext().getRequestDispatcher("/WEB-INF/store.jsp").forward(request, response);
 	}
 

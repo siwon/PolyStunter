@@ -50,4 +50,11 @@ public class Location {
 		this.latitude = list.get(0);
 		this.longitude = list.get(1);
 	}
+
+	@Override
+	public String toString() {
+		return "("+this.latitude+","+this.longitude+")";
+	}
+	
+	
 }
