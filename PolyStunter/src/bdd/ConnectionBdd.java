@@ -3,9 +3,6 @@ package bdd;
 import java.sql.*;
 import java.util.*;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.eclipse.jdt.internal.compiler.batch.Main;
 
 /**
  * Classe BDD
