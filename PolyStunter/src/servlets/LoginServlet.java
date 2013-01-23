@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.BasketDAO;
+
 import forms.ConnectForm;
 
 import bdd.*;
@@ -48,7 +50,9 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("connectForm", null);
 			if(user.isCustomer()) { // Si c'est un client, chargement du panier
 				Basket basket = new Basket(user.getId());
-				basket.loadBasket();
+				BasketDAO.getInstance().loadBasket(basket);
+				ServletContext c = getServletContext();
+				c.log(basket.toString());
 				user.setBasket(basket);
 			}
 			

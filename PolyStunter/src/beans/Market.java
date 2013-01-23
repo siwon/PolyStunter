@@ -3,13 +3,12 @@
  */
 package beans;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import bdd.ConnectionBdd;
+import dao.MarketDAO;
+
 
 /**
  * @author "Alexandre Bisiaux"
@@ -23,7 +22,7 @@ public class Market {
 
 	private Market() {
 		this.products = new ArrayList<Product>();
-		this.refresh();
+		MarketDAO.getInstance().refresh(this);
 	}
 
 	public static Market getInstance() {
@@ -46,26 +45,6 @@ public class Market {
 			}
 		}
 		return p;
-	}
-
-	public void refresh() {
-		java.sql.PreparedStatement preparedStatement;
-		try {
-			preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("SELECT * FROM PRODUCT");
-			ResultSet result = null;
-			result = preparedStatement.executeQuery();
-			products.clear();
-			while(result.next()) {
-				products.add(new Product(result.getInt("idProduct"),result.getInt("idSeller"),result.getDouble("priceProduct"),
-						result.getString("nameProduct"),result.getString("referenceProduct"),
-						result.getInt("quantityProduct"),result.getString("informationProduct"),
-						new Location(result.getString("locationProduct")),result.getString("photoProduct")));
-			}
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	public Product getProduct(int id) {

@@ -1,9 +1,5 @@
 package beans;
 
-import java.sql.*;
-
-import bdd.ConnectionBdd;
-
 /**
  * 
  * @author "Alexandre Bisiaux"
@@ -67,47 +63,16 @@ public class User {
 		this.mail = mail;
 	}
 
-	public int getNbProductsInBasket() {
-		Statement s = null;
-		ResultSet result = null;
-		try {
-			s = ConnectionBdd.getInstance().getConnection().createStatement();
-			result = s.executeQuery("SELECT COUNT(*) FROM PRODUCTSINBASKET WHERE idBasket="+this.id);
-			s.close();
-			if(result.next())
-				return result.getInt(1);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return 0;		
-	}
-	
 	public boolean isCustomer() {
 		return this.status.equals("CUSTOMER");
 	}
-	
+
 	public boolean isSeller() {
 		return this.status.equals("SELLER");
 	}
-	
+
 	public boolean isDeliveryMan() {
 		return this.status.equals("DELIVERYMAN");
-	}
-	
-	public boolean exist() {
-		Statement s = null;
-		ResultSet result = null;
-		try {
-			s = ConnectionBdd.getInstance().getConnection().createStatement();
-			result = s.executeQuery("SELECT * FROM USER WHERE loginUser LIKE '"+this.login+"'");
-			if(result.next())
-				return true;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return false;
 	}
 
 	public Basket getBasket() {
@@ -116,20 +81,5 @@ public class User {
 
 	public void setBasket(Basket basket) {
 		this.basket = basket;
-	}
-	
-	public static String getLoginFromId(int id) {
-		Statement s = null;
-		ResultSet result = null;
-		try {
-			s = ConnectionBdd.getInstance().getConnection().createStatement();
-			result = s.executeQuery("SELECT loginUser FROM USER WHERE idUser="+id);
-			if(result.next())
-				return result.getString("loginUser");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
 	}
 }

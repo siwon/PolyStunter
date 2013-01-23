@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@page import="beans.Product"%>
 <%@page import="beans.User"%>
+<%@page import="dao.UserDAO"%>
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" dir="ltr">
@@ -26,7 +27,7 @@
 				<td><div>
 						<p>
 							<span class="name"><%=p.getName()%></span><br /> <i>Ref. <%=p.getReference()%></i><br />
-							Vendu par : <b><%=User.getLoginFromId(p.getIdSeller())%></b>
+							Vendu par : <b><%=UserDAO.getInstance().getLoginFromId(p.getIdSeller())%></b>
 							<br/>
 							<br />
 							<%

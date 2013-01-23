@@ -2,13 +2,13 @@ package forms;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
+
+import dao.UserDAO;
 
 import bdd.ConnectionBdd;
 import beans.User;
@@ -34,7 +34,7 @@ public class RegisterForm {
 		boolean result = false;
 		
 		User user = new User(0, login, password, status ,mail);
-		if(user.exist())
+		if(UserDAO.getInstance().exist(user))
 		{
 			setErrors("Inscription impossible","Pseudo déjà utilisé");
 			result = false;
@@ -85,16 +85,5 @@ public class RegisterForm {
 		} else {
 			return valeur;
 		}
-	}
-
-	@Override
-	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		for(Entry<String,String> entry : errors.entrySet()) {
-			buffer.append(entry.getKey());
-			buffer.append(" : ");
-			buffer.append(entry.getValue());
-		}
-		return buffer.toString();
 	}
 }

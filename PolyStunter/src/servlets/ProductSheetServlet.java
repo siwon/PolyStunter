@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,9 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beans.Basket;
+import dao.BasketDAO;
+import dao.MarketDAO;
+
 import beans.Market;
-import beans.Product;
 import beans.User;
 
 /**
@@ -25,7 +28,7 @@ public class ProductSheetServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String param = request.getParameter("id");
-		Market.getInstance().refresh();
+		MarketDAO.getInstance().refresh(Market.getInstance());
 		if(param.isEmpty() || Market.getInstance().getProduct(Integer.parseInt(param)) == null)
 		{
 			getServletContext().getRequestDispatcher("/WEB-INF/products.jsp").forward(request, response);
@@ -39,11 +42,11 @@ public class ProductSheetServlet extends HttpServlet {
 			throws ServletException, IOException {
 		int id = Integer.parseInt(req.getParameter("id"));
 		int quantity = Integer.parseInt(req.getParameter("quantity"));
-		
+		ServletContext c = getServletContext();
+		c.log(id+"");
 		HttpSession session = req.getSession();
 		User u = (User) session.getAttribute("userSession");
-		Basket basket = u.getBasket();
-		basket.addProduct(id, quantity);
+		BasketDAO.getInstance().addProduct(u.getBasket(), id, quantity);
 		
 		resp.sendRedirect("/PolyStunter/basket");
 	}

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.MarketDAO;
+
 import beans.Market;
 
 /**
@@ -22,10 +24,10 @@ public class ProductsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Market market = Market.getInstance();
-		market.refresh();
 		HttpSession session = request.getSession();
-		session.setAttribute("market", market);
+		Market market = Market.getInstance();
+		session.setAttribute("market", Market.getInstance());
+		MarketDAO.getInstance().refresh(market);
 		getServletContext().getRequestDispatcher("/WEB-INF/products.jsp").forward(request, response);
 	}
 

@@ -2,12 +2,14 @@ package servlets;
 
 import java.io.IOException;
 
-import javax.servlet.ServletContext;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dao.BasketDAO;
 
 import beans.User;
 
@@ -33,9 +35,10 @@ public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		User user = (User) request.getSession().getAttribute("userSession");
-		if(user.isCustomer())			
-			user.getBasket().save(); // On sauvegarde l'état du panier dans la BDD
 		
+		if(user.isCustomer())
+			BasketDAO.getInstance().save(user.getBasket());
+			
 		request.getSession().invalidate();
 		response.sendRedirect("/PolyStunter/");
 	}

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.MarketDAO;
+
 import beans.Market;
 import beans.User;
 
@@ -32,7 +34,7 @@ public class StoreServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		Market.getInstance().refresh();
+		MarketDAO.getInstance().refresh(Market.getInstance());
 		User u = (User) session.getAttribute("userSession");
 		request.setAttribute("productsOfSeller", Market.getInstance().getProductsOfSeller(u.getId()));
 		getServletContext().getRequestDispatcher("/WEB-INF/store.jsp").forward(request, response);

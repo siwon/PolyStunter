@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.BasketDAO;
+import dao.MarketDAO;
+
 import beans.Basket;
 import beans.Market;
 import beans.User;
@@ -25,7 +28,7 @@ public class BasketServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Market.getInstance().refresh();
+		MarketDAO.getInstance().refresh(Market.getInstance());
 		getServletContext().getRequestDispatcher("/WEB-INF/basket.jsp").forward(request, response);
 	}
 
@@ -35,10 +38,9 @@ public class BasketServlet extends HttpServlet {
 		String button = req.getParameter("actionBasket");
 		HttpSession session = req.getSession();
 		User u = (User)session.getAttribute("userSession");
-		Basket b = u.getBasket();
 		
 		if(button.equals("Vider"))
-			b.empty();
+			BasketDAO.getInstance().empty(u.getBasket());
 		
 		getServletContext().getRequestDispatcher("/WEB-INF/basket.jsp").forward(req, resp);
 	}
