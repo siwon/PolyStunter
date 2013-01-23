@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import utils.ErrorMessage;
 import utils.UploadFileOnServer;
 
 import beans.Location;
