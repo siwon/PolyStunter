@@ -14,7 +14,6 @@ import dao.BasketDAO;
 
 import forms.ConnectForm;
 
-import bdd.*;
 import beans.Basket;
 import beans.User;
 

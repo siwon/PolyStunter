@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import dao.BasketDAO;
 import dao.MarketDAO;
 
-import beans.Basket;
 import beans.Market;
 import beans.User;
 

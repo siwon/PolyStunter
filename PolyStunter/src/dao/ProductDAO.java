@@ -3,6 +3,7 @@
  */
 package dao;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import bdd.ConnectionBdd;
@@ -46,6 +47,22 @@ public class ProductDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public int getLastId() {
+		java.sql.PreparedStatement preparedStatement;
+		int id = -1;
+		ResultSet result;
+		try {
+			preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("SELECT last_insert_id() FROM PRODUCT");
+			result = preparedStatement.executeQuery();
+			if(result.next())
+				id = result.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return id;
 	}
 
 }
