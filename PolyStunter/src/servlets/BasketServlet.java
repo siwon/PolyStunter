@@ -36,7 +36,7 @@ public class BasketServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String button = req.getParameter("actionBasket");
 		HttpSession session = req.getSession();
-		User u = (User)session.getAttribute("userSession");
+		User u = (User)session.getAttribute("user");
 		
 		if(button.equals("Vider"))
 			BasketDAO.getInstance().empty(u.getBasket());

@@ -11,9 +11,8 @@ import bdd.ConnectionBdd;
 import beans.Basket;
 import beans.Market;
 import beans.Product;
-
 /**
- * @author Alexandre Bisiaux
+ * @author "Alexandre Bisiaux"
  *
  */
 public class BasketDAO {
@@ -82,7 +81,7 @@ public class BasketDAO {
 			}
 		}
 	}
-	
+
 	public void addProduct(Basket basket, int id, Integer quantity) {
 		Market market = Market.getInstance();
 		if(basket.contains(id)){
@@ -91,13 +90,12 @@ public class BasketDAO {
 			basket.getProducts().put(market.getProduct(id), quantity);
 		}
 	}
-	
+
 	public void removeProduct(Basket basket, Product p) {
 		basket.getProducts().remove(p);
 	}
-	
+
 	public void empty(Basket basket) {
 		basket.getProducts().clear();
 	}
-
 }

@@ -1,71 +1,68 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<div class="page">
-	<div id="leadbar">
-		<a href="<c:url value="/home" />" class="logo"></a>
-		<c:if test="${not empty userSession}">
-			<div id="userCard">
-				<img style="float: left; margin: -10px 6px 6px 0;"
-					src="images/userCard.png" width="50px" height="50px" /> Bonjour,
-				${userSession.getLogin()} ! (<a href="<c:url value="/logout" />">Déconnexion</a>)
-				Status : ${userSession.getStatus().toLowerCase()}
-			</div>
-		</c:if>
-		<c:if test="${not empty userSession and userSession.isCustomer()}">
-			<div style="width: 100%;">
-				<div id="searchBar">
-					<form name="searchBar" action="<c:url value='/search' />" method="POST">
-						<a id="logoSearch" href="javascript:;" onclick="parentNode.submit();"></a>
-						<input type="search" value="Rechercher un produit" name="search" onclick="this.value='';"/>
-					</form>
-				</div>
-				<div id="basket">
-					<a href="<c:url value="/basket" />" id="basketLogo"></a>(${userSession.getBasket().size()})
-				</div>
-			</div>
-		</c:if>
-	</div>
-	<div id="wrap">
-		<div class="wrap_inner">
-			<div id="header">
-				<div id='cssmenu'>
-					<c:choose>
-						<c:when test="${empty userSession}">
-							<!-- Si non connecté -->
-							<ul>
-								<li><a href="<c:url value="/login" />"><span>Connexion</span></a></li>
-								<li><a href="<c:url value="/register" />"><span>S'inscrire</span></a></li>
-							</ul>
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse"
+				data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span>
+			</a> <a class="brand" href="<c:url value="/home"/>">PolyStunter</a>
+			<div class="nav-collapse collapse">
+			
+				<ul class="nav">
+					<c:choose>				
+						<c:when test="user.isCustomer()">
+							<li class="active"><a href="<c:url value="/home"/>" ><fmt:message key="home" /></a></li>
+							<li class="active"><a href="<c:url value="/profil"/>" ><fmt:message key="myProfil" /></a></li>
+							<li class="active"><a href="<c:url value="/products"/>" ><fmt:message key="products" /></a></li>
+							<li class="active"><a href="<c:url value="/basket"/>" ><fmt:message key="myBasket" /></a></li>
 						</c:when>
-						<c:when test="${userSession.isCustomer()}">
-							<ul>
-								<li><a href="<c:url value="/home" />"><span>Home</span></a></li>
-								<li><a href="<c:url value="/profile" />"><span>Mon
-											profil</span></a></li>
-								<li><a href="<c:url value="/products" />"><span>Produits</span></a></li>
-								<li><a href="<c:url value="/basket" />"><span>Panier</span></a></li>
-							</ul>
+						
+						<c:when test="user.isSeller()">
+							<li class="active"><a href="<c:url value="/home"/>" ><fmt:message key="home" /></a></li>
+							<li class="active"><a href="<c:url value="/profil"/>" ><fmt:message key="profil" /></a></li>
+							<li class="active"><a href="<c:url value="/store"/>" ><fmt:message key="myStore" /></a></li>
 						</c:when>
-						<c:when test="${userSession.isSeller()}">
-							<ul>
-								<li><a href="<c:url value="home" />"><span>Home</span></a></li>
-								<li><a href="<c:url value="/profile" />"><span>Mon
-											profil</span></a></li>
-								<li><a href='<c:url value="/store" />'><span>Gerer
-											ma boutique</span></a></li>
-							</ul>
+		
+						<c:when test="user.isDeliveryMan()">
+							<li class="active"><a href="<c:url value="/home"/>" ><fmt:message key="home" /></a></li>
+							<li class="active"><a href="<c:url value="/profil"/>" ><fmt:message key="profil" /></a></li>
+							<li class="active"><a href="<c:url value="#"/>" ><fmt:message key="deliverySpace" /></a></li>
+							<li class="active"><a href="<c:url value="#"/>" ><fmt:message key="notifications" /></a></li>
 						</c:when>
+						
 						<c:otherwise>
-							<ul>
-								<li><a href="<c:url value="home" />"><span>Home</span></a></li>
-								<li><a href="<c:url value="/profile" />"><span>Mon
-											profil</span></a></li>
-								<li><a href='#'><span>Pense-Bête</span></a></li>
-								<li><a href='#'><span>Notifications</span></a></li>
-							</ul>
+								<li class="active"><a href="<c:url value="/login"/>" ><fmt:message key="connect" /></a></li>
+								<li class="active"><a href="<c:url value="/register"/>" ><fmt:message key="register" /></a></li>
 						</c:otherwise>
 					</c:choose>
-				</div>
+				</ul>
+				
+				<c:choose>
+					<c:when test="empty user">
+						<div class="navbar-form pull-right">
+							<fmt:message key="welcome" />,${user.getLogin()} 
+						</div>
+					</c:when>
+					<c:otherwise>
+						<script src="/PolyStunter/bootstrap/js/jquery.js"></script>
+						<script src="/PolyStunter/bootstrap/js/jqBootstrapValidation.js"></script>
+						<script>
+							$(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
+						</script>
+						<form class="navbar-form pull-right" action="<c:url value="/login" />" method="POST">
+							<input class="span2" type="text" placeholder="Login" required>
+							<input class="span2" type="password" placeholder="Password" required>
+							<button type="submit" class="btn btn-success">
+								<fmt:message key="connect" />
+							</button>
+						</form>
+					</c:otherwise>
+				</c:choose>
 			</div>
+		</div>
+	</div>
+</div>

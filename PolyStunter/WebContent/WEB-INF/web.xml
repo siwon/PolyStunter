@@ -134,6 +134,7 @@
   </filter>
   <filter-mapping>
     <filter-name>NotLoggedFilter</filter-name>
+    <url-pattern>/home</url-pattern>
     <url-pattern>/login</url-pattern>
     <url-pattern>/register</url-pattern>
   </filter-mapping>
@@ -148,7 +149,6 @@
   </filter-mapping>
   <filter-mapping>
     <filter-name>LoggedFilter</filter-name>
-    <url-pattern>/home</url-pattern>
     <url-pattern>/logout</url-pattern>
     <url-pattern>/products</url-pattern>
     <url-pattern>/basket</url-pattern>
@@ -157,6 +157,6 @@
     <url-pattern>/profile</url-pattern>
   </filter-mapping>
   <welcome-file-list>
-    <welcome-file>/WEB-INF/connect.jsp</welcome-file>
+    <welcome-file>/WEB-INF/index.jsp</welcome-file>
   </welcome-file-list>
 </web-app>

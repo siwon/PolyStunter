@@ -44,9 +44,9 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		if (form.getErrors().isEmpty()) {
-			session.setAttribute("userSession", user);
+			session.setAttribute("user", user);
 			response.sendRedirect("/PolyStunter/home");
-			session.setAttribute("connectForm", null);
+			
 			if(user.isCustomer()) { // Si c'est un client, chargement du panier
 				Basket basket = new Basket(user.getId());
 				BasketDAO.getInstance().loadBasket(basket);
@@ -56,8 +56,7 @@ public class LoginServlet extends HttpServlet {
 			}
 			
 		} else {
-			session.setAttribute("userSession", null);
-			session.setAttribute("connectForm", form);
+			session.setAttribute("user", null);
 			this.getServletContext().getRequestDispatcher("/WEB-INF/connect.jsp").forward(request, response);
 		}
 	}

@@ -1,6 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
-</div>
-</div>
-</div>
+<footer>
+	<p>&copy; PolyStunter 2013</p>
+</footer>
+<%@include file="/WEB-INF/includes/jsBootstrap.jsp"%>

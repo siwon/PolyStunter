@@ -32,7 +32,7 @@ public class LoggedFilter implements Filter {
 
 		HttpSession session = request.getSession();
 
-		if (session.getAttribute("userSession") != null) {
+		if (session.getAttribute("user") != null) {
 			arg2.doFilter(arg0, arg1);
 		} else {
 			response.sendRedirect(request.getContextPath());

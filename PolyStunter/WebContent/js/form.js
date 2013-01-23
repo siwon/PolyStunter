@@ -6,13 +6,16 @@ function checkConnectForm(form) {
 	
 	if(form.login.value == "") {
 		valid = false;
-		form.login.focus();
 	}
 	else if(form.password.value == "") {
 		valid = false;
-		form.password.focus();
 	}
 	
+	if(!valid)
+	{
+		document.getElementById("errorForm").innerHTML = "<div class='alert alert-error'>Veuillez remplir tous les champs.</div>";
+			
+	}
 	return valid;
 }
 

@@ -45,7 +45,7 @@ public class ProductSheetServlet extends HttpServlet {
 		ServletContext c = getServletContext();
 		c.log(id+"");
 		HttpSession session = req.getSession();
-		User u = (User) session.getAttribute("userSession");
+		User u = (User) session.getAttribute("user");
 		BasketDAO.getInstance().addProduct(u.getBasket(), id, quantity);
 		
 		resp.sendRedirect("/PolyStunter/basket");

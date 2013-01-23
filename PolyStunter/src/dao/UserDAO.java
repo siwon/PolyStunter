@@ -11,24 +11,23 @@ import bdd.ConnectionBdd;
 import beans.User;
 
 /**
- * @author Alexandre Bisiaux
+ * @author "Alexandre Bisiaux"
  *
  */
 public class UserDAO {
-	
 	private static UserDAO userDAO = null;
-	
+
 	private UserDAO() {
-		
+
 	}
-	
+
 	public static UserDAO getInstance() {
 		if(userDAO == null) {
 			userDAO = new UserDAO();
 		}
 		return userDAO;
 	}
-	
+
 	public int getNbProductsInBasket(User user) {
 		Statement s = null;
 		ResultSet result = null;
@@ -44,7 +43,7 @@ public class UserDAO {
 		}
 		return 0;		
 	}
-	
+
 	public boolean exist(User user) {
 		Statement s = null;
 		ResultSet result = null;
@@ -59,7 +58,7 @@ public class UserDAO {
 		}
 		return false;
 	}
-	
+
 	public static String getLoginFromId(int id) {
 		Statement s = null;
 		ResultSet result = null;
@@ -74,5 +73,4 @@ public class UserDAO {
 		}
 		return null;
 	}
-
 }

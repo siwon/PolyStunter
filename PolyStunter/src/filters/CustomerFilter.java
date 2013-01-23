@@ -29,7 +29,7 @@ public class CustomerFilter implements Filter {
 		HttpServletResponse resp = (HttpServletResponse) response;
 		
 		HttpSession session = req.getSession();
-		User user = (User) session.getAttribute("userSession");
+		User user = (User) session.getAttribute("user");
 		if (user != null && user.isCustomer()) {
 			chain.doFilter(request, response);
 		} else {

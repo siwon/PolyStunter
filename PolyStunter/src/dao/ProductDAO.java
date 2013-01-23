@@ -8,27 +8,25 @@ import java.sql.SQLException;
 
 import bdd.ConnectionBdd;
 import beans.Product;
-
 /**
- * @author Alexandre Bisiaux
+ * @author "Alexandre Bisiaux"
  *
  */
 public class ProductDAO {
-	
 	private static ProductDAO productDAO = null;
-	
+
 	private ProductDAO() {
-		
+
 	}
-	
+
 	public static ProductDAO getInstance() {
 		if(productDAO == null) {
 			productDAO = new ProductDAO();
 		}
-		
+
 		return productDAO;
 	}
-	
+
 	public void addProduct(Product p) {
 		java.sql.PreparedStatement preparedStatement;
 		try {
@@ -42,13 +40,13 @@ public class ProductDAO {
 			preparedStatement.setString(8, p.getLocation().toString());
 			preparedStatement.setString(9, p.getPhoto());
 			preparedStatement.executeQuery();
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
 	public int getLastId() {
 		java.sql.PreparedStatement preparedStatement;
 		int id = -1;
@@ -64,5 +62,4 @@ public class ProductDAO {
 		}
 		return id;
 	}
-
 }

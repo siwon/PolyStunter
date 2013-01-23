@@ -34,7 +34,7 @@ public class LogoutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		User user = (User) request.getSession().getAttribute("userSession");
+		User user = (User) request.getSession().getAttribute("user");
 		
 		if(user.isCustomer())
 			BasketDAO.getInstance().save(user.getBasket());

@@ -29,7 +29,7 @@ public class NotLoggedFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest) arg0;
 		HttpServletResponse response = (HttpServletResponse) arg1;
 
-		if(request.getSession().getAttribute("userSession")==null) {
+		if(request.getSession().getAttribute("user")==null) {
 			arg2.doFilter(arg0, arg1);
 		} else {
 			response.sendRedirect(request.getContextPath());

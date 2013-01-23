@@ -1,6 +1,3 @@
-/**
- * 
- */
 package dao;
 
 import java.sql.ResultSet;
@@ -12,12 +9,13 @@ import beans.Market;
 import beans.Product;
 
 /**
- * @author Alexandre Bisiaux
+ * 
+ * @author "Alexandre Bisiaux"
  *
  */
 public class MarketDAO {
-	
-	private static MarketDAO marketDAO = null;
+
+private static MarketDAO marketDAO = null;
 	
 	private MarketDAO() {
 		

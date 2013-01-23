@@ -35,7 +35,7 @@ public class StoreServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		MarketDAO.getInstance().refresh(Market.getInstance());
-		User u = (User) session.getAttribute("userSession");
+		User u = (User) session.getAttribute("user");
 		request.setAttribute("productsOfSeller", Market.getInstance().getProductsOfSeller(u.getId()));
 		getServletContext().getRequestDispatcher("/WEB-INF/store.jsp").forward(request, response);
 	}
