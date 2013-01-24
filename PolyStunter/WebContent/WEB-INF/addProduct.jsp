@@ -1,92 +1,44 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<?xml version="1.0" encoding="UTF-8" ?>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<fmt:setBundle basename="properties.text" />
+
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" dir="ltr">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link href="/PolyStunter/design/design.css" rel="stylesheet"
-	type="text/css">
-<link href="/PolyStunter/design/form.css" rel="stylesheet"
-	type="text/css">
-<script type="text/javascript" src="/PolyStunter/js/form.js"></script>
-<title>Gérer ma boutique : ajout produit</title>
-</head>
-<body>
-	<%@include file="/WEB-INF/includes/header.jsp"%>
-	
-	<div id="content">
-		<div class="titlePage">Ajouter un produit</div>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		
+		<title><fmt:message key="addAProduct" /></title>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="Alexandre Bisiaux and Simon Rousseau">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		
+		<link href="/PolyStunter/bootstrap/css/bootstrap.css" rel="stylesheet">
+		<link href="/PolyStunter/design/design.css" rel="stylesheet">
+		<link href="/PolyStunter/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+		
+		<script src="http://axe.mappy.com/1v1/init/get.aspx?auth=[token]&version=2.01&solution=ajax"></script>
+		
+	</head>
 
-		<img id="top" src="/PolyStunter/images/top.png" alt="">
-		<div id="form_container">
-
-			<form id="form_557391" class="appnitro" enctype="multipart/form-data"
-				method="post" action="">
-				<div class="form_description"></div>
-				<ul>
-
-					<li id="li_1"><label class="description" for="name">Nom
-							du produit </label>
-						<div>
-							<input id="element_1" name="name" class="element text medium"
-								type="text" maxlength="255" value="" />
-						</div></li>
-					<li id="li_3"><label class="description" for="reference">Référence
-							du produit </label>
-						<div>
-							<input id="element_3" name="reference"
-								class="element text medium" type="text" maxlength="255" value="" />
-						</div></li>
-					<li id="li_5"><label class="description" for="information">Information
-					</label>
-						<div>
-							<textarea id="element_5" name="information"
-								class="element textarea medium"></textarea>
-						</div></li>
-					<li id="li_6"><label class="description" for="photo">Photo
-					</label>
-						<div>
-							<input id="element_6" name="photo" class="element file"
-								type="file" />
-						</div></li>
-					<li id="li_4"><label class="description" for="quantity">Quantité
-					</label>
-						<div>
-							<input id="element_4" name="quantity" class="element text small"
-								type="text" maxlength="255" value="" />
-						</div></li>
-					<li id="li_8"><label class="description" for="latitude">Latitude
-					</label>
-						<div>
-							<input id="element_8" name="latitude" class="element text medium"
-								type="text" maxlength="255" value="" />
-						</div></li>
-					<li id="li_7"><label class="description" for="longitude">Longitude
-					</label>
-						<div>
-							<input id="element_7" name="longitude"
-								class="element text medium" type="text" maxlength="255" value="" />
-						</div></li>
-					<li id="li_2"><label class="description" for="price">Prix
-					</label>
-						<div>
-							<input id="element_2" name="price" class="element text small"
-								type="text" maxlength="255" value="" />
-						</div></li>
-					<li><input type="hidden" name="form_id" value="557391" /></li>
-					<input id="saveForm" class="button" type="submit" name="submit"
-						value="Ajouter" />
-
-				</ul>
-			</form>
-			<% if(request.getAttribute("errors") != null) {
-			%><div class="error"><%=request.getAttribute("errors") %></div>
-			<%}%>
+	<body>
+		<%@include file="/WEB-INF/includes/header.jsp" %>
+		
+		<div class="container">
+		
+			<div class="page-header">
+				<h1><fmt:message key="addAProduct" /></h1>
+			</div>
+			<div id="mymap" style="width:100%;height:400px;"></div>
+			<script>
+				var map = new Mappy.api.map.Map({
+				    container:'#mymap'
+				});
+				map.setCenter(new Mappy.api.geo.Coordinates(1.44295,43.6044),7);
+			</script>
+			<hr>
 		</div>
-		<img id="bottom" src="/PolyStunter/images/bottom.png" alt="">
-	</div>
-	<%@include file="/WEB-INF/includes/footer.jsp"%>
-</body>
+		<%@include file="/WEB-INF/includes/footer.jsp" %>
+	</body>
 </html>

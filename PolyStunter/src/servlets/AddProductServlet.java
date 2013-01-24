@@ -14,8 +14,6 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import utils.ErrorMessage;
-import utils.UploadFileOnServer;
-
 import beans.Location;
 import beans.Product;
 import beans.User;
@@ -41,7 +39,7 @@ public class AddProductServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		ErrorMessage errors = new ErrorMessage();
+		/*ErrorMessage errors = new ErrorMessage();
 
 		String name = request.getParameter("name");
 		String information = request.getParameter("information");
@@ -77,7 +75,7 @@ public class AddProductServlet extends HttpServlet {
 			getServletContext().getRequestDispatcher("/WEB-INF/addProduct.jsp").forward(request, response);
 		} else {
 			getServletContext().getRequestDispatcher("/WEB-INF/store.jsp").forward(request, response);
-		}
+		}*/
 	}
 
 	private String getFilename(Part part) {
