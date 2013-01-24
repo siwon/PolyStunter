@@ -3,11 +3,10 @@ package forms;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
+
+import utils.ErrorMessage;
 
 
 import bdd.ConnectionBdd;
@@ -20,16 +19,12 @@ import beans.User;
  */
 public final class ConnectForm {
 
-	private Map<String, String> errors = new HashMap<String, String>();
-
-	public Map<String, String> getErrors() {
-		return this.errors;
-	}
+	public static ErrorMessage errors = new ErrorMessage();
 
 	public User connectUser(HttpServletRequest request) {
 
-		String login = getValue(request, "login");
-		String password = getValue(request, "password");
+		String login = request.getParameter("login");
+		String password = request.getParameter("password");
 		ResultSet result = null;
 		User user = null;
 
@@ -56,7 +51,7 @@ public final class ConnectForm {
 				user.setStatus(result.getString("statusUser"));
 				user.setMail(result.getString("mailUser"));
 			} else {
-				setErrors("Connexion impossible","Identifiants incorrects");
+				errors.add("Connexion impossible : Identifiants incorrects.");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -66,31 +61,5 @@ public final class ConnectForm {
 			e.printStackTrace();
 		}
 		return user;
-	}
-
-	private void setErrors(String key, String message) {
-		this.errors.put(key, message);
-	}
-
-	private static String getValue(HttpServletRequest request, String inputValue) {
-		String valeur = request.getParameter(inputValue);
-		if ( valeur == null || valeur.trim().length() == 0 ) {
-			return null;
-		} else {
-			return valeur;
-		}
-	}
-
-	@Override
-	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		for(Entry<String,String> entry : errors.entrySet()) {
-			buffer.append(entry.getKey());
-			buffer.append(" : ");
-			buffer.append(entry.getValue());
-		}
-		return buffer.toString();
-	}
-	
-	
+	}	
 }

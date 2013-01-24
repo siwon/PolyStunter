@@ -3,7 +3,7 @@
 <fmt:setBundle basename="properties.text" />
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 	<head>
 		<meta charset="utf-8">
 		
@@ -14,14 +14,7 @@
 		<meta name="author" content="Alexandre Bisiaux and Simon Rousseau">
 		
 		<link href="/PolyStunter/bootstrap/css/bootstrap.css" rel="stylesheet">
-		
-		<style type="text/css">
-		body {
-			padding-top: 60px;
-			padding-bottom: 40px;
-		}
-		</style>
-		
+		<link href="/PolyStunter/design/design.css" rel="stylesheet">
 		<link href="/PolyStunter/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 		
 		<script src="/PolyStunter/bootstrap/js/jquery.js"></script>
@@ -59,11 +52,14 @@
 				</div>
 				
 				<div class="form-actions">
-					<button type="submit" class="btn"><fmt:message key="connect"/></button>
+					<button type="submit" class="btn btn-success"><fmt:message key="connect"/></button>
 				</div>
 				
 			</form>
-				
+			<% if(request.getAttribute("errors") != null) {
+				out.print("<div class='alert alert-error'>"+ request.getAttribute("errors") + "</div>");
+			}
+			%>
 			<hr>
 			<%@include file="/WEB-INF/includes/footer.jsp" %>
 		</div>

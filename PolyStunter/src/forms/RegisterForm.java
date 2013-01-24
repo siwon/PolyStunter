@@ -3,10 +3,10 @@ package forms;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+
+import utils.ErrorMessage;
 
 import dao.UserDAO;
 
@@ -19,24 +19,20 @@ import beans.User;
  */
 public class RegisterForm {
 
-	private Map<String, String> errors = new HashMap<String, String>();
-
-	public Map<String, String> getErrors() {
-		return this.errors;
-	}
+	public static ErrorMessage errors = new ErrorMessage();
 
 	public boolean registerUser(HttpServletRequest request) {
 
-		String login = getValue(request, "login");
-		String password = getValue(request, "password");
-		String status = getValue(request,"status");
-		String mail = getValue(request,"mail");
+		String login = request.getParameter("login");
+		String password = request.getParameter("password");
+		String status = request.getParameter("status");
+		String mail = request.getParameter("mail");
 		boolean result = false;
 		
 		User user = new User(0, login, password, status ,mail);
 		if(UserDAO.getInstance().exist(user))
 		{
-			setErrors("Inscription impossible","Pseudo déjà utilisé");
+			errors.add("Inscription impossible : Pseudo déjà utilisé.");
 			result = false;
 		} else {
 			try {
@@ -58,7 +54,7 @@ public class RegisterForm {
 				if(preparedStatement.executeUpdate() == 1)
 					result = true;
 				else {
-					setErrors("Inscription impossible","Retentez plus tard");
+					errors.add("Inscription impossible : Retentez plus tard.");
 					result = false;
 				}
 				
@@ -72,18 +68,5 @@ public class RegisterForm {
 		}
 		
 		return result;
-	}
-
-	private void setErrors(String key, String message) {
-		this.errors.put(key, message);
-	}
-
-	private static String getValue(HttpServletRequest request, String inputValue) {
-		String valeur = request.getParameter(inputValue);
-		if ( valeur == null || valeur.trim().length() == 0 ) {
-			return null;
-		} else {
-			return valeur;
-		}
 	}
 }

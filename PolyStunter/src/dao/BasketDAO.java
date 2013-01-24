@@ -91,11 +91,30 @@ public class BasketDAO {
 		}
 	}
 
-	public void removeProduct(Basket basket, Product p) {
-		basket.getProducts().remove(p);
+	public void removeProduct(Basket basket, int id) {
+		if(basket.getProduct(id) != null)
+			basket.getProducts().remove(basket.getProduct(id));
 	}
 
 	public void empty(Basket basket) {
 		basket.getProducts().clear();
+	}
+
+	public void decreaseQuantity(Basket basket, int id) {
+		Product p = basket.getProduct(id);
+		if(p != null){
+			if(basket.getProducts().get(p) == 1)
+				removeProduct(basket, id);
+			else
+				basket.getProducts().put(p, basket.getProducts().get(p)-1);
+		}			
+	}
+	
+	public void increaseQuantity(Basket basket, int id) {
+		Product p = basket.getProduct(id);
+		if(p != null){
+			if(p.getQuantity() > basket.getProducts().get(p)+1)
+				basket.getProducts().put(p, basket.getProducts().get(p)+1);
+		}			
 	}
 }

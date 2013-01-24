@@ -3,7 +3,7 @@
 <fmt:setBundle basename="properties.text" />
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 	<head>
 		<meta charset="utf-8">
 		
@@ -14,14 +14,7 @@
 		<meta name="author" content="Alexandre Bisiaux and Simon Rousseau">
 		
 		<link href="/PolyStunter/bootstrap/css/bootstrap.css" rel="stylesheet">
-		
-		<style type="text/css">
-		body {
-			padding-top: 60px;
-			padding-bottom: 40px;
-		}
-		</style>
-		
+		<link href="/PolyStunter/design/design.css" rel="stylesheet">
 		<link href="/PolyStunter/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 		
 	</head>
@@ -30,11 +23,21 @@
 		<%@include file="/WEB-INF/includes/header.jsp" %>
 		
 		<div class="container">
-	
+		
+			<% if(request.getAttribute("errors") != null) {
+				out.print("<div class='alert alert-error'>"+ request.getAttribute("errors") + "</div>");
+			}
+			%>
+			<% if(request.getAttribute("successMessage") != null) {
+				out.print("<div class='alert alert-success'>"+ request.getAttribute("successMessage") + "</div>");
+			}
+			%>		
 			<div class="hero-unit">
-				<img src="/PolyStunter/images/logo_Large.png" width="500px" />
-				<fmt:message key="home.welcome" />
-				<button class="btn btn-large btn-primary" type="button">Commencer maintenant !</button>
+				<div style="text-align:center">
+					<img src="/PolyStunter/images/logo_Large.png" width="500px" />
+					<fmt:message key="home.welcome" />
+					<a class="btn btn-large btn-primary" href="<c:url value="/products" />"><fmt:message key="startShopping" /> !</a>
+				</div>
 			</div>
 	
 			<div class="row">
@@ -63,9 +66,8 @@
 					</p>
 				</div>
 			</div>
-	
-			<hr>
-			<%@include file="/WEB-INF/includes/footer.jsp" %>
+		<hr>
 		</div>
+		<%@include file="/WEB-INF/includes/footer.jsp" %>
 	</body>
 </html>

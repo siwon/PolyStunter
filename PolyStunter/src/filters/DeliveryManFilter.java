@@ -1,6 +1,8 @@
 package filters;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -9,7 +11,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.User;
@@ -32,15 +33,15 @@ public class DeliveryManFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		HttpServletRequest req = (HttpServletRequest) request;
-		HttpServletResponse resp = (HttpServletResponse) response;
-
-		HttpSession session = req.getSession();
+		ResourceBundle rb = ResourceBundle.getBundle("properties.text");
+		
+		HttpSession session = ((HttpServletRequest) request).getSession();
 		User user = (User) session.getAttribute("user");
 		if (user != null && user.isDeliveryMan()) {
 			chain.doFilter(request, response);
 		} else {
-			resp.sendRedirect("/PolyStunter/home");
+			((HttpServletRequest) request).setAttribute("errors", rb.getString("unauthorizedPage"));
+			((HttpServletRequest) request).getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 		}
 	}
 

@@ -1,6 +1,7 @@
 package filters;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 
 import javax.servlet.Filter;
@@ -26,7 +27,7 @@ public class LoggedFilter implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2) throws IOException, ServletException {
-		
+		ResourceBundle rb = ResourceBundle.getBundle("properties.text");
 		HttpServletRequest request = (HttpServletRequest) arg0;
 		HttpServletResponse response = (HttpServletResponse) arg1;
 
@@ -35,7 +36,8 @@ public class LoggedFilter implements Filter {
 		if (session.getAttribute("user") != null) {
 			arg2.doFilter(arg0, arg1);
 		} else {
-			response.sendRedirect(request.getContextPath());
+			request.setAttribute("errors", rb.getString("unauthorizedPage"));
+			request.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 		}
 	}
 

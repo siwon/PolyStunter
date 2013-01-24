@@ -1,48 +1,37 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<fmt:setBundle basename="properties.text" />
 
-<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" dir="ltr">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="/PolyStunter/design/design.css" rel="stylesheet"
-	type="text/css">
-<title>Produits</title>
-</head>
-<body>
-	<%@include file="/WEB-INF/includes/header.jsp"%>
-	<div id="content">
-		<div class="titlePage">Produits</div>
-		<c:if test="${not empty market }">
-			<div>
-				<c:forEach var="product" items="${market.getProducts()}">
-					<div class="market">
-						<img src="/PolyStunter/products/${product.getPhoto()}" width="100px" height="100px"/>
-						<c:if test="${product.getName().length() > 20}">
-							<b>${product.getName().substring(0,20)}...</b> <br/>
-						</c:if>
-						<c:if test="${product.getName().length() <= 20}">
-							<b>${product.getName()}</b> <br/>
-						</c:if>
-						<b style="color:red;">Prix :</b> ${product.getPrice()} &euro;
-						<c:if test="${product.inStock()}">
-						<span style="color:green;">En stock</span>
-						</c:if>
-						<c:if test="${! product.inStock()}">
-						<span style="color:red;">En rupture</span>
-						</c:if>
-						<br/>
-						<a href="<c:url value="/productSheet?id=${product.getId()}"/>" class="button">Voir</a>
-					</div>
-				</c:forEach>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		
+		<title><fmt:message key="products" /></title>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="Alexandre Bisiaux and Simon Rousseau">
+		
+		<link href="/PolyStunter/bootstrap/css/bootstrap.css" rel="stylesheet">
+		<link href="/PolyStunter/design/design.css" rel="stylesheet">
+		<link href="/PolyStunter/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+		
+	</head>
+
+	<body>
+		<%@include file="/WEB-INF/includes/header.jsp" %>
+		
+		<div class="container">
+			<div class="page-header">
+				<h1><fmt:message key="products" /></h1>
 			</div>
-		</c:if>
-		<c:if test="${empty market }">
-			<div align="center">Il n'y a plus de produits en vente.</div>
-		</c:if>
-	</div>
-	<%@include file="/WEB-INF/includes/footer.jsp"%>
-</body>
+				
+			<ul class="thumbnails market">
+				<%= request.getAttribute("products") %>
+			</ul>
+			<hr>
+		</div>
+		<%@include file="/WEB-INF/includes/footer.jsp" %>
+	</body>
 </html>

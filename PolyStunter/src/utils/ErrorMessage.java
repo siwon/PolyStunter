@@ -15,7 +15,7 @@ public class ErrorMessage {
 	private List<String> errors = new ArrayList<String>();
 	
 	public void add(String error){
-		this.errors.add(error);
+		this.errors.add(error+ "\n");
 	}
 	
 	public void clear() {

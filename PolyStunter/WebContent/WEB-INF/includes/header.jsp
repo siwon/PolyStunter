@@ -14,20 +14,20 @@
 			
 				<ul class="nav">
 					<c:choose>				
-						<c:when test="user.isCustomer()">
+						<c:when test="${user.isCustomer()}">
 							<li class="active"><a href="<c:url value="/home"/>" ><fmt:message key="home" /></a></li>
 							<li class="active"><a href="<c:url value="/profil"/>" ><fmt:message key="myProfil" /></a></li>
 							<li class="active"><a href="<c:url value="/products"/>" ><fmt:message key="products" /></a></li>
 							<li class="active"><a href="<c:url value="/basket"/>" ><fmt:message key="myBasket" /></a></li>
 						</c:when>
 						
-						<c:when test="user.isSeller()">
+						<c:when test="${user.isSeller()}">
 							<li class="active"><a href="<c:url value="/home"/>" ><fmt:message key="home" /></a></li>
 							<li class="active"><a href="<c:url value="/profil"/>" ><fmt:message key="profil" /></a></li>
 							<li class="active"><a href="<c:url value="/store"/>" ><fmt:message key="myStore" /></a></li>
 						</c:when>
 		
-						<c:when test="user.isDeliveryMan()">
+						<c:when test="${user.isDeliveryMan()}">
 							<li class="active"><a href="<c:url value="/home"/>" ><fmt:message key="home" /></a></li>
 							<li class="active"><a href="<c:url value="/profil"/>" ><fmt:message key="profil" /></a></li>
 							<li class="active"><a href="<c:url value="#"/>" ><fmt:message key="deliverySpace" /></a></li>
@@ -42,24 +42,26 @@
 				</ul>
 				
 				<c:choose>
-					<c:when test="empty user">
-						<div class="navbar-form pull-right">
-							<fmt:message key="welcome" />,${user.getLogin()} 
-						</div>
-					</c:when>
-					<c:otherwise>
+					<c:when test="${empty user}">
 						<script src="/PolyStunter/bootstrap/js/jquery.js"></script>
 						<script src="/PolyStunter/bootstrap/js/jqBootstrapValidation.js"></script>
 						<script>
 							$(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
 						</script>
 						<form class="navbar-form pull-right" action="<c:url value="/login" />" method="POST">
-							<input class="span2" type="text" placeholder="Login" required>
-							<input class="span2" type="password" placeholder="Password" required>
+							<input class="span2" type="text" name="login" placeholder="Login" required>
+							<input class="span2" type="password" name="password" placeholder="Password" required>
 							<button type="submit" class="btn btn-success">
 								<fmt:message key="connect" />
 							</button>
-						</form>
+						</form>						
+					</c:when>
+					<c:otherwise>
+						<div class=".navbar-text pull-right">
+							<p style="margin-top:10px;color: white;">
+								<fmt:message key="welcome" />, ${user.getLogin()} ! (<a href="<c:url value="/logout" />"><fmt:message key="logout" /></a>)
+							</p>
+						</div>
 					</c:otherwise>
 				</c:choose>
 			</div>

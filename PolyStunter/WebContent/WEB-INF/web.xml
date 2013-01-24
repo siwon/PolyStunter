@@ -29,6 +29,15 @@
     <url-pattern>/search</url-pattern>
   </servlet-mapping>
   <servlet>
+    <display-name>BasketActionServlet</display-name>
+    <servlet-name>BasketActionServlet</servlet-name>
+    <servlet-class>servlets.BasketActionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BasketActionServlet</servlet-name>
+    <url-pattern>/basketAction</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <display-name>AddProductServlet</display-name>
     <servlet-name>AddProductServlet</servlet-name>
     <servlet-class>servlets.AddProductServlet</servlet-class>
@@ -113,14 +122,6 @@
     <url-pattern>/productSheet</url-pattern>
   </servlet-mapping>
   <filter>
-    <filter-name>NotLoggedFilter</filter-name>
-    <filter-class>filters.NotLoggedFilter</filter-class>
-  </filter>
-  <filter>
-    <filter-name>LoggedFilter</filter-name>
-    <filter-class>filters.LoggedFilter</filter-class>
-  </filter>
-  <filter>
     <filter-name>CustomerFilter</filter-name>
     <filter-class>filters.CustomerFilter</filter-class>
   </filter>
@@ -133,12 +134,6 @@
     <filter-class>filters.SellerFilter</filter-class>
   </filter>
   <filter-mapping>
-    <filter-name>NotLoggedFilter</filter-name>
-    <url-pattern>/home</url-pattern>
-    <url-pattern>/login</url-pattern>
-    <url-pattern>/register</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
     <filter-name>SellerFilter</filter-name>
     <url-pattern>/store</url-pattern>
   </filter-mapping>
@@ -147,6 +142,20 @@
     <url-pattern>/basket</url-pattern>
     <url-pattern>/products</url-pattern>
   </filter-mapping>
+  <filter>
+    <filter-name>NotLoggedFilter</filter-name>
+    <filter-class>filters.NotLoggedFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>NotLoggedFilter</filter-name>
+    <url-pattern>/login</url-pattern>
+    <url-pattern>/register</url-pattern>
+    <url-pattern>/home</url-pattern>
+  </filter-mapping>
+  <filter>
+    <filter-name>LoggedFilter</filter-name>
+    <filter-class>filters.LoggedFilter</filter-class>
+  </filter>
   <filter-mapping>
     <filter-name>LoggedFilter</filter-name>
     <url-pattern>/logout</url-pattern>

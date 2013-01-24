@@ -2,7 +2,6 @@ package servlets;
 
 import java.io.IOException;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,20 +42,21 @@ public class LoginServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 
-		if (form.getErrors().isEmpty()) {
+		if (ConnectForm.errors.isEmpty()) {
+			
 			session.setAttribute("user", user);
-			response.sendRedirect("/PolyStunter/home");
 			
 			if(user.isCustomer()) { // Si c'est un client, chargement du panier
 				Basket basket = new Basket(user.getId());
 				BasketDAO.getInstance().loadBasket(basket);
-				ServletContext c = getServletContext();
-				c.log(basket.toString());
 				user.setBasket(basket);
 			}
+			request.setAttribute("successMessage", "Connexion établie.");
+			this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 			
 		} else {
 			session.setAttribute("user", null);
+			request.setAttribute("errors",ConnectForm.errors.toString());
 			this.getServletContext().getRequestDispatcher("/WEB-INF/connect.jsp").forward(request, response);
 		}
 	}

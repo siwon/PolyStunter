@@ -40,7 +40,8 @@ public class LogoutServlet extends HttpServlet {
 			BasketDAO.getInstance().save(user.getBasket());
 			
 		request.getSession().invalidate();
-		response.sendRedirect("/PolyStunter/");
+		request.setAttribute("successMessage", "Déconnexion établie.");
+		this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 	}
 
 	/**
