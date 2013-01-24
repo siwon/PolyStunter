@@ -53,7 +53,7 @@
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="mail">Email</label>
+					<label class="control-label" for="mail"><fmt:message key="mail" /></label>
 					<div class="controls">
 						<input type="email" id="mail" name="mail" required>
 					</div>
@@ -75,8 +75,10 @@
 						</label>
 					</div>
 				</div>
-				<div class="form-actions">
-					<button type="submit" class="btn btn-success"><fmt:message key="register"/></button>
+				<div class="control-group">
+					<div class="controls">
+						<button type="submit" class="btn btn-success"><fmt:message key="register"/></button>
+					</div>
 				</div>
 			</form>
 			<% if(request.getAttribute("errors") != null) {

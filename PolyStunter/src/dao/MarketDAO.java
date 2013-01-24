@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import bdd.ConnectionBdd;
-import beans.Location;
 import beans.Market;
 import beans.Product;
 
@@ -39,7 +38,7 @@ private static MarketDAO marketDAO = null;
 				market.getProducts().add(new Product(result.getInt("idProduct"),result.getInt("idSeller"),result.getDouble("priceProduct"),
 						result.getString("nameProduct"),result.getString("referenceProduct"),
 						result.getInt("quantityProduct"),result.getString("informationProduct"),
-						new Location(result.getString("locationProduct")),result.getString("photoProduct")));
+						result.getString("addressProduct"),result.getString("photoProduct")));
 			}
 
 		} catch (SQLException e) {

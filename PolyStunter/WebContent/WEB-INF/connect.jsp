@@ -51,8 +51,10 @@
 					</div>
 				</div>
 				
-				<div class="form-actions">
-					<button type="submit" class="btn btn-success"><fmt:message key="connect"/></button>
+				<div class="control-group">
+					<div class="controls">
+						<button type="submit" class="btn btn-success"><fmt:message key="connect"/></button>
+					</div>
 				</div>
 				
 			</form>

@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import utils.ErrorMessage;
-import beans.Location;
 import beans.Product;
 import beans.User;
 

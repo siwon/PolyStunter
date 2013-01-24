@@ -16,11 +16,11 @@ public class Product {
 	private String reference;
 	private int quantity;
 	private String information;
-	private Location location; /* Latitude Longitude */
+	private String address;
 	private String photo;
 	
 	public Product(int id, int idSeller, double price, String name, String reference, int quantity, String information,
-			Location location, String photo) {
+			String location, String photo) {
 		super();
 		this.id = id;
 		this.idSeller = idSeller;
@@ -29,7 +29,7 @@ public class Product {
 		this.reference = reference;
 		this.quantity = quantity;
 		this.information = information;
-		this.location = location;
+		this.address = location;
 		this.photo = photo;
 	}
 
@@ -81,12 +81,12 @@ public class Product {
 		this.information = information;
 	}
 
-	public Object getLocation() {
-		return location;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setLocation(Location location) {
-		this.location = location;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public double getPrice() {
@@ -114,6 +114,6 @@ public class Product {
 		return "Product [id=" + id + ", idSeller=" + idSeller + ", price="
 				+ price + ", name=" + name + ", reference=" + reference
 				+ ", quantity=" + quantity + ", information=" + information
-				+ ", location=" + location + ", photo=" + photo + "]";
+				+ ", address=" + address + ", photo=" + photo + "]";
 	}
 }

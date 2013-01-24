@@ -11,3 +11,5 @@
 <script src="/PolyStunter/bootstrap/js/bootstrap-collapse.js"></script>
 <script src="/PolyStunter/bootstrap/js/bootstrap-carousel.js"></script>
 <script src="/PolyStunter/bootstrap/js/bootstrap-typeahead.js"></script>
+<script src="/PolyStunter/bootstrap/js/bootstrap-fileupload.js"></script>
+<script src="/PolyStunter/bootstrap/js/bootstrap-fileupload.min.js"></script>

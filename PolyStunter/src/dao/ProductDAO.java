@@ -37,7 +37,7 @@ public class ProductDAO {
 			preparedStatement.setString(5, p.getReference());
 			preparedStatement.setInt(6, p.getQuantity());
 			preparedStatement.setString(7, p.getInformation());
-			preparedStatement.setString(8, p.getLocation().toString());
+			preparedStatement.setString(8, p.getAddress());
 			preparedStatement.setString(9, p.getPhoto());
 			preparedStatement.executeQuery();
 
