@@ -1,5 +1,5 @@
 <div id="footer">
-	<img src="/PolyStunter/images/footer3.png"/>
+	<img src="/PolyStunter/images/footer2.png"/>
 	<hr/>
 	<footer>
 		<p>&copy; PolyStunter 2013</p>
