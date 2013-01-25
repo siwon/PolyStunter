@@ -29,7 +29,7 @@ public class CustomerFilter implements Filter {
 		ResourceBundle rb = ResourceBundle.getBundle("properties.text");
 		HttpSession session = ((HttpServletRequest) request).getSession();
 		User user = (User) session.getAttribute("user");
-		if (user != null && user.isCustomer()) {
+		if (user != null && (user.isCustomer() || user.isAdmin())) {
 			chain.doFilter(request, response);
 		} else {
 			request.setAttribute("errors", rb.getString("unauthorizedPage"));

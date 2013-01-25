@@ -37,7 +37,7 @@ public class SellerFilter implements Filter {
 
 		HttpSession session = ((HttpServletRequest) request).getSession();
 		User user = (User) session.getAttribute("user");
-		if (user != null && user.isSeller()) {
+		if (user != null && (user.isSeller()|| user.isAdmin())) {
 			chain.doFilter(request, response);
 		} else {
 			((HttpServletRequest) request).setAttribute("errors", rb.getString("unauthorizedPage"));

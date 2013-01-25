@@ -19,6 +19,9 @@ SET time_zone = "+00:00";
 --
 -- Base de données: `polystunter`
 --
+CREATE DATABASE IF NOT EXISTS polystunter DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+USE polystunter;
 
 -- --------------------------------------------------------
 
@@ -81,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `referenceProduct` varchar(32) DEFAULT NULL,
   `quantityProduct` int(11) DEFAULT NULL,
   `informationProduct` text,
-  `locationProduct` varchar(100) DEFAULT NULL,
+  `addressProduct` varchar(100) DEFAULT NULL,
   `photoProduct` varchar(32) NOT NULL,
   PRIMARY KEY (`idProduct`,`idSeller`),
   KEY `idSeller` (`idSeller`)
@@ -91,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `product` (
 -- Contenu de la table `product`
 --
 
-INSERT INTO `product` (`idProduct`, `idSeller`, `priceProduct`, `nameProduct`, `referenceProduct`, `quantityProduct`, `informationProduct`, `locationProduct`, `photoProduct`) VALUES
+INSERT INTO `product` (`idProduct`, `idSeller`, `priceProduct`, `nameProduct`, `referenceProduct`, `quantityProduct`, `informationProduct`, `addressProduct`, `photoProduct`) VALUES
 (1, 2, 25, 'pouetpouetpouetpouetpouetpouetpo', 'pouet', 50, 'Et licet quocumque oculos flexeris feminas adfatim multas spectare cirratas, quibus, si nupsissent, per aetatem ter iam nixus poterat suppetere liberorum, ad usque taedium pedibus pavimenta tergentes iactari volucriter gyris, dum exprimunt innumera simulacra, quae finxere fabulae theatrales.', '(-125.54564,54.5454)', '1.jpg');
 
 -- --------------------------------------------------------

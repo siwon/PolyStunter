@@ -16,11 +16,11 @@ public class Product {
 	private String reference;
 	private int quantity;
 	private String information;
-	private String address;
+	private int warehouse;
 	private String photo;
 	
 	public Product(int id, int idSeller, double price, String name, String reference, int quantity, String information,
-			String location, String photo) {
+			int warehouse, String photo) {
 		super();
 		this.id = id;
 		this.idSeller = idSeller;
@@ -29,7 +29,7 @@ public class Product {
 		this.reference = reference;
 		this.quantity = quantity;
 		this.information = information;
-		this.address = location;
+		this.warehouse = warehouse;
 		this.photo = photo;
 	}
 
@@ -81,12 +81,12 @@ public class Product {
 		this.information = information;
 	}
 
-	public String getAddress() {
-		return address;
+	public int getWarehouse() {
+		return warehouse;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setWarehouse(int warehouse) {
+		this.warehouse = warehouse;
 	}
 
 	public double getPrice() {
@@ -107,13 +107,5 @@ public class Product {
 
 	public void setPhoto(String photo) {
 		this.photo = photo;
-	}
-
-	@Override
-	public String toString() {
-		return "Product [id=" + id + ", idSeller=" + idSeller + ", price="
-				+ price + ", name=" + name + ", reference=" + reference
-				+ ", quantity=" + quantity + ", information=" + information
-				+ ", address=" + address + ", photo=" + photo + "]";
 	}
 }

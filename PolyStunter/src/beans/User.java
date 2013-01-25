@@ -74,6 +74,10 @@ public class User {
 	public boolean isDeliveryMan() {
 		return this.status.equals("DELIVERYMAN");
 	}
+	
+	public boolean isAdmin() {
+		return this.status.equals("ADMIN");
+	}
 
 	public Basket getBasket() {
 		return basket;

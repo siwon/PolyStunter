@@ -7,9 +7,24 @@ CREATE TABLE USER (
 	loginUser VARCHAR(32),
 	passwordUser VARCHAR(64),
 	mailUser VARCHAR(150),
-	statusUser ENUM("CUSTOMER", "SELLER", "DELIVERYMAN"),
-	PRIMARY KEY (idUser)) ENGINE=InnoDB;	
+	statusUser ENUM("CUSTOMER", "SELLER", "DELIVERYMAN", "ADMIN"),
+	PRIMARY KEY (idUser)) ENGINE=InnoDB;
+	
+INSERT INTO `user` (`idUser`, `loginUser`, `passwordUser`, `mailUser`, `statusUser`) VALUES
+(1, 'client', '948fe603f61dc036b5c596dc09fe3ce3f3d30dc90f024c85f3c82db2ccab679d', 'client', 'CUSTOMER'),
+(2, 'livreur', '21bef81c50399dd680bcc9961659fa67ff8c2a6cd551baa22f5fe5d431c2f5fd', 'livreur', 'DELIVERYMAN'),
+(3, 'vendeur', '3fe6dd5dd172cef095720595fe45bac03bdfd9844d68a5b7dfc20320437aba92', 'vendeur', 'SELLER'),
+(4, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'admin', 'ADMIN');
 
+CREATE TABLE WAREHOUSE (
+	idWarehouse INT AUTO_INCREMENT NOT NULL,
+	idSeller INT,
+	streetWarehouse VARCHAR(64),
+	zipCodeWarehouse TINYINT,
+	cityWarehouse VARCHAR(32),
+	PRIMARY KEY (idWarehouse),
+	FOREIGN KEY (idSeller) REFERENCES USER(idUser) ON DELETE CASCADE) ENGINE=InnoDB;
+	
 CREATE TABLE ORDERS (
 	idOrder INT AUTO_INCREMENT NOT NULL,
 	idCustomer INT,
@@ -28,10 +43,11 @@ CREATE TABLE PRODUCT (
 	referenceProduct VARCHAR(32),
 	quantityProduct INT,
 	informationProduct TEXT,
-	locationProduct VARCHAR(100),
+	idWarehouse INT,
 	photoProduct VARCHAR(32),
 	PRIMARY KEY (idProduct, idSeller),
-	FOREIGN KEY (idSeller) REFERENCES USER(idUser) ON DELETE CASCADE) ENGINE=InnoDB;
+	FOREIGN KEY (idSeller) REFERENCES USER(idUser) ON DELETE CASCADE,
+	FOREIGN KEY (idWarehouse) REFERENCES WAREHOUSE(idWarehouse) ON DELETE CASCADE) ENGINE=InnoDB;
 	
 CREATE TABLE NOTIFICATION (
 	idNotification INT AUTO_INCREMENT NOT NULL,

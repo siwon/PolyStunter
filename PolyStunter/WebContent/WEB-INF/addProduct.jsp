@@ -68,15 +68,22 @@
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label" for="address"><fmt:message key="warehouseAddress" /></label>
+							<label class="control-label" for="warehouse"><fmt:message key="warehouseAddress" /></label>
 							<div class="controls">
-								<input type="text" id="address" name="address" placeholder="<fmt:message key="street" />" required>
-							</div>
-						</div>
-						<div class="control-group">
-							<div class="controls">
-								<input type="text" class="input-mini" id="zipCode" name="zipCode" placeholder="<fmt:message key="zipCode" />" required/>
-								<input type="text" id="city" name="city" placeholder="<fmt:message key="city" />" required/>
+								<c:if test="${warehouses.isEmpty()}">
+									<fmt:message key="noWarehouse"/>
+								</c:if>
+								<c:if test="${!warehouses.isEmpty()}">
+									<select name="warehouse">
+										<c:forEach var="warehouse" items="${warehouses}">
+											<option value="${warehouse.getId()}">${warehouse.getStreet()}, ${warehouse.getZipCode().toString()} ${warehouse.getCity()}</option>									
+										</c:forEach>
+									</select>
+								</c:if>
+								<a href="#myModal" role="button" class="btn" data-toggle="modal"><fmt:message key="addWarehouse"/></a>
+								<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									<%@include file="modalAddWarehouse.jsp"%>
+								</div>
 							</div>
 						</div>
 						<div class="control-group">

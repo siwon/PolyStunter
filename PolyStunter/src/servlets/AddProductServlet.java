@@ -18,6 +18,7 @@ import beans.Product;
 import beans.User;
 
 import dao.ProductDAO;
+import dao.WarehouseDAO;
 
 /**
  * Servlet implementation class AddProductServlet
@@ -30,6 +31,8 @@ public class AddProductServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		User user = (User) request.getSession().getAttribute("user");
+		request.setAttribute("warehouses", WarehouseDAO.getInstance().getWarehousesOfSeller(user.getId()));
 		getServletContext().getRequestDispatcher("/WEB-INF/addProduct.jsp").forward(request, response);
 	}
 

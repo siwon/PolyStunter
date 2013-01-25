@@ -37,7 +37,7 @@ public class DeliveryManFilter implements Filter {
 		
 		HttpSession session = ((HttpServletRequest) request).getSession();
 		User user = (User) session.getAttribute("user");
-		if (user != null && user.isDeliveryMan()) {
+		if (user != null && (user.isDeliveryMan() || user.isAdmin())) {
 			chain.doFilter(request, response);
 		} else {
 			((HttpServletRequest) request).setAttribute("errors", rb.getString("unauthorizedPage"));

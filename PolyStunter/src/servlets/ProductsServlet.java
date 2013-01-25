@@ -48,7 +48,7 @@ public class ProductsServlet extends HttpServlet {
 			else
 				buffer.append("<span class='red'>" + rb.getString("outOfStock") + "</span>");
 			
-			buffer.append("<br/><br/><a href=" + request.getContextPath() + "/productSheet?id=" + p.getId() + " class='btn btn-info'>Voir</a></li>");
+			buffer.append("<br/><br/><a href=" + request.getContextPath() + "/productSheet?id=" + p.getId() + " class='btn btn-info'>" + rb.getString("see") + "</a></li>");
 		}
 		
 		request.setAttribute("products", buffer.toString());
