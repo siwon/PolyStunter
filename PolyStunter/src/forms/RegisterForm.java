@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 
-import utils.ErrorMessage;
+import utils.Message;
 
 import dao.UserDAO;
 
@@ -19,7 +19,7 @@ import beans.User;
  */
 public class RegisterForm {
 
-	public static ErrorMessage errors = new ErrorMessage();
+	public static Message errors = new Message();
 
 	public boolean registerUser(HttpServletRequest request) {
 

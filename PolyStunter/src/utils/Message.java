@@ -10,22 +10,22 @@ import java.util.List;
  * @author Alexandre Bisiaux
  *
  */
-public class ErrorMessage {
+public class Message {
 
-	private List<String> errors = new ArrayList<String>();
+	private List<String> messages = new ArrayList<String>();
 	
-	public void add(String error){
-		this.errors.add(error+ "\n");
+	public void add(String message){
+		this.messages.add(message+ "\n");
 	}
 	
 	public void clear() {
-		this.errors.clear();
+		this.messages.clear();
 	}
 
 	@Override
 	public String toString() {
 		StringBuffer buf = new StringBuffer();
-		for (String e : errors) {
+		for (String e : messages) {
 			buf.append(e);
 			buf.append("\n");
 		}
@@ -33,7 +33,7 @@ public class ErrorMessage {
 	}
 	
 	public boolean isEmpty() {
-		return this.errors.isEmpty();
+		return this.messages.isEmpty();
 	}
 	
 	

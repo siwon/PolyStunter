@@ -6,7 +6,7 @@ import java.sql.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-import utils.ErrorMessage;
+import utils.Message;
 
 
 import bdd.ConnectionBdd;
@@ -19,7 +19,7 @@ import beans.User;
  */
 public final class ConnectForm {
 
-	public static ErrorMessage errors = new ErrorMessage();
+	public static Message errors = new Message();
 
 	public User connectUser(HttpServletRequest request) {
 

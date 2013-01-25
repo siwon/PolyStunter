@@ -49,7 +49,7 @@ public class ProductDAO {
 
 	public int getLastId() {
 		java.sql.PreparedStatement preparedStatement;
-		int id = -1;
+		int id = 1;
 		ResultSet result;
 		try {
 			preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("SELECT last_insert_id() FROM PRODUCT");

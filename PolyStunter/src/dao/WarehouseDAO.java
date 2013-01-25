@@ -35,7 +35,7 @@ public class WarehouseDAO {
 			result = preparedStatement.executeQuery();
 			warehouses.clear();
 			while(result.next()) {
-				warehouses.add(new Warehouse(result.getInt("idWarehouse"), result.getInt("idSeller"), result.getString("streetWarehouse"), result.getInt("zipCodeWarehouse"), result.getString("cityWarehouse")));
+				warehouses.add(new Warehouse(result.getInt("idWarehouse"), result.getInt("idSeller"), result.getString("nameWarehouse"), result.getString("streetWarehouse"), result.getInt("zipCodeWarehouse"), result.getString("cityWarehouse")));
 			}
 
 		} catch (SQLException e) {
@@ -50,11 +50,30 @@ public class WarehouseDAO {
 	}
 	
 	public List<Warehouse> getWarehousesOfSeller(int idSeller) {
+		this.loadWarehouses();
 		List<Warehouse> l = new ArrayList<Warehouse>();
 		for (Warehouse warehouse : warehouses) {
 			if(warehouse.getIdSeller() == idSeller)
 				l.add(warehouse);
 		}
 		return l;
+	}
+	
+	public void addWarehouse(int idSeller, String name, String street, int zipCode, String city) {
+		java.sql.PreparedStatement preparedStatement;
+		try {
+			preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("INSERT INTO WAREHOUSE VALUES (null,?,?,?,?,?)");
+			preparedStatement.setInt(1, idSeller);
+			preparedStatement.setString(2, name);
+			preparedStatement.setString(3, street);
+			preparedStatement.setInt(4, zipCode);
+			preparedStatement.setString(5, city);
+			preparedStatement.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.loadWarehouses();
 	}
 }

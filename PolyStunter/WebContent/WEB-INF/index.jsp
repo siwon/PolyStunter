@@ -36,7 +36,7 @@
 				<div style="text-align:center">
 					<img src="/PolyStunter/images/logo_Large.png" width="500px" />
 					<fmt:message key="home.welcome" />
-					<a class="btn btn-large btn-primary" href="<c:url value="/products" />"><fmt:message key="startShopping" /> !</a>
+					<a class="btn btn-large btn-info" href="<c:url value="/products" />"><fmt:message key="startShopping" /> !</a>
 				</div>
 			</div>
 	

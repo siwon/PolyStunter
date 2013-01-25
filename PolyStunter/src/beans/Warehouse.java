@@ -11,16 +11,18 @@ public class Warehouse {
 
 	private int id;
 	private int idSeller;
+	private String name;
 	private String street;
 	private int zipCode;
 	private String city;
 	
 	
-	public Warehouse(int id, int idSeller, String street, int zipCode,
+	public Warehouse(int id, int idSeller, String name, String street, int zipCode,
 			String city) {
 		super();
 		this.id = id;
 		this.idSeller = idSeller;
+		this.name = name;
 		this.street = street;
 		this.zipCode = zipCode;
 		this.city = city;
@@ -55,4 +57,11 @@ public class Warehouse {
 	public void setCity(String city) {
 		this.city = city;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 }

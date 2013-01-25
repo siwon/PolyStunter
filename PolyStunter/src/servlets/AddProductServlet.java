@@ -1,9 +1,10 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Collection;
-import java.util.logging.ErrorManager;
+import java.io.UnsupportedEncodingException;
+
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,14 +12,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
-import utils.ErrorMessage;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import utils.Message;
 import beans.Product;
 import beans.User;
 
 import dao.ProductDAO;
 import dao.WarehouseDAO;
+import exceptions.ExtensionException;
+
+import utils.UploadFileOnServer;
 
 /**
  * Servlet implementation class AddProductServlet
@@ -28,6 +35,7 @@ public class AddProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * @throws IOException 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,56 +45,86 @@ public class AddProductServlet extends HttpServlet {
 	}
 
 	/**
+	 * @throws IOException 
+	 * @throws ServletException 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		/*ErrorMessage errors = new ErrorMessage();
-
-		String name = request.getParameter("name");
-		String information = request.getParameter("information");
-		double price = Double.parseDouble(request.getParameter("price"));
-		String reference = request.getParameter("reference");
-		int quantity = Integer.parseInt(request.getParameter("quantity"));
-		double latitude = Double.parseDouble(request.getParameter("latitude"));
-		double longitude = Double.parseDouble(request.getParameter("longitude"));
-
-		HttpSession session = request.getSession();
-		User u = (User)session.getAttribute("userSession");
+		Message errors = new Message();
+		Message success = new Message();
 		
-		int lastIdProduct = ProductDAO.getInstance().getLastId();
-		if(lastIdProduct != -1) {
-			UploadFileOnServer upload= new UploadFileOnServer();
-			try {
-				String filename = upload.uploadFile(lastIdProduct+1+"", request);
-			} catch(Exception e) {
-				errors.
-			}
-			if() {
-				errors = "Erreur lors de l'envoie de la photo.";
-			} else {
-				ProductDAO.getInstance().addProduct(new Product(lastIdProduct+1,u.getId(),price,name,reference,quantity,information,new Location(latitude,longitude),lastIdProduct+1));
-			}
+		DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
+		ServletFileUpload uploadHandler = new ServletFileUpload(fileItemFactory);
+		try {
+			@SuppressWarnings("unchecked")
+			List<FileItem> items = (List<FileItem>) uploadHandler.parseRequest(request);
 			
-		} else {
-			errors = "Erreur interne";
+			Iterator<FileItem> itr = (Iterator<FileItem>) items.iterator();
+			
+			HttpSession session = request.getSession();
+			User u = (User)session.getAttribute("userSession");
+						
+			int lastIdProduct = ProductDAO.getInstance().getLastId();
+			
+			if(lastIdProduct != -1) {
+				String name = "", information = "", reference = "", fileName = "", param = "", newName = "";
+				int quantity = 0, warehouse = 0;
+				double price = 0;
+				
+				while (itr.hasNext()) {
+					FileItem item = (FileItem) itr.next();
+					if(item.isFormField()) {
+						param = item.getFieldName();
+						switch(param) {
+							case "name":
+								name = item.getString();
+								break;
+							case "information":
+								information = item.getString();
+								break;
+							case "reference":
+								reference = item.getString();
+								break;
+							case "quantity":
+								quantity = Integer.parseInt(item.getString());
+								break;
+							case "warehouse":
+								warehouse = Integer.parseInt(item.getString());
+								break;
+							case "price":
+								price = Double.parseDouble(item.getString());
+								break;
+							default:
+								break;
+						}						
+					} else {
+						newName = lastIdProduct+1 + "";
+						UploadFileOnServer uploadFileOnServer = new UploadFileOnServer();
+						fileName = uploadFileOnServer.uploadFile(item, getServletContext().getRealPath("/") + "products", newName);
+					}
+				}
+				ProductDAO.getInstance().addProduct(new Product(lastIdProduct+1,u.getId(),price,name,reference,quantity,information,warehouse,fileName));
+			} else {
+				throw new Exception("Erreur interne.");
+			}
+		} catch(ExtensionException e) {
+			errors.add(e.getMessage());
+		} catch (UnsupportedEncodingException e) {
+			errors.add("Erreur d'encodage");
+		} catch (Exception e) {
+			errors.add("Erreur d'upload." + e.getMessage());
 		}
 		
-		if(errors != "") {
+		if(errors.isEmpty()) {
+			success.add("Produit a été ajouté à votre boutique.");
+			request.setAttribute("success", success);
+			getServletContext().getRequestDispatcher("/WEB-INF/store.jsp").forward(request, response);	
+		} else {
 			request.setAttribute("errors", errors);
 			getServletContext().getRequestDispatcher("/WEB-INF/addProduct.jsp").forward(request, response);
-		} else {
-			getServletContext().getRequestDispatcher("/WEB-INF/store.jsp").forward(request, response);
-		}*/
-	}
-
-	private String getFilename(Part part) {
-		for (String cd : part.getHeader("content-disposition").split(";")) {
-			if (cd.trim().startsWith("filename")) {
-				String filename = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
-				return filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1); // MSIE fix.
-			}
 		}
-		return null;
 	}
 }
+
+
