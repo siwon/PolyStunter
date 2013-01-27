@@ -3,12 +3,12 @@
  */
 package dao;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import bdd.ConnectionBdd;
-import beans.Product;
-/**
+
+/** Accès aux données de type Product
+ * Patron singleton
  * @author "Alexandre Bisiaux"
  *
  */
@@ -27,39 +27,54 @@ public class ProductDAO {
 		return productDAO;
 	}
 
-	public void addProduct(Product p) {
+	/**
+	 * Ajoute un produit à la BDD
+	 * @param idSeller Identifiant du vendeur
+	 * @param price Prix du produit
+	 * @param name Nom du produit
+	 * @param reference Référence du produit
+	 * @param quantity Quantité du produit
+	 * @param information Information sur le produit
+	 * @param warehouse Dépôt 
+	 * @param photo Photo du produit
+	 */
+	public static int addProduct(int idSeller, double price, String name, String reference, int quantity, String information, int warehouse, String photo) {
+		int success = 0;
 		java.sql.PreparedStatement preparedStatement;
 		try {
 			preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("INSERT INTO PRODUCT VALUES(null,?,?,?,?,?,?,?,?)");
-			preparedStatement.setInt(2, p.getIdSeller());
-			preparedStatement.setDouble(3, p.getPrice());
-			preparedStatement.setString(4, p.getName());
-			preparedStatement.setString(5, p.getReference());
-			preparedStatement.setInt(6, p.getQuantity());
-			preparedStatement.setString(7, p.getInformation());
-			preparedStatement.setInt(8, p.getWarehouse());
-			preparedStatement.setString(9, p.getPhoto());
-			preparedStatement.executeQuery();
+			preparedStatement.setInt(1, idSeller);
+			preparedStatement.setDouble(2, price);
+			preparedStatement.setString(3, name);
+			preparedStatement.setString(4, reference);
+			preparedStatement.setInt(5, quantity);
+			preparedStatement.setString(6, information);
+			preparedStatement.setInt(7, warehouse);
+			preparedStatement.setString(8, photo);
+			success = preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return success;
 	}
-
-	public int getLastId() {
+	
+	/**
+	 * Supprime le produit identifié par id
+	 * @param id Identification du produit à supprimer
+	 * @return 1 si l'opération s'est bien déroulée, 0 sinon
+	 */
+	public static int remove(int id) {
 		java.sql.PreparedStatement preparedStatement;
-		int id = 1;
-		ResultSet result;
+		int success = 0;
 		try {
-			preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("SELECT last_insert_id() FROM PRODUCT");
-			result = preparedStatement.executeQuery();
-			if(result.next())
-				id = result.getInt(1);
+			preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("DELETE FROM PRODUCT WHERE idProduct = ?");
+			preparedStatement.setInt(1, id);
+			success = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return id;
+		return success;
 	}
 }

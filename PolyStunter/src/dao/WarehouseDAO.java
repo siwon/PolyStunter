@@ -7,9 +7,10 @@ import java.sql.SQLException;
 import java.util.*;
 
 import bdd.ConnectionBdd;
-import beans.Product;
 import beans.Warehouse;
 /**
+ * Accés aux données de type Warehouse
+ * Patron singleton
  * @author Alexandre Bisiaux
  *
  */
@@ -27,7 +28,10 @@ public class WarehouseDAO {
 		return warehouseDAO;
 	}
 	
-	private void loadWarehouses() {
+	/**
+	 * Stocke les dépôts en local
+	 */
+	private void load() {
 		java.sql.PreparedStatement preparedStatement;
 		try {
 			preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("SELECT * FROM WAREHOUSE");
@@ -39,18 +43,26 @@ public class WarehouseDAO {
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * Retourne tous les dépôts de la BDD
+	 * @return Les dépôts de la BDD
+	 */
 	public List<Warehouse> getWarehouses() {
-		warehouseDAO.loadWarehouses();
+		warehouseDAO.load();
 		return warehouses;
 	}
 	
+	/**
+	 * Retourne la liste des dépôt d'un commerçant
+	 * @param idSeller Identifiant du commerçant
+	 * @return Liste de ses dépôts
+	 */
 	public List<Warehouse> getWarehousesOfSeller(int idSeller) {
-		this.loadWarehouses();
+		this.load();
 		List<Warehouse> l = new ArrayList<Warehouse>();
 		for (Warehouse warehouse : warehouses) {
 			if(warehouse.getIdSeller() == idSeller)
@@ -59,7 +71,17 @@ public class WarehouseDAO {
 		return l;
 	}
 	
-	public void addWarehouse(int idSeller, String name, String street, int zipCode, String city) {
+	/**
+	 * Ajoute un dépôt à la BDD
+	 * @param idSeller Identifiant du commerçant
+	 * @param name Nom du dépôt
+	 * @param street Rue du dépôt
+	 * @param zipCode Code postal
+	 * @param city Ville
+	 * @return 1 si l'opération s'est bien déroulée, 0 sinon
+	 */
+	public int add(int idSeller, String name, String street, int zipCode, String city) {
+		int success = 0;
 		java.sql.PreparedStatement preparedStatement;
 		try {
 			preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("INSERT INTO WAREHOUSE VALUES (null,?,?,?,?,?)");
@@ -68,12 +90,12 @@ public class WarehouseDAO {
 			preparedStatement.setString(3, street);
 			preparedStatement.setInt(4, zipCode);
 			preparedStatement.setString(5, city);
-			preparedStatement.executeUpdate();
+			success = preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.loadWarehouses();
+		this.load();
+		return success;
 	}
 }

@@ -8,6 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import utils.UploadFileOnServer;
+
+import beans.Market;
+
+import dao.ProductDAO;
+
 /**
  * Servlet implementation class StoreAction
  */
@@ -23,7 +29,10 @@ public class StoreActionServlet extends HttpServlet {
 		if(action.equals("update")) {
 			getServletContext().getRequestDispatcher("/updateProduct").forward(request, response);
 		}else if(action.equals("remove")) {
-			
+			int id = Integer.valueOf(request.getParameter("id"));
+			UploadFileOnServer.removeFile(getServletContext().getRealPath("/") + "products/" + Market.getInstance().getProduct(id).getPhoto());
+			ProductDAO.remove(id);				
+			getServletContext().getRequestDispatcher("/store").forward(request, response);
 		} else {
 			getServletContext().getRequestDispatcher("/store").forward(request, response);
 		}

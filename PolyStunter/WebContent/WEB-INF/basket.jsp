@@ -40,7 +40,7 @@
 					<tr>
 						<th colspan="4" ></th>
 						<th><b><fmt:message key="totalTTC" /></b></th>
-						<th><b><fmt:formatNumber value="${basketCost}" type="currency"/></b></th>
+						<th><b><fmt:formatNumber value="${basketCost}" minFractionDigits="2"/> &euro;</b></th>
 						<th></th>
 					</tr>
 				</table>

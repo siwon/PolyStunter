@@ -26,7 +26,14 @@
 			<div class="page-header">
 				<h1><fmt:message key="myStore" /></h1>
 			</div>
-			
+			<% if(request.getAttribute("errors") != null) {
+				out.print("<div class='alert alert-error'>"+ request.getAttribute("errors").toString() + "</div>");
+			}
+			%>
+			<% if(request.getAttribute("success") != null) {
+				out.print("<div class='alert alert-success'>"+ request.getAttribute("success").toString() + "</div>");
+			}
+			%>		
 			<div class="form-actions center">
 				<div class="controls">
 					<a href="<c:url value="/addProduct"/>"><button type="submit" class="btn btn-info"><fmt:message key="addAProduct" /></button></a>

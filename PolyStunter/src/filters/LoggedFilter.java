@@ -36,7 +36,7 @@ public class LoggedFilter implements Filter {
 		if (session.getAttribute("user") != null) {
 			arg2.doFilter(arg0, arg1);
 		} else {
-			request.setAttribute("errors", rb.getString("unauthorizedPage"));
+			//request.setAttribute("errors", rb.getString("unauthorizedPage"));
 			request.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 		}
 	}

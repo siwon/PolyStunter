@@ -32,7 +32,7 @@ public class CustomerFilter implements Filter {
 		if (user != null && (user.isCustomer() || user.isAdmin())) {
 			chain.doFilter(request, response);
 		} else {
-			request.setAttribute("errors", rb.getString("unauthorizedPage"));
+			//request.setAttribute("errors", rb.getString("unauthorizedPage"));
 			((HttpServletRequest) request).getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 		}
 	}

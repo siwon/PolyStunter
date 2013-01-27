@@ -46,7 +46,7 @@ public class LoginServlet extends HttpServlet {
 			
 			session.setAttribute("user", user);
 			
-			if(user.isCustomer()) { // Si c'est un client, chargement du panier
+			if(user.isCustomer() || user.isAdmin()) { // Si c'est un client ou l'admin, chargement du panier
 				Basket basket = new Basket(user.getId());
 				BasketDAO.getInstance().loadBasket(basket);
 				user.setBasket(basket);

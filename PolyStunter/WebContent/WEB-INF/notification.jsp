@@ -7,7 +7,7 @@
 	<head>
 		<meta charset="utf-8">
 		
-		<title><fmt:message key="addAProduct" /></title>
+		<title><fmt:message key="notifications" /></title>
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
@@ -28,19 +28,39 @@
 		<div class="container">
 		
 			<div class="page-header">
-				<h1><fmt:message key="addAProduct" /></h1>
-			</div>
-			<ul class="thumbnails">
-				<li class="thumbnail">
-					<div id="mymap" style="width:500px;height:400px;"></div>
-					<script>
-						var map = new Mappy.api.map.Map({
-						    container:'#mymap'
-						});
-						map.setCenter(new Mappy.api.geo.Coordinates(1.44295,43.6044),7);
-					</script>
-				</li>
-			</ul>
+				<h1><fmt:message key="notifications" /></h1>
+			</div>		
+							
+			<form name="addNotification" action="" method="POST">
+				
+				<div class="form-actions center">
+					<div class="controls">
+						<a href="#notificationForm" role="button" class="btn btn-info" data-toggle="modal"><fmt:message key="addNotification"/></a>
+						<a href="#" role="button" class="btn btn-info" data-toggle="modal"><fmt:message key="myNotifications"/></a>
+					</div>
+				</div>
+				<%@include file="modalAddNotification.jsp" %>
+				
+			</form>
+			<h3><fmt:message key="currentNotification"/></h3>
+			<div id="mymap" style="width:100%;height:400px;"></div>
+			<script>
+				var map = new Mappy.api.map.Map({
+				    container:'#mymap'
+				});
+				map.setCenter(new Mappy.api.geo.Coordinates(-1.553879,47.218286),7);
+				var markerLayer = new Mappy.api.map.layer.MarkerLayer(40);
+				map.addLayer(markerLayer);
+				var ACCIDENT = new Mappy.api.ui.Icon(Mappy.api.ui.Icon.DEFAULT);
+				ACCIDENT.image = "/PolyStunter/images/accident.png";
+				var BUILDING_SITE = new Mappy.api.ui.Icon(Mappy.api.ui.Icon.DEFAULT);
+				BUILDING_SITE.image = "/PolyStunter/images/building_site.png";
+				var DEMONSTRATION = new Mappy.api.ui.Icon(Mappy.api.ui.Icon.DEFAULT);
+				DEMONSTRATION.image = "/PolyStunter/images/demonstration.png";
+				var OTHER = new Mappy.api.ui.Icon(Mappy.api.ui.Icon.DEFAULT);
+				OTHER.image = "/PolyStunter/images/other.png";
+			</script>
+			<%= request.getAttribute("markers")%>
 			<hr>
 		</div>
 		<%@include file="/WEB-INF/includes/footer.jsp" %>

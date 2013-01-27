@@ -19,10 +19,16 @@
 		<link href="/PolyStunter/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 		<link href="/PolyStunter/bootstrap/css/bootstrap-fileupload.css" rel="stylesheet">
 		<link href="/PolyStunter/bootstrap/css/bootstrap-fileupload.min.css" rel="stylesheet">
+		
 				
 	</head>
 
 	<body>
+		<script src="/PolyStunter/bootstrap/js/jquery.js"></script>
+		<script src="/PolyStunter/bootstrap/js/jqBootstrapValidation.js"></script>
+		<script>
+			$(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
+		</script>
 		<%@include file="/WEB-INF/includes/header.jsp" %>
 		
 		<div class="container">

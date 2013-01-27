@@ -1,2 +1,4 @@
 eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/modalAddNotification.jsp=UTF-8
 encoding//WebContent/WEB-INF/modalAddWarehouse.jsp=UTF-8
+encoding//WebContent/WEB-INF/notification.jsp=UTF-8

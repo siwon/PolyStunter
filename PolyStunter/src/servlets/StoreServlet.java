@@ -50,7 +50,7 @@ public class StoreServlet extends HttpServlet {
 				buffer.append("<span class='red'>" + rb.getString("outOfStock") + "</span>");
 			
 			buffer.append("<br/><div class='btn-group'>");
-			buffer.append("<a href=" + request.getContextPath() + "/storeAction?action=remove&id=" + p.getId() + " class='btn btn-danger btn-mini'>" + rb.getString("remove") + "</a>");
+			buffer.append("<a href=" + request.getContextPath() + "/storeAction?action=remove&id=" + p.getId() + " class='btn btn-danger btn-mini' onclick=\"return confirm('"+ rb.getString("messageConfirmation") + "')\">" + rb.getString("remove") + "</a>");
 			buffer.append("<a href=" + request.getContextPath() + "/storeAction?action=update&id=" + p.getId() + " class='btn btn-warning btn-mini'>" + rb.getString("update") + "</a>");
 			buffer.append("</div></li>");
 		}

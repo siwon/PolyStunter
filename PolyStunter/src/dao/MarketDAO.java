@@ -38,7 +38,7 @@ private static MarketDAO marketDAO = null;
 				market.getProducts().add(new Product(result.getInt("idProduct"),result.getInt("idSeller"),result.getDouble("priceProduct"),
 						result.getString("nameProduct"),result.getString("referenceProduct"),
 						result.getInt("quantityProduct"),result.getString("informationProduct"),
-						result.getInt("warehouseProduct"),result.getString("photoProduct")));
+						result.getInt("idWarehouse"),result.getString("photoProduct")));
 			}
 
 		} catch (SQLException e) {

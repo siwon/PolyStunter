@@ -23,7 +23,9 @@
 		<%@include file="/WEB-INF/includes/header.jsp" %>
 		
 		<div class="container">
-		
+		<div class="page-header">
+				<h1><fmt:message key="myProfil" /></h1>
+			</div>
 		<hr>
 		</div>
 		<%@include file="/WEB-INF/includes/footer.jsp" %>

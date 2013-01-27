@@ -35,8 +35,8 @@ public class AddWarehouseServlet extends HttpServlet {
 		String city = request.getParameter("city");
 		User user = (User) request.getSession().getAttribute("user");
 		
-		WarehouseDAO.getInstance().addWarehouse(user.getId(), name, street, zipCode, city);
-		getServletContext().getRequestDispatcher("/PolyStunter/addProduct").forward(request, response);
+		WarehouseDAO.getInstance().add(user.getId(), name, street, zipCode, city);
+		response.sendRedirect("/PolyStunter/addProduct");
 	}
 
 }

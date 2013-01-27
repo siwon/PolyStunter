@@ -19,8 +19,9 @@ INSERT INTO `user` (`idUser`, `loginUser`, `passwordUser`, `mailUser`, `statusUs
 CREATE TABLE WAREHOUSE (
 	idWarehouse INT AUTO_INCREMENT NOT NULL,
 	idSeller INT,
+	nameWarehouse VARCHAR(32),
 	streetWarehouse VARCHAR(64),
-	zipCodeWarehouse TINYINT,
+	zipCodeWarehouse INT,
 	cityWarehouse VARCHAR(32),
 	PRIMARY KEY (idWarehouse),
 	FOREIGN KEY (idSeller) REFERENCES USER(idUser) ON DELETE CASCADE) ENGINE=InnoDB;

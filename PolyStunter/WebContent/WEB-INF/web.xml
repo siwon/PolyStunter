@@ -19,7 +19,7 @@
     <servlet-name>StoreServlet</servlet-name>
     <url-pattern>/store</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <display-name>AddWarehouseServlet</display-name>
     <servlet-name>AddWarehouseServlet</servlet-name>
     <servlet-class>servlets.AddWarehouseServlet</servlet-class>
@@ -137,6 +137,17 @@
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description>
+		</description>
+    <display-name>NotificationServlet</display-name>
+    <servlet-name>NotificationServlet</servlet-name>
+    <servlet-class>servlets.NotificationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NotificationServlet</servlet-name>
+    <url-pattern>/notification</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>ProductSheetServlet</servlet-name>
     <url-pattern>/productSheet</url-pattern>
@@ -158,12 +169,17 @@
     <url-pattern>/store</url-pattern>
     <url-pattern>/storeAction</url-pattern>
     <url-pattern>/addProduct</url-pattern>
+    <url-pattern>/addWarehouse</url-pattern>
   </filter-mapping>
   <filter-mapping>
     <filter-name>CustomerFilter</filter-name>
     <url-pattern>/basket</url-pattern>
     <url-pattern>/products</url-pattern>
     <url-pattern>/basketAction</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>DeliveryManFilter</filter-name>
+    <url-pattern>/notification</url-pattern>
   </filter-mapping>
   <filter>
     <filter-name>NotLoggedFilter</filter-name>

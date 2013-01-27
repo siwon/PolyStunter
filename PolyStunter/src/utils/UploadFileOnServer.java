@@ -13,7 +13,7 @@ public class UploadFileOnServer {
 
 	public static List<String> log = new ArrayList<String>();
 
-	public String uploadFile(FileItem fileItem, String root, String name) throws Exception {
+	public String uploadFile(FileItem fileItem, String root, String name) throws ExtensionException {
 
 		List<String> listOfExtensions = new ArrayList<String>(4);
 		listOfExtensions.add("jpg");
@@ -32,7 +32,12 @@ public class UploadFileOnServer {
 		File file = new File(path + "/" + newName);
 
 		if (listOfExtensions.contains(ext))
-			fileItem.write(file);
+			try {
+				fileItem.write(file);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		else
 			throw(new ExtensionException("Erreur d'extension du fichier."));
 		
@@ -42,5 +47,10 @@ public class UploadFileOnServer {
 	public String getExtension(String filename) {
 		int id = filename.lastIndexOf(".");
 		return filename.substring(id+1,filename.length()); 
+	}
+	
+	public static boolean removeFile(String path){
+		File file = new File(path);
+		return file.delete();
 	}
 }

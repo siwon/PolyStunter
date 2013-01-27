@@ -40,7 +40,7 @@ public class SellerFilter implements Filter {
 		if (user != null && (user.isSeller()|| user.isAdmin())) {
 			chain.doFilter(request, response);
 		} else {
-			((HttpServletRequest) request).setAttribute("errors", rb.getString("unauthorizedPage"));
+			//((HttpServletRequest) request).setAttribute("errors", rb.getString("unauthorizedPage"));
 			((HttpServletRequest) request).getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 		}
 	}

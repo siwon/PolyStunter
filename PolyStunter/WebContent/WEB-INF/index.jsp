@@ -36,7 +36,22 @@
 				<div style="text-align:center">
 					<img src="/PolyStunter/images/logo_Large.png" width="500px" />
 					<fmt:message key="home.welcome" />
-					<a class="btn btn-large btn-info" href="<c:url value="/products" />"><fmt:message key="startShopping" /> !</a>
+					<c:choose>
+						<c:when test="${user.isCustomer()}">
+							<a class="btn btn-large btn-info" href="<c:url value="/products" />"><fmt:message key="startShopping" /> !</a>
+						</c:when>
+						<c:when test="${user.isSeller()}">
+							<a class="btn btn-large btn-info" href="<c:url value="/store" />"><fmt:message key="manageMyStore" /> !</a>
+						</c:when>
+						<c:when test="${user.isDeliveryMan()}">
+							<a class="btn btn-large btn-info" href="<c:url value="#" />"><fmt:message key="manageMyDeliveries" /> !</a>
+						</c:when>
+						<c:otherwise>
+							<a class="btn btn-large btn-info" href="<c:url value="/register" />"><fmt:message key="register" /> !</a>
+						</c:otherwise>
+					</c:choose>
+					
+					
 				</div>
 			</div>
 	

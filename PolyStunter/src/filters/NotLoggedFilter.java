@@ -44,7 +44,7 @@ public class NotLoggedFilter implements Filter {
 		if(request.getSession().getAttribute("user")==null) {
 			chain.doFilter(arg0, arg1);
 		} else {
-			request.setAttribute("errors", rb.getString("unauthorizedPage"));
+			//request.setAttribute("errors", rb.getString("unauthorizedPage"));
 			request.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 		}
 	}
