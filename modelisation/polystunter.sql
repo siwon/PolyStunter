@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Sam 19 Janvier 2013 à 20:15
+-- Généré le: Dim 27 Janvier 2013 à 16:22
 -- Version du serveur: 5.5.24-log
 -- Version de PHP: 5.4.3
 
@@ -19,9 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données: `polystunter`
 --
-CREATE DATABASE IF NOT EXISTS polystunter DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-
-USE polystunter;
 
 -- --------------------------------------------------------
 
@@ -34,10 +31,19 @@ CREATE TABLE IF NOT EXISTS `notification` (
   `idSender` int(11) NOT NULL DEFAULT '0',
   `typeNotification` enum('BUILDING_SITE','ACCIDENT','DEMONSTRATION','OTHER') DEFAULT NULL,
   `informationNotification` text,
-  `locationNotification` varchar(100) DEFAULT NULL,
+  `latitudeNotification` double DEFAULT NULL,
+  `longitudeNotification` double DEFAULT NULL,
   PRIMARY KEY (`idNotification`,`idSender`),
   KEY `idSender` (`idSender`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Contenu de la table `notification`
+--
+
+INSERT INTO `notification` (`idNotification`, `idSender`, `typeNotification`, `informationNotification`, `latitudeNotification`, `longitudeNotification`) VALUES
+(1, 1, 'ACCIDENT', 'accident voiture sur le toit', -1.548386, 47.258262),
+(2, 2, 'DEMONSTRATION', 'manifestation devant la préfecture', -1.554319, 47.220208);
 
 -- --------------------------------------------------------
 
@@ -84,18 +90,20 @@ CREATE TABLE IF NOT EXISTS `product` (
   `referenceProduct` varchar(32) DEFAULT NULL,
   `quantityProduct` int(11) DEFAULT NULL,
   `informationProduct` text,
-  `addressProduct` varchar(100) DEFAULT NULL,
-  `photoProduct` varchar(32) NOT NULL,
+  `idWarehouse` int(11) DEFAULT NULL,
+  `photoProduct` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`idProduct`,`idSeller`),
-  KEY `idSeller` (`idSeller`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  KEY `idSeller` (`idSeller`),
+  KEY `idWarehouse` (`idWarehouse`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Contenu de la table `product`
 --
 
-INSERT INTO `product` (`idProduct`, `idSeller`, `priceProduct`, `nameProduct`, `referenceProduct`, `quantityProduct`, `informationProduct`, `addressProduct`, `photoProduct`) VALUES
-(1, 2, 25, 'pouetpouetpouetpouetpouetpouetpo', 'pouet', 50, 'Et licet quocumque oculos flexeris feminas adfatim multas spectare cirratas, quibus, si nupsissent, per aetatem ter iam nixus poterat suppetere liberorum, ad usque taedium pedibus pavimenta tergentes iactari volucriter gyris, dum exprimunt innumera simulacra, quae finxere fabulae theatrales.', '(-125.54564,54.5454)', '1.jpg');
+INSERT INTO `product` (`idProduct`, `idSeller`, `priceProduct`, `nameProduct`, `referenceProduct`, `quantityProduct`, `informationProduct`, `idWarehouse`, `photoProduct`) VALUES
+(1, 3, 2.5, 'kinder', 'kinder', 100, 'kinder', 10, '1.jpg'),
+(2, 3, 10.2, 'test', 'test', 10, 'test', 10, '1.png');
 
 -- --------------------------------------------------------
 
@@ -111,13 +119,6 @@ CREATE TABLE IF NOT EXISTS `productsinbasket` (
   KEY `idProduct` (`idProduct`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Contenu de la table `productsinbasket`
---
-
-INSERT INTO `productsinbasket` (`idBasket`, `idProduct`, `quantityToOrder`) VALUES
-(1, 1, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -129,9 +130,9 @@ CREATE TABLE IF NOT EXISTS `user` (
   `loginUser` varchar(32) DEFAULT NULL,
   `passwordUser` varchar(64) DEFAULT NULL,
   `mailUser` varchar(150) DEFAULT NULL,
-  `statusUser` enum('CUSTOMER','SELLER','DELIVERYMAN') DEFAULT NULL,
+  `statusUser` enum('CUSTOMER','SELLER','DELIVERYMAN','ADMIN') DEFAULT NULL,
   PRIMARY KEY (`idUser`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Contenu de la table `user`
@@ -140,7 +141,35 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`idUser`, `loginUser`, `passwordUser`, `mailUser`, `statusUser`) VALUES
 (1, 'client', '948fe603f61dc036b5c596dc09fe3ce3f3d30dc90f024c85f3c82db2ccab679d', 'client', 'CUSTOMER'),
 (2, 'livreur', '21bef81c50399dd680bcc9961659fa67ff8c2a6cd551baa22f5fe5d431c2f5fd', 'livreur', 'DELIVERYMAN'),
-(3, 'vendeur', '3fe6dd5dd172cef095720595fe45bac03bdfd9844d68a5b7dfc20320437aba92', 'vendeur', 'SELLER');
+(3, 'vendeur', '3fe6dd5dd172cef095720595fe45bac03bdfd9844d68a5b7dfc20320437aba92', 'vendeur', 'SELLER'),
+(4, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'admin', 'ADMIN');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `warehouse`
+--
+
+CREATE TABLE IF NOT EXISTS `warehouse` (
+  `idWarehouse` int(11) NOT NULL AUTO_INCREMENT,
+  `idSeller` int(11) DEFAULT NULL,
+  `nameWarehouse` varchar(32) DEFAULT NULL,
+  `streetWarehouse` varchar(64) DEFAULT NULL,
+  `zipCodeWarehouse` int(11) DEFAULT NULL,
+  `cityWarehouse` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`idWarehouse`),
+  KEY `idSeller` (`idSeller`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+
+--
+-- Contenu de la table `warehouse`
+--
+
+INSERT INTO `warehouse` (`idWarehouse`, `idSeller`, `nameWarehouse`, `streetWarehouse`, `zipCodeWarehouse`, `cityWarehouse`) VALUES
+(1, 4, 'test', 'test', 44240, 'test'),
+(3, 4, 'test2', 'test2', 44200, 'test'),
+(9, 4, 'depot', 'test', 44240, 'test'),
+(10, 3, 'depot', 'test', 44240, 'test');
 
 --
 -- Contraintes pour les tables exportées
@@ -169,7 +198,8 @@ ALTER TABLE `orders`
 -- Contraintes pour la table `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`idSeller`) REFERENCES `user` (`idUser`) ON DELETE CASCADE;
+  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`idSeller`) REFERENCES `user` (`idUser`) ON DELETE CASCADE,
+  ADD CONSTRAINT `product_ibfk_2` FOREIGN KEY (`idWarehouse`) REFERENCES `warehouse` (`idWarehouse`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `productsinbasket`
@@ -177,6 +207,12 @@ ALTER TABLE `product`
 ALTER TABLE `productsinbasket`
   ADD CONSTRAINT `productsinbasket_ibfk_1` FOREIGN KEY (`idProduct`) REFERENCES `product` (`idProduct`) ON DELETE CASCADE,
   ADD CONSTRAINT `productsinbasket_ibfk_2` FOREIGN KEY (`idBasket`) REFERENCES `user` (`idUser`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `warehouse`
+--
+ALTER TABLE `warehouse`
+  ADD CONSTRAINT `warehouse_ibfk_1` FOREIGN KEY (`idSeller`) REFERENCES `user` (`idUser`) ON DELETE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
