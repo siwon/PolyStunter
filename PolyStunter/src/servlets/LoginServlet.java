@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,6 +38,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ResourceBundle rb = ResourceBundle.getBundle("properties.text");
 		ConnectForm form = new ConnectForm();
 		User user = form.connectUser(request);
 		
@@ -51,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 				BasketDAO.getInstance().loadBasket(basket);
 				user.setBasket(basket);
 			}
-			request.setAttribute("successMessage", "Connexion établie.");
+			request.setAttribute("successMessage", rb.getString("connectionEstablished"));
 			this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 			
 		} else {

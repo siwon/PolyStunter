@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 
 import javax.servlet.ServletException;
@@ -33,14 +34,14 @@ public class LogoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		ResourceBundle rb = ResourceBundle.getBundle("properties.text");
 		User user = (User) request.getSession().getAttribute("user");
 		
 		if(user.isCustomer())
 			BasketDAO.getInstance().save(user.getBasket());
 			
 		request.getSession().invalidate();
-		request.setAttribute("successMessage", "Déconnexion établie.");
+		request.setAttribute("successMessage", rb.getString("logoutSuccessful"));
 		this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 	}
 
