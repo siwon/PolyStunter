@@ -27,6 +27,8 @@ public class StoreActionServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
 		if(action.equals("update")) {
+			int id = Integer.valueOf(request.getParameter("id"));
+			request.setAttribute("id", id);
 			getServletContext().getRequestDispatcher("/updateProduct").forward(request, response);
 		}else if(action.equals("remove")) {
 			int id = Integer.valueOf(request.getParameter("id"));

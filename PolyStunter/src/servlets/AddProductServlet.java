@@ -107,9 +107,10 @@ public class AddProductServlet extends HttpServlet {
 		}
 		
 		if(errors.isEmpty()) {
-			success.add("Produit a été ajouté à votre boutique.");
+			/*success.add("Produit a été ajouté à votre boutique.");
 			request.setAttribute("success", success);
-			getServletContext().getRequestDispatcher("/store").forward(request, response);	
+			getServletContext().getRequestDispatcher("/store").forward(request, response);*/
+			response.sendRedirect("/PolyStunter/store");
 		} else {
 			request.setAttribute("errors", errors);
 			getServletContext().getRequestDispatcher("/WEB-INF/addProduct.jsp").forward(request, response);

@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <fmt:setBundle basename="properties.text" />
-<fmt:setLocale value="fr" scope="application"/>
+<fmt:setLocale value="en" scope="application"/>
 <!DOCTYPE html>
 <html lang="fr">
 	<head>

@@ -98,4 +98,21 @@ public class WarehouseDAO {
 		this.load();
 		return success;
 	}
+	
+	public String getWarehouseName(int id) {
+		java.sql.PreparedStatement preparedStatement;
+		ResultSet result;
+		String name = "";
+		try {
+			preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("SELECT nameWarehouse FROM WAREHOUSE WHERE idWarehouse = ?");
+			preparedStatement.setInt(1, id);
+			result = preparedStatement.executeQuery();
+			if(result.next())
+				name = result.getString("nameWarehouse");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return name;
+	}
 }

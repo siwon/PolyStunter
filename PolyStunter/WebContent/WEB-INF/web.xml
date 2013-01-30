@@ -29,13 +29,13 @@
     <url-pattern>/addWarehouse</url-pattern>
   </servlet-mapping>
   <servlet>
-    <display-name>SearchServlet</display-name>
-    <servlet-name>SearchServlet</servlet-name>
-    <servlet-class>servlets.SearchServlet</servlet-class>
+    <display-name>UpdateProductServlet</display-name>
+    <servlet-name>UpdateProductServlet</servlet-name>
+    <servlet-class>servlets.UpdateProductServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>SearchServlet</servlet-name>
-    <url-pattern>/search</url-pattern>
+    <servlet-name>UpdateProductServlet</servlet-name>
+    <url-pattern>/updateProduct</url-pattern>
   </servlet-mapping>
   <servlet>
     <display-name>BasketActionServlet</display-name>
