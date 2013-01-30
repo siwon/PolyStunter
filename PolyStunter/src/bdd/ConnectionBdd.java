@@ -41,9 +41,9 @@ public class ConnectionBdd {
 		}
 
 		/* Connexion à la BDD */
-		String url = "jdbc:mysql://localhost:3306/polystunter";
+		String url = "jdbc:mysql://localhost:8889/polystunter";
 		String login = "root";
-		String password = "";
+		String password = "root";
 		try {
 			this.connection = DriverManager.getConnection(url, login, password);
 		} catch ( SQLException e ) {
