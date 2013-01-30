@@ -4,6 +4,7 @@ PolyStunter/.metadata/*
 */.Thumbs.bd
 Servers/*
 .DS_Store
+PolyStunter/.settings/*
 
 # Package Files #
 *.ear
