@@ -1,5 +1,7 @@
 package beans;
 
+import java.sql.Timestamp;
+
 /**
  * 
  * @author Alexandre Bisiaux
@@ -13,9 +15,10 @@ public class Notification {
 	private String information;
 	private double latitude;
 	private double longitude;
+	private Timestamp date;
 	
 	public Notification(int id, int idSender, String type, String information,
-			double latitude, double longitude) {
+			double latitude, double longitude, Timestamp date) {
 		super();
 		this.id = id;
 		this.idSender = idSender;
@@ -23,6 +26,7 @@ public class Notification {
 		this.information = information;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.date = date;
 	}
 
 	public int getId() {
@@ -72,5 +76,12 @@ public class Notification {
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-	
+
+	public Timestamp getDate() {
+		return date;
+	}
+
+	public void setDate(Timestamp date) {
+		this.date = date;
+	}
 }

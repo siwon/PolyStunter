@@ -8,6 +8,7 @@ import beans.Notification;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.*;
 /**
  * Accès aux données de type Notification
@@ -42,7 +43,7 @@ public class NotificationDAO {
 			result = preparedStatement.executeQuery();
 			notifications.clear();
 			while(result.next()) {
-				notifications.add(new Notification(result.getInt("idNotification"), result.getInt("idSender"), result.getString("typeNotification"), result.getString("informationNotification"), result.getDouble("latitudeNotification"), result.getDouble("longitudeNotification")));
+				notifications.add(new Notification(result.getInt("idNotification"), result.getInt("idSender"), result.getString("typeNotification"), result.getString("informationNotification"), result.getDouble("latitudeNotification"), result.getDouble("longitudeNotification"), result.getTimestamp("dateNotification")));
 			}
 
 		} catch (SQLException e) {
@@ -61,16 +62,17 @@ public class NotificationDAO {
 	 * @return 1 si l'opération s'est bien déroulée, 0 sinon
 	 * 
 	 */
-	public int add(int idSender, String type, String information, double latitude, double longitude) {
+	public int add(int idSender, String type, String information, double latitude, double longitude, Timestamp date) {
 		java.sql.PreparedStatement preparedStatement;
 		int success = 0;
 		try {
-			preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("INSERT INTO NOTIFICATION VALUES (null,?,?,?,?,?)");
+			preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("INSERT INTO NOTIFICATION VALUES (null,?,?,?,?,?,?)");
 			preparedStatement.setInt(1, idSender);
 			preparedStatement.setString(2, type);
 			preparedStatement.setString(3, information);
 			preparedStatement.setDouble(4, latitude);
 			preparedStatement.setDouble(5, longitude);
+			preparedStatement.setTimestamp(6, date);
 			success = preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -85,7 +87,7 @@ public class NotificationDAO {
 	 * @param idSender Identifiant de l'émetteur
 	 * @return La liste des notifications
 	 */
-	public List<Notification> findBySender(int idSender) {
+	public List<Notification> getBySender(int idSender) {
 		List<Notification> list = new ArrayList<Notification>();
 		for (Notification n : notifications) {
 			if(n.getIdSender() == idSender)

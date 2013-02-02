@@ -47,15 +47,6 @@
     <url-pattern>/basketAction</url-pattern>
   </servlet-mapping>
   <servlet>
-    <display-name>AddProductServlet</display-name>
-    <servlet-name>AddProductServlet</servlet-name>
-    <servlet-class>servlets.AddProductServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddProductServlet</servlet-name>
-    <url-pattern>/addProduct</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <display-name>BasketServlet</display-name>
     <servlet-name>BasketServlet</servlet-name>
     <servlet-class>servlets.BasketServlet</servlet-class>

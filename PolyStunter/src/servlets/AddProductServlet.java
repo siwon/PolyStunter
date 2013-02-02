@@ -28,7 +28,10 @@ import utils.UploadFileOnServer;
 /**
  * Servlet implementation class AddProductServlet
  */
-@WebServlet("/addProductServlet")
+@WebServlet(
+	    name = "AddProductServlet", 
+	    urlPatterns = {"/addProductServlet"}
+	)
 public class AddProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

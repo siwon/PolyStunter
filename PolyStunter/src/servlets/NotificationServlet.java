@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.Date;
+import java.sql.Timestamp;
 import java.util.ResourceBundle;
 
 import javax.servlet.ServletException;
@@ -36,7 +38,7 @@ public class NotificationServlet extends HttpServlet {
 			buffer.append("marker" + n.getId() + ".addToolTip('" + rb.getString(n.getType().toLowerCase()) + 
 					"'); marker" + n.getId() + ".addListener('click', function () { marker" + n.getId() + 
 					".openPopUp(\"<div class='custom-popup'><a href='javascript:closeCustom();' class='close-custom-popup'>x</a><div class='custom-popup-content'><p>Envoyé par <b>"+
-					UserDAO.getLoginFromId(n.getIdSender())+ "</b><br/><i>" + n.getInformation() + "</i></p></div></div>\")});");
+					UserDAO.getLoginFromId(n.getIdSender())+ "</b> à " + n.getDate().toString() + "<br/><i>" + n.getInformation() + "</i></p></div></div>\")});");
 			buffer.append("markerLayer.addMarker(marker" + n.getId() +");");
 		}
 		buffer.append("</script>");
@@ -54,9 +56,10 @@ public class NotificationServlet extends HttpServlet {
 		double latitude = Double.valueOf(request.getParameter("latitude"));
 		double longitude = Double.valueOf(request.getParameter("longitude"));
 		User user = (User) request.getSession().getAttribute("user");
-		NotificationDAO.getInstance().add(user.getId(), type, information, latitude, longitude);
-		response.sendRedirect("/PolyStunter/store");
-		//getServletContext().getRequestDispatcher("/WEB-INF/notification.jsp").forward(request, response);
+		Date date = new Date();
+		Timestamp time = new Timestamp(date.getTime());
+		NotificationDAO.getInstance().add(user.getId(), type, information, latitude, longitude, time);
+		getServletContext().getRequestDispatcher("/WEB-INF/notification.jsp").forward(request, response);
 	}
 
 }
