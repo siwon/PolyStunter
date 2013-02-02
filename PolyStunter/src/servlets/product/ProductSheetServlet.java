@@ -1,4 +1,4 @@
-package servlets;
+package servlets.product;
 
 import java.io.IOException;
 import java.util.ResourceBundle;
@@ -23,7 +23,10 @@ import beans.User;
  * Servlet implementation class productSheetServlet
  * @author "Alexandre Bisiaux"
  */
-@WebServlet("/productSheetServlet")
+@WebServlet(
+	    name = "ProductSheetServlet", 
+	    urlPatterns = {"/productSheet"}
+	)
 public class ProductSheetServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	/**

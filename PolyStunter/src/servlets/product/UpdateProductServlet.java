@@ -1,8 +1,6 @@
-package servlets;
+package servlets.product;
 
 import java.io.IOException;
-import java.util.ResourceBundle;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +16,10 @@ import beans.User;
 /**
  * Servlet implementation class UpdateProductServlet
  */
-@WebServlet("/UpdateProductServlet")
+@WebServlet(
+	    name = "UpdateProductServlet", 
+	    urlPatterns = {"/updateProduct"}
+	)
 public class UpdateProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -38,12 +39,4 @@ public class UpdateProductServlet extends HttpServlet {
 			getServletContext().getRequestDispatcher("/WEB-INF/store.jsp").forward(request, response);
 		}
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
-
 }

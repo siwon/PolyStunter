@@ -13,13 +13,18 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import utils.Message;
+
 import beans.User;
 
 /**
  * Filtre d'accès aux pages réservées aux livreurs
  * @author "Alexandre Bisiaux"
  */
-@WebFilter("/DeliveryManFilter")
+@WebFilter(
+		filterName = "/DeliveryManFilter",
+		urlPatterns = {"/notification"}
+		)
 public class DeliveryManFilter implements Filter {
 
 	/**
@@ -40,7 +45,9 @@ public class DeliveryManFilter implements Filter {
 		if (user != null && (user.isDeliveryMan() || user.isAdmin())) {
 			chain.doFilter(request, response);
 		} else {
-			//((HttpServletRequest) request).setAttribute("errors", rb.getString("unauthorizedPage"));
+			Message message = new Message();
+			message.addError(rb.getString("unauthorizedPage"));
+			((HttpServletRequest) request).setAttribute("message", message);
 			((HttpServletRequest) request).getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 		}
 	}

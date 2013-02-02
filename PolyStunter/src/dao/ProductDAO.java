@@ -65,7 +65,7 @@ public class ProductDAO {
 	 * @param id Identification du produit à supprimer
 	 * @return 1 si l'opération s'est bien déroulée, 0 sinon
 	 */
-	public static int remove(int id) {
+	public static int removeProduct(int id) {
 		java.sql.PreparedStatement preparedStatement;
 		int success = 0;
 		try {

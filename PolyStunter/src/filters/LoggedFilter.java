@@ -10,14 +10,21 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import utils.Message;
 /**
  * 
  * @author "Alexandre Bisiaux"
  *
  */
+@WebFilter(
+		filterName = "/LoggedFilter",
+		urlPatterns = {"/logout", "/profile"}
+		)
 public class LoggedFilter implements Filter {
 
 	@Override
@@ -36,7 +43,9 @@ public class LoggedFilter implements Filter {
 		if (session.getAttribute("user") != null) {
 			arg2.doFilter(arg0, arg1);
 		} else {
-			//request.setAttribute("errors", rb.getString("unauthorizedPage"));
+			Message message = new Message();
+			message.addError(rb.getString("unauthorizedPage"));
+			((HttpServletRequest) request).setAttribute("message", message);
 			request.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 		}
 	}

@@ -1,4 +1,4 @@
-package servlets;
+package servlets.store;
 
 import java.io.IOException;
 import java.util.ResourceBundle;
@@ -14,15 +14,19 @@ import dao.MarketDAO;
 
 import beans.Market;
 import beans.Product;
+import beans.User;
 
 /**
- * Servlet implementation class ProductsServlet
+ * Servlet implementation class StoreServlet
  * @author "Alexandre Bisiaux"
  */
-@WebServlet("/ProductsServlet")
-public class ProductsServlet extends HttpServlet {
+@WebServlet(
+	    name = "StoreServlet", 
+	    urlPatterns = {"/store"}
+	)
+public class StoreServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -30,12 +34,12 @@ public class ProductsServlet extends HttpServlet {
 		ResourceBundle rb = ResourceBundle.getBundle("properties.text");
 		HttpSession session = request.getSession();
 		Market market = Market.getInstance();
-		session.setAttribute("market", Market.getInstance());
 		MarketDAO.getInstance().refresh(market);
+		User u = (User) session.getAttribute("user");
 		
 		StringBuffer buffer = new StringBuffer();
 		
-		for (Product p : market.getProducts()) {
+		for (Product p : market.getProductsOfSeller(u.getId())) {
 			buffer.append("<li class='span3'>");
 			buffer.append("<img src='/PolyStunter/products/" + p.getPhoto() + "' width='100px' height='100px'/><br/>");
 			if(p.getName().length() > 20)
@@ -48,12 +52,14 @@ public class ProductsServlet extends HttpServlet {
 			else
 				buffer.append("<span class='red'>" + rb.getString("outOfStock") + "</span>");
 			
-			buffer.append("<br/><br/><a href=" + request.getContextPath() + "/productSheet?id=" + p.getId() + " class='btn btn-info'>" + rb.getString("see") + "</a></li>");
+			buffer.append("<br/><div class='btn-group'>");
+			buffer.append("<a href=" + request.getContextPath() + "/removeProduct&id=" + p.getId() + " class='btn btn-danger btn-mini' onclick=\"return confirm('"+ rb.getString("messageConfirmation") + "')\">" + rb.getString("remove") + "</a>");
+			buffer.append("<a href=" + request.getContextPath() + "/updateProduct&id=" + p.getId() + " class='btn btn-warning btn-mini'>" + rb.getString("update") + "</a>");
+			buffer.append("</div></li>");
 		}
 		
 		request.setAttribute("products", buffer.toString());
 		
-		getServletContext().getRequestDispatcher("/WEB-INF/products.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/WEB-INF/store.jsp").forward(request, response);
 	}
-
 }

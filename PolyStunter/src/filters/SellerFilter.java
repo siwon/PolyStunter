@@ -13,13 +13,18 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import utils.Message;
+
 import beans.User;
 
 /**
  * Filtre d'accès aux pages réservées aux commerçants
  * @author "Alexandre Bisiaux"
  */
-@WebFilter("/SellerFilter")
+@WebFilter(
+		filterName = "/SellerFilter",
+		urlPatterns = {"/store", "/warehouse", "/addProduct", "/removeProduct", "/updateProduct"}
+		)
 public class SellerFilter implements Filter {
 
 	/**
@@ -34,13 +39,14 @@ public class SellerFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		ResourceBundle rb = ResourceBundle.getBundle("properties.text");
-
 		HttpSession session = ((HttpServletRequest) request).getSession();
 		User user = (User) session.getAttribute("user");
 		if (user != null && (user.isSeller()|| user.isAdmin())) {
 			chain.doFilter(request, response);
 		} else {
-			//((HttpServletRequest) request).setAttribute("errors", rb.getString("unauthorizedPage"));
+			Message message = new Message();
+			message.addError(rb.getString("unauthorizedPage"));
+			((HttpServletRequest) request).setAttribute("message", message);
 			((HttpServletRequest) request).getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 		}
 	}

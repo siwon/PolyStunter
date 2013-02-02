@@ -12,29 +12,32 @@ import java.util.List;
  */
 public class Message {
 
-	private List<String> messages = new ArrayList<String>();
+	private List<String> errorMessages = new ArrayList<String>();
+	private List<String> successMessages = new ArrayList<String>();
 	
-	public void add(String message){
-		this.messages.add(message+ "\n");
+	public void addError(String message){
+		this.errorMessages.add(message+ "\n");
+	}
+	
+	public void addSuccess(String message){
+		this.successMessages.add(message+ "\n");
 	}
 	
 	public void clear() {
-		this.messages.clear();
+		this.errorMessages.clear();
+		this.successMessages.clear();
+	}
+	
+	public List<String> getErrorMessages() {
+		return errorMessages;
 	}
 
-	@Override
-	public String toString() {
-		StringBuffer buf = new StringBuffer();
-		for (String e : messages) {
-			buf.append(e);
-			buf.append("\n");
-		}
-		return buf.toString();
+	public List<String> getSuccessMessages() {
+		return successMessages;
 	}
-	
+
 	public boolean isEmpty() {
-		return this.messages.isEmpty();
+		return this.errorMessages.isEmpty() || this.successMessages.isEmpty();
 	}
-	
 	
 }

@@ -1,4 +1,4 @@
-package servlets;
+package servlets.product;
 
 import java.io.IOException;
 import java.util.ResourceBundle;
@@ -14,16 +14,18 @@ import dao.MarketDAO;
 
 import beans.Market;
 import beans.Product;
-import beans.User;
 
 /**
- * Servlet implementation class StoreServlet
+ * Servlet implementation class ProductsServlet
  * @author "Alexandre Bisiaux"
  */
-@WebServlet("/Store")
-public class StoreServlet extends HttpServlet {
+@WebServlet(
+	    name = "ProductsServlet", 
+	    urlPatterns = {"/products"}
+	)
+public class ProductsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -31,12 +33,12 @@ public class StoreServlet extends HttpServlet {
 		ResourceBundle rb = ResourceBundle.getBundle("properties.text");
 		HttpSession session = request.getSession();
 		Market market = Market.getInstance();
+		session.setAttribute("market", Market.getInstance());
 		MarketDAO.getInstance().refresh(market);
-		User u = (User) session.getAttribute("user");
 		
 		StringBuffer buffer = new StringBuffer();
 		
-		for (Product p : market.getProductsOfSeller(u.getId())) {
+		for (Product p : market.getProducts()) {
 			buffer.append("<li class='span3'>");
 			buffer.append("<img src='/PolyStunter/products/" + p.getPhoto() + "' width='100px' height='100px'/><br/>");
 			if(p.getName().length() > 20)
@@ -49,14 +51,12 @@ public class StoreServlet extends HttpServlet {
 			else
 				buffer.append("<span class='red'>" + rb.getString("outOfStock") + "</span>");
 			
-			buffer.append("<br/><div class='btn-group'>");
-			buffer.append("<a href=" + request.getContextPath() + "/storeAction?action=remove&id=" + p.getId() + " class='btn btn-danger btn-mini' onclick=\"return confirm('"+ rb.getString("messageConfirmation") + "')\">" + rb.getString("remove") + "</a>");
-			buffer.append("<a href=" + request.getContextPath() + "/storeAction?action=update&id=" + p.getId() + " class='btn btn-warning btn-mini'>" + rb.getString("update") + "</a>");
-			buffer.append("</div></li>");
+			buffer.append("<br/><br/><a href=" + request.getContextPath() + "/productSheet?id=" + p.getId() + " class='btn btn-info'>" + rb.getString("see") + "</a></li>");
 		}
 		
 		request.setAttribute("products", buffer.toString());
 		
-		getServletContext().getRequestDispatcher("/WEB-INF/store.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/WEB-INF/products.jsp").forward(request, response);
 	}
+
 }

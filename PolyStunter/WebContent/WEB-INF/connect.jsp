@@ -58,10 +58,18 @@
 				</div>
 				
 			</form>
-			<% if(request.getAttribute("errors") != null) {
-				out.print("<div class='alert alert-error'>"+ request.getAttribute("errors") + "</div>");
-			}
-			%>
+			<c:if test="${not empty message}">
+				<c:if test="${not empty message.getErrorMessages()}">
+					<div class='alert alert-error'>
+						${message.getErrorMessages().toString()}
+					</div>
+				</c:if>
+				<c:if test="${not empty message.getSuccessMessages()}">
+					<div class='alert alert-success'>
+						${message.getSuccessMessages().toString()}
+					</div>
+				</c:if>
+			</c:if>
 			<hr>
 			<%@include file="/WEB-INF/includes/footer.jsp" %>
 		</div>

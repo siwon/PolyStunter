@@ -36,6 +36,19 @@
 				<h1><fmt:message key="register" /></h1>
 			</div>
 			
+			<c:if test="${not empty message}">
+				<c:if test="${not empty message.getErrorMessages()}">
+					<div class='alert alert-error'>
+						${message.getErrorMessages().toString()}
+					</div>
+				</c:if>
+				<c:if test="${not empty message.getSuccessMessages()}">
+					<div class='alert alert-success'>
+						${message.getSuccessMessages().toString()}
+					</div>
+				</c:if>
+			</c:if>
+			
 			<form class="form-horizontal" id="registerForm" action="<c:url value="/register" />" method="POST">
 			
 				<div class="control-group">

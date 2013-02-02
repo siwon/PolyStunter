@@ -13,10 +13,15 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import utils.Message;
+
 /**
  * Servlet Filter implementation class NotLoggedFilter
  */
-@WebFilter("/NotLoggedFilter")
+@WebFilter(
+		filterName = "/NotLoggedFilter",
+		urlPatterns = {"/login", "/register"}
+		)
 public class NotLoggedFilter implements Filter {
 
     /**
@@ -44,7 +49,9 @@ public class NotLoggedFilter implements Filter {
 		if(request.getSession().getAttribute("user")==null) {
 			chain.doFilter(arg0, arg1);
 		} else {
-			//request.setAttribute("errors", rb.getString("unauthorizedPage"));
+			Message message = new Message();
+			message.addError(rb.getString("unauthorizedPage"));
+			((HttpServletRequest) request).setAttribute("message", message);
 			request.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 		}
 	}

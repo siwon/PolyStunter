@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <fmt:setBundle basename="properties.text" />
-<fmt:setLocale value="en" scope="application"/>
+<fmt:setLocale value="fr" scope="application"/>
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
@@ -24,14 +24,19 @@
 		
 		<div class="container">
 		
-			<% if(request.getAttribute("errors") != null) {
-				out.print("<div class='alert alert-error'>"+ request.getAttribute("errors") + "</div>");
-			}
-			%>
-			<% if(request.getAttribute("successMessage") != null) {
-				out.print("<div class='alert alert-success'>"+ request.getAttribute("successMessage") + "</div>");
-			}
-			%>		
+			<c:if test="${not empty message}">
+				<c:if test="${not empty message.getErrorMessages()}">
+					<div class='alert alert-error'>
+						${message.getErrorMessages().toString()}
+					</div>
+				</c:if>
+				<c:if test="${not empty message.getSuccessMessages()}">
+					<div class='alert alert-success'>
+						${message.getSuccessMessages().toString()}
+					</div>
+				</c:if>
+			</c:if>
+			
 			<div class="hero-unit">
 				<div style="text-align:center">
 					<img src="/PolyStunter/images/logo_Large.png" width="500px" />

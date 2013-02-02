@@ -38,15 +38,19 @@
 				<a href="<c:url value="/store"/>"><button class="btn btn-link"><fmt:message key="back"/></button></a>
 			</div>
 			
-			<% if(request.getAttribute("errors") != null) {
-				out.print("<div class='alert alert-error'>"+ request.getAttribute("errors").toString() + "</div>");
-			}
-			%>
-			<% if(request.getAttribute("success") != null) {
-				out.print("<div class='alert alert-success'>"+ request.getAttribute("success").toString() + "</div>");
-			}
-			%>		
-			
+			<c:if test="${not empty message}">
+				<c:if test="${not empty message.getErrorMessages()}">
+					<div class='alert alert-error'>
+						${message.getErrorMessages().toString()}
+					</div>
+				</c:if>
+				<c:if test="${not empty message.getSuccessMessages()}">
+					<div class='alert alert-success'>
+						${message.getSuccessMessages().toString()}
+					</div>
+				</c:if>
+			</c:if>
+					
 			<form class="form-horizontal" id="addProduct" action="<c:url value="/addProduct" />" method="POST" enctype="multipart/form-data">
 				<div class="control-group">
 					<label class="control-label" for="name"><fmt:message key="productName" /></label>

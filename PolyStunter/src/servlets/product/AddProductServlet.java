@@ -1,4 +1,4 @@
-package servlets;
+package servlets.product;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -30,7 +30,7 @@ import utils.UploadFileOnServer;
  */
 @WebServlet(
 	    name = "AddProductServlet", 
-	    urlPatterns = {"/addProductServlet"}
+	    urlPatterns = {"/addProduct"}
 	)
 public class AddProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -52,8 +52,7 @@ public class AddProductServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		Message errors = new Message();
-		Message success = new Message();
+		Message message = new Message();
 		
 		DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
 		ServletFileUpload uploadHandler = new ServletFileUpload(fileItemFactory);
@@ -104,18 +103,15 @@ public class AddProductServlet extends HttpServlet {
 			}
 			ProductDAO.addProduct(u.getId(),price,name,reference,quantity,information,warehouse,fileName);
 		} catch(ExtensionException e) {
-			errors.add(e.getMessage());
+			message.addError(e.getMessage());
 		} catch (FileUploadException e) {
-			errors.add(e.getMessage());
+			message.addError(e.getMessage());
 		}
 		
-		if(errors.isEmpty()) {
-			/*success.add("Produit a été ajouté à votre boutique.");
-			request.setAttribute("success", success);
-			getServletContext().getRequestDispatcher("/store").forward(request, response);*/
+		if(message.isEmpty()) {
 			response.sendRedirect("/PolyStunter/store");
 		} else {
-			request.setAttribute("errors", errors);
+			request.setAttribute("message", message);
 			getServletContext().getRequestDispatcher("/WEB-INF/addProduct.jsp").forward(request, response);
 		}
 	}

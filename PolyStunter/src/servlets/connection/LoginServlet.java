@@ -1,4 +1,4 @@
-package servlets;
+package servlets.connection;
 
 import java.io.IOException;
 
@@ -22,17 +22,20 @@ import beans.User;
  * Servlet implementation class ConnectionServlet
  * @author "Alexandre Bisiaux"
  */
-@WebServlet("/ConnectionServlet")
+@WebServlet(
+	    name = "LoginServlet", 
+	    urlPatterns = {"/login"}
+	)
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		getServletContext().getRequestDispatcher("/WEB-INF/connect.jsp").forward(request, response);
-	}
 	
+	
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		this.getServletContext().getRequestDispatcher("/WEB-INF/connect.jsp").forward(request, response);
+	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -41,8 +44,10 @@ public class LoginServlet extends HttpServlet {
 		User user = form.connectUser(request);
 		
 		HttpSession session = request.getSession();
-
-		if (ConnectForm.errors.isEmpty()) {
+		
+		request.setAttribute("message",form.message);
+		
+		if (form.message.getErrorMessages().isEmpty()) {
 			
 			session.setAttribute("user", user);
 			
@@ -51,12 +56,10 @@ public class LoginServlet extends HttpServlet {
 				BasketDAO.getInstance().loadBasket(basket);
 				user.setBasket(basket);
 			}
-			request.setAttribute("successMessage", "Connexion établie.");
 			this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 			
 		} else {
 			session.setAttribute("user", null);
-			request.setAttribute("errors",ConnectForm.errors.toString());
 			this.getServletContext().getRequestDispatcher("/WEB-INF/connect.jsp").forward(request, response);
 		}
 	}

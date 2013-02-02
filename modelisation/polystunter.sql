@@ -36,17 +36,10 @@ CREATE TABLE IF NOT EXISTS `notification` (
   `informationNotification` text,
   `latitudeNotification` double DEFAULT NULL,
   `longitudeNotification` double DEFAULT NULL,
+  `dateNotification` timestamp,
   PRIMARY KEY (`idNotification`,`idSender`),
   KEY `idSender` (`idSender`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
-
---
--- Contenu de la table `notification`
---
-
-INSERT INTO `notification` (`idNotification`, `idSender`, `typeNotification`, `informationNotification`, `latitudeNotification`, `longitudeNotification`) VALUES
-(1, 1, 'ACCIDENT', 'accident voiture sur le toit', -1.548386, 47.258262),
-(2, 2, 'DEMONSTRATION', 'manifestation devant la préfecture', -1.554319, 47.220208);
 
 -- --------------------------------------------------------
 
@@ -99,14 +92,6 @@ CREATE TABLE IF NOT EXISTS `product` (
   KEY `idSeller` (`idSeller`),
   KEY `idWarehouse` (`idWarehouse`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
-
---
--- Contenu de la table `product`
---
-
-INSERT INTO `product` (`idProduct`, `idSeller`, `priceProduct`, `nameProduct`, `referenceProduct`, `quantityProduct`, `informationProduct`, `idWarehouse`, `photoProduct`) VALUES
-(1, 3, 2.5, 'kinder', 'kinder', 100, 'kinder', 10, '1.jpg'),
-(2, 3, 10.2, 'test', 'test', 10, 'test', 10, '1.png');
 
 -- --------------------------------------------------------
 
@@ -164,15 +149,6 @@ CREATE TABLE IF NOT EXISTS `warehouse` (
   KEY `idSeller` (`idSeller`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
---
--- Contenu de la table `warehouse`
---
-
-INSERT INTO `warehouse` (`idWarehouse`, `idSeller`, `nameWarehouse`, `streetWarehouse`, `zipCodeWarehouse`, `cityWarehouse`) VALUES
-(1, 4, 'test', 'test', 44240, 'test'),
-(3, 4, 'test2', 'test2', 44200, 'test'),
-(9, 4, 'depot', 'test', 44240, 'test'),
-(10, 3, 'depot', 'test', 44240, 'test');
 
 --
 -- Contraintes pour les tables exportées

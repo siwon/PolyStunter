@@ -25,6 +25,7 @@
 							<li class="active"><a href="<c:url value="/home"/>" ><fmt:message key="home" /></a></li>
 							<li class="active"><a href="<c:url value="/profile"/>" ><fmt:message key="profil" /></a></li>
 							<li class="active"><a href="<c:url value="/store"/>" ><fmt:message key="myStore" /></a></li>
+							<li class="active"><a href="<c:url value="/warehouse"/>" ><fmt:message key="myWarehouses" /></a></li>
 						</c:when>
 		
 						<c:when test="${user.isDeliveryMan()}">

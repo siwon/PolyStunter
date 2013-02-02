@@ -13,13 +13,18 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import utils.Message;
+
 import beans.User;
 
 /**
  * Filtre d'accès aux pages réservées aux clients
  * @author "Alexandre Bisiaux"
  */
-@WebFilter("/CustomerFilter")
+@WebFilter(
+		filterName = "/CustomerFilter",
+		urlPatterns = {"/basket", "/basketDecrease", "/basketIncrease", "/basketRemove", "/basketEmpty", "/basketValidate", "/products", "/productSheet"}
+		)
 public class CustomerFilter implements Filter {
 
    	/**
@@ -32,7 +37,9 @@ public class CustomerFilter implements Filter {
 		if (user != null && (user.isCustomer() || user.isAdmin())) {
 			chain.doFilter(request, response);
 		} else {
-			//request.setAttribute("errors", rb.getString("unauthorizedPage"));
+			Message message = new Message();
+			message.addError(rb.getString("unauthorizedPage"));
+			((HttpServletRequest) request).setAttribute("message", message);
 			((HttpServletRequest) request).getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 		}
 	}

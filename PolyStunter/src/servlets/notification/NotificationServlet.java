@@ -1,4 +1,4 @@
-package servlets;
+package servlets.notification;
 
 import java.io.IOException;
 import java.util.Date;
@@ -20,7 +20,10 @@ import beans.User;
 /**
  * Servlet implementation class NotificationServlet
  */
-@WebServlet("/NotificationServlet")
+@WebServlet(
+	    name = "NotificationServlet", 
+	    urlPatterns = {"/notification"}
+	)
 public class NotificationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -59,7 +62,7 @@ public class NotificationServlet extends HttpServlet {
 		Date date = new Date();
 		Timestamp time = new Timestamp(date.getTime());
 		NotificationDAO.getInstance().add(user.getId(), type, information, latitude, longitude, time);
-		getServletContext().getRequestDispatcher("/WEB-INF/notification.jsp").forward(request, response);
+		response.sendRedirect("/PolyStunter/notification");
 	}
 
 }

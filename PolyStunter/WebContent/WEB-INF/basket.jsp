@@ -28,6 +28,19 @@
 				<h1><fmt:message key="myBasket" /></h1>
 			</div>
 			
+			<c:if test="${not empty message}">
+				<c:if test="${not empty message.getErrorMessages()}">
+					<div class='alert alert-error'>
+						${message.getErrorMessages().toString()}
+					</div>
+				</c:if>
+				<c:if test="${not empty message.getSuccessMessages()}">
+					<div class='alert alert-success'>
+						${message.getSuccessMessages().toString()}
+					</div>
+				</c:if>
+			</c:if>
+			
 			<c:if test="${not empty basket}" >
 				<table class="table table-hover">
 					<thead>
@@ -45,8 +58,8 @@
 					</tr>
 				</table>
 				<div class="center">
-						<a href="<c:url value="/basketAction?action=empty"/>"><button type="submit" class="btn btn-warning"><fmt:message key="empty" /></button></a>
-						<a href="<c:url value="/basketAction?action=validate"/>"><button type="submit" class="btn btn-success"><fmt:message key="validate" /></button></a>
+						<a href="<c:url value="/basketEmpty"/>"><button type="button" class="btn btn-warning"><fmt:message key="empty" /></button></a>
+						<a href="<c:url value="/basketValidate"/>"><button type="button" class="btn btn-success"><fmt:message key="validate" /></button></a>
 				</div>	
 			</c:if>
 			<c:if test="${empty basket}" >

@@ -37,7 +37,7 @@
 		if(navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(position)
 			{
-				document.getElementById("info").innerHTML = "<div class='alert alert-success'>Votre position a été obtenue par géolocalisation via votre navigateur.</div>";
+				document.getElementById("info").innerHTML = "<div class='alert alert-success'>Votre position a \351t\351 obtenue par g\351olocalisation via votre navigateur.</div>";
 				document.getElementById("latitude").value = position.coords.latitude;
 				document.getElementById("longitude").value = position.coords.longitude;
 				document.getElementById('latitude').setAttribute("readonly");
@@ -50,10 +50,10 @@
 				    	document.getElementById("info").innerHTML = "<div class='alert alert-warning'>Timeout !</div>";
 				    break;
 				    case error.PERMISSION_DENIED:
-				    	document.getElementById("info").innerHTML = "<div class='alert alert-warning'>Vous n'avez pas autorisé la géolocalisation</div>";
+				    	document.getElementById("info").innerHTML = "<div class='alert alert-warning'>Vous n'avez pas autoris\351 la g\351olocalisation</div>";
 				    break;
 				    case error.POSITION_UNAVAILABLE:
-				    	document.getElementById("info").innerHTML = "<div class='alert alert-warning'>Votre position n'a pas pu être déterminéee.</div>";
+				    	document.getElementById("info").innerHTML = "<div class='alert alert-warning'>Votre position n'a pas pu \352tre d\351termin\351ee.</div>";
 				    break;
 				    case error.UNKNOWN_ERROR:
 				    	document.getElementById("info").innerHTML = "<div class='alert alert-warning'>Erreur inconnue</div>";
@@ -63,7 +63,7 @@
 				
 			});
 		} else {
-			document.getElementById("info").innerHTML = "<div class='alert alert-warning'>Votre navigateur ne supporte pas la géolocalisation.<br/>Veuillez saisir les champs latitude et longitude</div>";
+			document.getElementById("info").innerHTML = "<div class='alert alert-warning'>Votre navigateur ne supporte pas la g\351olocalisation.<br/>Veuillez saisir les champs latitude et longitude</div>";
 		}
 		</script>
 	</div>

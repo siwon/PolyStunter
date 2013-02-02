@@ -1,4 +1,4 @@
-package servlets;
+package servlets.basket;
 
 import java.io.IOException;
 import java.util.Map.Entry;
@@ -23,7 +23,10 @@ import beans.Product;
  * @author "Alexandre Bisiaux"
  *
  */
-@WebServlet("/BasketServlet")
+@WebServlet(
+	    name = "BasketServlet", 
+	    urlPatterns = {"/basket"}
+	)
 public class BasketServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -50,10 +53,10 @@ public class BasketServlet extends HttpServlet {
 				buffer.append("<span class='green'>" + rb.getString("inStock") + "</span>");
 			else
 				buffer.append("<span class='red'>" + rb.getString("outOfStock") + "</span>");
-			buffer.append("</td><td><a href=" + request.getContextPath() + "/basketAction?action=remove&id=" + e.getKey().getId() + ">" + rb.getString("remove") + "</a></td>");
+			buffer.append("</td><td><a href=" + request.getContextPath() + "/basketRemove&id=" + e.getKey().getId() + ">" + rb.getString("remove") + "</a></td>");
 			buffer.append("<td>" + e.getKey().getPrice() + " &euro;</td>");
 			buffer.append("<td>" + e.getValue() + "</td>");
-			buffer.append("<td><div class='btn-group'><a href=" + request.getContextPath() + "/basketAction?action=decreaseQuantity&id=" + e.getKey().getId() + "><button class='btn btn-danger btn-mini'>-</button></a><a href=" + request.getContextPath() + "/basketAction?action=increaseQuantity&id=" + e.getKey().getId() + "><button class='btn btn-success btn-mini'>+</button></a></div></td></tr>");
+			buffer.append("<td><div class='btn-group'><a href=" + request.getContextPath() + "/basketDecreaseQuantity&id=" + e.getKey().getId() + "><button class='btn btn-danger btn-mini'>-</button></a><a href=" + request.getContextPath() + "/basketIncreaseQuantity&id=" + e.getKey().getId() + "><button class='btn btn-success btn-mini'>+</button></a></div></td></tr>");
 		
 			
 		}

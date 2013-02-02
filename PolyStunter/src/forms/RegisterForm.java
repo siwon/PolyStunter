@@ -19,7 +19,7 @@ import beans.User;
  */
 public class RegisterForm {
 
-	public static Message errors = new Message();
+	public Message message = new Message();
 
 	public boolean registerUser(HttpServletRequest request) {
 
@@ -32,7 +32,7 @@ public class RegisterForm {
 		User user = new User(0, login, password, status ,mail);
 		if(UserDAO.getInstance().exist(user))
 		{
-			errors.add("Inscription impossible : Pseudo déjà utilisé.");
+			message.addError("Inscription impossible : Pseudo déjà utilisé.");
 			result = false;
 		} else {
 			try {
@@ -51,10 +51,11 @@ public class RegisterForm {
 				preparedStatement.setString(3, mail);
 				preparedStatement.setString(4, status);
 				
-				if(preparedStatement.executeUpdate() == 1)
+				if(preparedStatement.executeUpdate() == 1) {
 					result = true;
-				else {
-					errors.add("Inscription impossible : Retentez plus tard.");
+					message.addSuccess("Inscription réalisée avec succés.");
+				} else {
+					message.addError("Inscription impossible : Retentez plus tard.");
 					result = false;
 				}
 				

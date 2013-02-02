@@ -19,7 +19,7 @@ import beans.User;
  */
 public final class ConnectForm {
 
-	public static Message errors = new Message();
+	public Message message = new Message();
 
 	public User connectUser(HttpServletRequest request) {
 
@@ -50,8 +50,9 @@ public final class ConnectForm {
 				user.setPassword(result.getString("passwordUser"));
 				user.setStatus(result.getString("statusUser"));
 				user.setMail(result.getString("mailUser"));
+				message.addSuccess("Connexion établie");
 			} else {
-				errors.add("Connexion impossible : Identifiants incorrects.");
+				message.addError("Connexion impossible : Identifiants incorrects.");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

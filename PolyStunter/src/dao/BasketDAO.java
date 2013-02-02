@@ -110,11 +110,15 @@ public class BasketDAO {
 		}			
 	}
 	
-	public void increaseQuantity(Basket basket, int id) {
+	public boolean increaseQuantity(Basket basket, int id) {
+		boolean toReturn = false;
 		Product p = basket.getProduct(id);
 		if(p != null){
-			if(p.getQuantity() > basket.getProducts().get(p)+1)
+			if(p.getQuantity() > basket.getProducts().get(p)+1) {
 				basket.getProducts().put(p, basket.getProducts().get(p)+1);
-		}			
+				toReturn = true;
+			}
+		}
+		return toReturn;
 	}
 }

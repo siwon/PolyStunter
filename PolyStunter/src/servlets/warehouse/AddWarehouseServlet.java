@@ -1,4 +1,4 @@
-package servlets;
+package servlets.warehouse;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -14,17 +14,13 @@ import dao.WarehouseDAO;
 /**
  * Servlet implementation class addWarehouseServlet
  */
-@WebServlet("/addWarehouseServlet")
+@WebServlet(
+	    name = "AddWarehouseServlet", 
+	    urlPatterns = {"/addWarehouse"}
+	)
 public class AddWarehouseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
