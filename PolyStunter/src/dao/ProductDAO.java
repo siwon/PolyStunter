@@ -3,6 +3,7 @@
  */
 package dao;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import bdd.ConnectionBdd;
@@ -76,5 +77,26 @@ public class ProductDAO {
 			e.printStackTrace();
 		}
 		return success;
+	}
+	
+	/**
+	 * Test si un produit est commandé avant de le supprimer
+	 * @param id Identifiant du produit concerné
+	 * @return Vrai si le produit n'est pas commandé, faux sinon
+	 */
+	public static boolean isOrdered(int id) {
+		java.sql.PreparedStatement preparedStatement;
+		boolean ordered = false;
+		ResultSet result;
+		try {
+			preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("SELECT * FROM ORDEREDPRODUCTS WHERE idProduct = ?");
+			preparedStatement.setInt(1, id);
+			result = preparedStatement.executeQuery();
+			if(result.next())
+				ordered = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ordered;
 	}
 }

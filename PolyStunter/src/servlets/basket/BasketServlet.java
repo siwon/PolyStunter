@@ -53,10 +53,10 @@ public class BasketServlet extends HttpServlet {
 				buffer.append("<span class='green'>" + rb.getString("inStock") + "</span>");
 			else
 				buffer.append("<span class='red'>" + rb.getString("outOfStock") + "</span>");
-			buffer.append("</td><td><a href=" + request.getContextPath() + "/basketRemove&id=" + e.getKey().getId() + ">" + rb.getString("remove") + "</a></td>");
+			buffer.append("</td><td><a href=" + request.getContextPath() + "/basketRemove?id=" + e.getKey().getId() + ">" + rb.getString("remove") + "</a></td>");
 			buffer.append("<td>" + e.getKey().getPrice() + " &euro;</td>");
 			buffer.append("<td>" + e.getValue() + "</td>");
-			buffer.append("<td><div class='btn-group'><a href=" + request.getContextPath() + "/basketDecreaseQuantity&id=" + e.getKey().getId() + "><button class='btn btn-danger btn-mini'>-</button></a><a href=" + request.getContextPath() + "/basketIncreaseQuantity&id=" + e.getKey().getId() + "><button class='btn btn-success btn-mini'>+</button></a></div></td></tr>");
+			buffer.append("<td><div class='btn-group'><a href=" + request.getContextPath() + "/basketDecreaseQuantity?id=" + e.getKey().getId() + "><button class='btn btn-danger btn-mini'>-</button></a><a href=" + request.getContextPath() + "/basketIncreaseQuantity?id=" + e.getKey().getId() + "><button class='btn btn-success btn-mini'>+</button></a></div></td></tr>");
 		
 			
 		}

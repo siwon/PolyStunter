@@ -36,9 +36,13 @@ public class RemoveProductServlet extends HttpServlet {
 		if(request.getParameter("id") != null) {
 			int id = Integer.valueOf(request.getParameter("id"));
 			if(Market.getInstance().getProduct(id).getIdSeller() == user.getId()) {
-				UploadFileOnServer.removeFile(getServletContext().getRealPath("/") + "products/" + Market.getInstance().getProduct(id).getPhoto());
-				ProductDAO.removeProduct(id);
-				message.addSuccess("Produit correctement supprimé");
+				if(ProductDAO.isOrdered(id))
+					message.addError("Ce produit a été commandé par des utilisateurs. Impossible de le supprimer.");
+				else {
+					UploadFileOnServer.removeFile(getServletContext().getRealPath("/") + "products/" + Market.getInstance().getProduct(id).getPhoto());
+					ProductDAO.removeProduct(id);
+					message.addSuccess("Produit correctement supprimé");
+				}
 			} else {
 				message.addError("Ce produit ne vous appartient pas");
 			}

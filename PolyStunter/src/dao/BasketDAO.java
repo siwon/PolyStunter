@@ -114,7 +114,7 @@ public class BasketDAO {
 		boolean toReturn = false;
 		Product p = basket.getProduct(id);
 		if(p != null){
-			if(p.getQuantity() > basket.getProducts().get(p)+1) {
+			if(p.getQuantity() > basket.getProducts().get(p)) {
 				basket.getProducts().put(p, basket.getProducts().get(p)+1);
 				toReturn = true;
 			}

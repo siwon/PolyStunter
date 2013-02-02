@@ -80,7 +80,7 @@ public class WarehouseDAO {
 	 * @param city Ville
 	 * @return 1 si l'opération s'est bien déroulée, 0 sinon
 	 */
-	public int add(int idSeller, String name, String street, int zipCode, String city) {
+	public int addWarehouse(int idSeller, String name, String street, int zipCode, String city) {
 		int success = 0;
 		java.sql.PreparedStatement preparedStatement;
 		try {
@@ -114,5 +114,59 @@ public class WarehouseDAO {
 			e.printStackTrace();
 		}
 		return name;
+	}
+	
+	public boolean isUsed(int id) {
+		java.sql.PreparedStatement preparedStatement;
+		ResultSet result;
+		boolean isUsed = false;
+		try {
+			preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("SELECT * FROM PRODUCT WHERE idWarehouse = ?");
+			preparedStatement.setInt(1, id);
+			result = preparedStatement.executeQuery();
+			if(result.next())
+				isUsed = true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return isUsed;
+	}
+	
+	/**
+	 * Supprime le dépôt identifié par id
+	 * @param id Identification du dépôt à supprimer
+	 * @return 1 si l'opération s'est bien déroulée, 0 sinon
+	 */
+	public int removeWarehouse(int id) {
+		java.sql.PreparedStatement preparedStatement;
+		int success = 0;
+		try {
+			preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("DELETE FROM WAREHOUSE WHERE idWarehouse = ?");
+			preparedStatement.setInt(1, id);
+			success = preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return success;
+	}
+	
+	/**
+	 * Obtenir le dépôt d'identifiant id
+	 * @param id Identifiant du dépôt
+	 * @return Le dépôt s'il existe, null sinon
+	 */
+	public Warehouse getWarehouseById(int id) {
+		Warehouse w = null;
+		boolean find = false;
+		Iterator<Warehouse> it = warehouses.iterator();
+		while(!find && it.hasNext()) {
+			Warehouse temp = it.next();
+			if(temp.getId() == id) {
+				find = true;
+				w = temp;
+			}
+		}
+		return w;
 	}
 }

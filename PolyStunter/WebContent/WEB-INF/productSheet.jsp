@@ -37,11 +37,9 @@
 						<p>
 							<b><fmt:message key="quantity" /> :</b> <br />
 							<select name="quantity"	<%if (!p.inStock())	out.println("disabled='disabled'");%> >
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
+								<c:forEach var="entry" begin="1" end="${product.getQuantity()}">
+									<option value="${entry}"> ${entry} </option>
+								</c:forEach>
 							</select>
 							<br /> 
 							<input name="id" type="hidden" value="<%=p.getId()%>" />

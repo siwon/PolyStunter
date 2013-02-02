@@ -7,6 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.User;
+import beans.Warehouse;
+
+import dao.WarehouseDAO;
+
 /**
  * Servlet implementation class WarehouseServlet
  */
@@ -29,7 +34,9 @@ public class WarehouseServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		User user = (User) request.getSession().getAttribute("user");
+		request.setAttribute("warehouses", WarehouseDAO.getInstance().getWarehousesOfSeller(user.getId()));
+		getServletContext().getRequestDispatcher("/WEB-INF/warehouse.jsp").forward(request, response);
 	}
 
 	/**

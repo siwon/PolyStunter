@@ -3,7 +3,6 @@
  */
 package utils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,8 +11,8 @@ import java.util.List;
  */
 public class Message {
 
-	private List<String> errorMessages = new ArrayList<String>();
-	private List<String> successMessages = new ArrayList<String>();
+	private List<String> errorMessages = new MessageList();
+	private List<String> successMessages = new MessageList();
 	
 	public void addError(String message){
 		this.errorMessages.add(message+ "\n");

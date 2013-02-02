@@ -36,8 +36,6 @@ public class ProductSheetServlet extends HttpServlet {
 		ResourceBundle rb = ResourceBundle.getBundle("properties.text");
 		String param = request.getParameter("id");
 		MarketDAO.getInstance().refresh(Market.getInstance());
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
 		if(param.isEmpty() || Market.getInstance().getProduct(Integer.parseInt(param)) == null)
 		{
 			getServletContext().getRequestDispatcher("/WEB-INF/products.jsp").forward(request, response);
@@ -58,14 +56,8 @@ public class ProductSheetServlet extends HttpServlet {
 			
 			request.setAttribute("product", p);
 			request.setAttribute("productSheet", buffer.toString());
-			
-			String forward;
-			if(user.isCustomer())
-				forward = "/WEB-INF/productSheet.jsp";
-			else
-				forward = "/WEB-INF/productManager.jsp";
-			
-			getServletContext().getRequestDispatcher(forward).forward(request, response);
+						
+			getServletContext().getRequestDispatcher("/WEB-INF/productSheet.jsp").forward(request, response);
 		}
 	}
 	@Override
