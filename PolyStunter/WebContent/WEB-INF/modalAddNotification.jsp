@@ -69,6 +69,6 @@
 	</div>
 	<div class="modal-footer">
 		<button class="btn" data-dismiss="modal" aria-hidden="true"><fmt:message key="cancel"/></button>
-		<button class="btn btn-primary"><fmt:message key="save"/></button>
+		<button class="btn btn-info"><fmt:message key="save"/></button>
 	</div>
 </div>

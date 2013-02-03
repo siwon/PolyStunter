@@ -169,4 +169,31 @@ public class WarehouseDAO {
 		}
 		return w;
 	}
+
+	/**
+	 * Mettre à jour les informations d'un dépôt
+	 * @param id Identifiant du dépôt à modifier
+	 * @param name Nouveau nom pour le dépôt
+	 * @param street Nouvelle rue pour le dépôt
+	 * @param zipCode Nouveau code postal pour le dépôt
+	 * @param city Nouvelle ville pour le dépôt
+	 * @return 1 si la màj s'est bien déroulée, 0 sinon
+	 */
+	public int updateWarehouse(int id, String name, String street,	int zipCode, String city) {
+		java.sql.PreparedStatement preparedStatement;
+		int success = 0;
+		try {
+			preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("UPDATE WAREHOUSE SET nameWarehouse = ? , streetWarehouse = ? , zipCodeWarehouse = ? , cityWarehouse = ? WHERE idWarehouse = ?");
+			preparedStatement.setString(1, name);
+			preparedStatement.setString(2, street);
+			preparedStatement.setInt(3, zipCode);
+			preparedStatement.setString(4, city);
+			preparedStatement.setInt(5, id);
+			success = preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		this.load();
+		return success;
+	}
 }
