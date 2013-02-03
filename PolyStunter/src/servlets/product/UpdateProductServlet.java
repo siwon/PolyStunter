@@ -39,4 +39,11 @@ public class UpdateProductServlet extends HttpServlet {
 			getServletContext().getRequestDispatcher("/WEB-INF/store.jsp").forward(request, response);
 		}
 	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+	}
+	
+	
 }

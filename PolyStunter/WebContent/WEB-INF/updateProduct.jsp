@@ -72,7 +72,7 @@
 				<div class="control-group">
 					<div class="controls">
 						<a href="<c:url value="/store" />"><button type="button" class="btn"><fmt:message key="cancel"/></button></a>
-						<button type="submit" class="btn btn-success"><fmt:message key="save"/></button>
+						<button type="submit" class="btn btn-info"><fmt:message key="save"/></button>
 					</div>
 				</div>
 			</form>
