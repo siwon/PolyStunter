@@ -43,8 +43,6 @@ public class BasketDAO {
 				if(market.getProduct(result.getInt("idProduct")) != null) {
 					if(result.getInt("quantityProduct") > 0) {
 						basket.getProducts().put(market.getProduct(result.getInt("idProduct")),result.getInt("quantityToOrder"));
-					} else {
-						basket.getProducts().put(market.getProduct(result.getInt("idProduct")),0);
 					}
 				}
 			}
@@ -85,7 +83,10 @@ public class BasketDAO {
 	public void addProduct(Basket basket, int id, Integer quantity) {
 		Market market = Market.getInstance();
 		if(basket.contains(id)){
-			basket.getProducts().put(basket.getProduct(id), basket.getProducts().get(basket.getProduct(id))+quantity);
+			if(basket.getProducts().get(basket.getProduct(id))+quantity <= basket.getProduct(id).getQuantity())
+				basket.getProducts().put(basket.getProduct(id), basket.getProducts().get(basket.getProduct(id))+quantity);
+			else
+				basket.getProducts().put(basket.getProduct(id), quantity);
 		} else {
 			basket.getProducts().put(market.getProduct(id), quantity);
 		}

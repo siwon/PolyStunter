@@ -33,30 +33,14 @@ public class ProductSheetServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ResourceBundle rb = ResourceBundle.getBundle("properties.text");
 		String param = request.getParameter("id");
 		MarketDAO.getInstance().refresh(Market.getInstance());
 		if(param.isEmpty() || Market.getInstance().getProduct(Integer.parseInt(param)) == null)
 		{
 			getServletContext().getRequestDispatcher("/WEB-INF/products.jsp").forward(request, response);
 		} else {
-			StringBuffer buffer = new StringBuffer();
-			
-			Product p = Market.getInstance().getProduct(Integer.parseInt(param));
-			
-			buffer.append("<div class='span6'><p><img src='/PolyStunter/products/" + p.getPhoto() + "' width='100px' height='100px' /><br/>");
-			buffer.append("<b>" + p.getName() + "</b><br/><i>" + p.getReference() + "</i><br/>");
-			buffer.append(rb.getObject("sellBy") + " : <a href=" + request.getContextPath() + "/profile?id=" + p.getIdSeller() + ">" + UserDAO.getLoginFromId(p.getIdSeller()) + "</a><br/>");
-			if(p.inStock())
-				buffer.append("<span class='green'>" + rb.getString("inStock") + "</span>");
-			else
-				buffer.append("<span class='red'>" + rb.getString("outOfStock") + "</span><br/>");
-			
-			buffer.append("<b> Prix : " + p.getPrice() + " &euro;</b></p></div>");
-			
+			Product p = Market.getInstance().getProduct(Integer.parseInt(param));	
 			request.setAttribute("product", p);
-			request.setAttribute("productSheet", buffer.toString());
-						
 			getServletContext().getRequestDispatcher("/WEB-INF/productSheet.jsp").forward(request, response);
 		}
 	}
@@ -65,12 +49,9 @@ public class ProductSheetServlet extends HttpServlet {
 			throws ServletException, IOException {
 		int id = Integer.parseInt(req.getParameter("id"));
 		int quantity = Integer.parseInt(req.getParameter("quantity"));
-		ServletContext c = getServletContext();
-		c.log(id+"");
 		HttpSession session = req.getSession();
 		User u = (User) session.getAttribute("user");
 		BasketDAO.getInstance().addProduct(u.getBasket(), id, quantity);
-		
 		resp.sendRedirect("/PolyStunter/basket");
 	}
 

@@ -99,4 +99,35 @@ public class ProductDAO {
 		}
 		return ordered;
 	}
+
+	/**
+	 * Mise à jour des informations d'un produit
+	 * @param id Identifiant du produit à modifier
+	 * @param name Nouveau nom
+	 * @param reference Nouvelle reference
+	 * @param information Nouvelle info
+	 * @param price Nouveau prix
+	 * @param quantity Nouvelle quantité
+	 * @return 1 si l'opération s'est bien déroulée, 0 sinon
+	 */
+	public int updateProduct(int id, String name, String reference,
+			String information, double price, int quantity, int warehouse) {
+		java.sql.PreparedStatement preparedStatement;
+		int success = 0;
+		try {
+			preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("UPDATE PRODUCT SET nameProduct = ?, referenceProduct=?, informationProduct=?, " +
+					"priceProduct = ?, quantityProduct = ?, idWarehouse = ? WHERE idProduct = ?");
+			preparedStatement.setString(1, name);
+			preparedStatement.setString(2, reference);
+			preparedStatement.setString(3, information);
+			preparedStatement.setDouble(4, price);
+			preparedStatement.setInt(5, quantity);
+			preparedStatement.setInt(6, warehouse);
+			preparedStatement.setInt(7, id);
+			success = preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return success;
+	}
 }

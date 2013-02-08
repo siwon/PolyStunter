@@ -49,7 +49,61 @@
 						<th><b><fmt:message key="quantity" /></b></th>
 						<th></th>
 					<thead>
-					<%= request.getAttribute("basket") %>
+					<c:forEach var="e" items="${basket}">
+						<tr>
+							<td>
+								<a href="<c:url value="/productSheet?id=${e.key.id}" />" >
+									<c:choose>
+										<c:when test="${e.key.name.length() > 20}">
+											${e.key.name.substring(0,20)} ...
+										</c:when>
+										<c:otherwise>
+											${e.key.name}
+										</c:otherwise>
+									</c:choose>
+								</a>
+							</td>
+							<td>
+								<span>
+									Ref. ${e.key.reference}
+								</span>
+							</td>
+							<td>
+								<c:choose>
+									<c:when test="${e.key.inStock()}">
+										<span class='green'><fmt:message key="inStock"/></span>
+									</c:when>
+									<c:otherwise>
+										<span class='red'><fmt:message key="outOfStock"/></span>
+									</c:otherwise>
+								</c:choose>
+							</td>
+							<td>
+								<a href="<c:url value="/basketRemove?id=${e.key.id}" />"><fmt:message key="remove"/></a>
+								
+							</td>
+							<td>
+								<fmt:formatNumber value="${e.key.price}" minFractionDigits="2"/> &euro;
+							</td>
+							<td>
+								${e.value}
+							</td>
+							<td>
+								<div class='btn-group'>
+									<a href="<c:url value="/basketDecreaseQuantity?id=${e.key.id}" />">
+										<button class='btn btn-danger btn-mini'>
+											-
+										</button>
+									</a>
+									<a href="<c:url value="/basketIncreaseQuantity?id=${e.key.id}" />">
+										<button class='btn btn-success btn-mini'>
+											+
+										</button>
+									</a>
+								</div>
+							</td>
+						</tr>					
+					</c:forEach>
 					<tr>
 						<th colspan="4" ></th>
 						<th><b><fmt:message key="totalTTC" /></b></th>
@@ -59,8 +113,11 @@
 				</table>
 				<div class="center">
 						<a href="<c:url value="/basketEmpty"/>"><button type="button" class="btn btn-warning"><fmt:message key="empty" /></button></a>
-						<a href="<c:url value="/basketValidate"/>"><button type="button" class="btn btn-success"><fmt:message key="validate" /></button></a>
+						<a href="#myModal" role="button" class="btn btn-success" data-toggle="modal"><fmt:message key="validate" /></a>
 				</div>	
+				<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<%@include file="modalForwardingAddress.jsp"%>
+			</div>
 			</c:if>
 			<c:if test="${empty basket}" >
 				<div class="center">

@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.BasketDAO;
+
+import beans.User;
+
 /**
  * Servlet implementation class BasketValidateServlet
 */
@@ -22,14 +26,19 @@ public class BasketValidateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		User user = (User) request.getSession().getAttribute("user");
+		if(user.getBasket().isEmpty())
+			response.sendRedirect("/PolyStunter/basket");
+		else {
+			//BasketDAO.getInstance().valid(user.getBasket());
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -28,28 +28,46 @@
 				<a href=<c:url value="/products"/>><fmt:message key="back" /></a>
 			</div>
 			
-				
-			<% Product p = (Product) request.getAttribute("product"); %>
 			<div class="row">
-				<%= request.getAttribute("productSheet") %>
+				<div class="span6">
+					<p>
+						<img src="/PolyStunter/products/${product.photo}" width="100px" height="100px" /><br/>
+						<b>${product.name}</b><br/>
+						<i>${product.reference}</i><br/>
+						<fmt:message key="sellBy"/>
+						<a href="<c:url value="/profile?id=${product.idSeller}"/>">${UserDAO.getLoginFromId(product.idSeller)}</a><br/>
+						<c:choose>
+							<c:when test="${product.inStock()}">
+								<span class='green'>
+									<fmt:message key="inStock"/>
+								</span>
+							</c:when>
+							<c:otherwise>
+								<span class='red'>
+									<fmt:message key="outOfStock"/>
+								</span>
+							</c:otherwise>
+						</c:choose> <br/>
+						<b><fmt:message key="unitPrice"/> : <fmt:formatNumber value="${product.price}" minFractionDigits="2"/> &euro;</b>
+					</p>
+				</div>		
 				<div class="span3">
 				<form name="productSheet" action=<c:url value="/productSheet"/>	method="POST">
 						<p>
 							<b><fmt:message key="quantity" /> :</b> <br />
-							<select name="quantity"	<%if (!p.inStock())	out.println("disabled='disabled'");%> >
-								<c:forEach var="entry" begin="1" end="${product.getQuantity()}">
+							<select name="quantity" <c:if test="${!product.inStock()}"> disabled </c:if>>
+								<c:forEach var="entry" begin="1" end="${product.quantity}">
 									<option value="${entry}"> ${entry} </option>
 								</c:forEach>
 							</select>
 							<br /> 
-							<input name="id" type="hidden" value="<%=p.getId()%>" />
-							<button type="submit" class="btn btn-success <%if (!p.inStock())
-				out.println("disabled");%>"><fmt:message key="addToBasket" /></button>
+							<input name="id" type="hidden" value="${product.id}" />
+							<button type="submit" class="btn btn-success <c:if test="${!product.inStock()}"> disabled </c:if>"<c:if test="${!product.inStock()}"> disabled </c:if>><fmt:message key="addToBasket" /></button>
 						</p>
 					</form>
 				</div>
 			</div>
-			<i><%= p.getInformation() %></i>
+			<i>${product.information}</i>
 			<hr>
 		</div>
 		<%@include file="/WEB-INF/includes/footer.jsp" %>

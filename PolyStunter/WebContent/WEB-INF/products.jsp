@@ -28,7 +28,36 @@
 			</div>
 				
 			<ul class="thumbnails market">
-				<%= request.getAttribute("products") %>
+				<c:forEach var="p" items="${products}">
+					<li class="span3">
+						<img src="/PolyStunter/products/${p.photo}" width="100px" height="100px"/><br/>
+						<c:choose>
+							<c:when test="${p.name.length()> 20}">
+								${p.name.substring(0,20)}...
+							</c:when>
+							<c:otherwise>
+							${p.name}
+							</c:otherwise>
+						</c:choose><br/>
+						<b><fmt:message key="unitPrice"/> : </b> <fmt:formatNumber value="${p.price}" minFractionDigits="2"/> &euro;<br/>
+						<c:choose>
+							<c:when test="${p.inStock()}">
+								<span class='green'>
+									<fmt:message key="inStock"/>
+								</span>
+							</c:when>
+							<c:otherwise>
+								<span class='red'>
+									<fmt:message key="outOfStock"/>
+								</span>
+							</c:otherwise>
+						</c:choose>
+						<br/>
+						<a href="<c:url value="/productSheet?id=${p.id}" />" class='btn btn-info'>
+							<fmt:message key="see"/>
+						</a>
+					</li>
+				</c:forEach>
 			</ul>
 			<hr>
 		</div>

@@ -28,45 +28,54 @@
 				<h1><fmt:message key="updateProduct" /></h1>
 				<a href=<c:url value="/store"/>><fmt:message key="back" /></a>
 			</div>
-			
 				
-			<% Product p = (Product) request.getAttribute("product"); %>
-			
-			<form class="form-horizontal" name="productManager" action=<c:url value="/storeAction"/>	method="POST">
+			<form class="form-horizontal" name="productManager" action=<c:url value="/updateProduct"/>	method="POST">
 				<div class="control-group">
 					<label class="control-label" for="name"><fmt:message key="productName"/></label>
 					<div class="controls">
-						<input type="text" id="name" name="name" value="<%= p.getName() %>">
+						<input type="text" id="name" name="name" value="${product.name}">
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="reference"><fmt:message key="reference" /></label>
 					<div class="controls">
-						<input type="text" id="reference" name="reference" value="<%= p.getReference() %>"required >
+						<input type="text" id="reference" name="reference" value="${product.reference}"required >
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="information"><fmt:message key="information" /></label>
 					<div class="controls">
-						<textarea rows="4" id="information" name="information"><%= p.getInformation() %></textarea>
+						<textarea rows="4" id="information" name="information">${product.information}</textarea>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="warehouse"><fmt:message key="warehouseAddress" /></label>
 					<div class="controls">
-						<input type="text" class="input-mini disabled" disabled value="<%= WarehouseDAO.getInstance().getWarehouseName(p.getWarehouse()) %>" />
+						<select name="warehouse">
+							<c:forEach var="w" items="${warehouses}">
+								<c:choose>
+									<c:when test="${product.warehouse == w.id}">
+										<option value="${w.id}" selected>${w.name}</option>
+									</c:when>
+									<c:otherwise>
+										<option value="${w.id}">${w.name}</option>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>					
+						</select>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="price"><fmt:message key="unitPrice" /></label>
 					<div class="controls">
-						<input class="input-mini" id="price" name="price" type="text" pattern="[0-9]+[.]?[0-9]*" value="<%= p.getPrice()%>" required> &euro;
+						<input class="input-mini" id="price" name="price" type="text" pattern="[0-9]+[.]?[0-9]*" value="${product.price}" required> &euro;
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="quantity"><fmt:message key="quantity" /></label>
 					<div class="controls">
-						<input class="input-mini" type="text" pattern="[0-9]+"  id="quantity" name="quantity" value="<%= p.getQuantity()%>" required>
+						<input class="input-mini" type="text" pattern="[0-9]+"  id="quantity" name="quantity" value="${product.quantity}" required>
+						<input type="hidden" name="id" value="${product.id}" />
 					</div>
 				</div>						
 				<div class="control-group">
