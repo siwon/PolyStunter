@@ -64,10 +64,10 @@ CREATE TABLE IF NOT EXISTS `orderedproducts` (
 CREATE TABLE IF NOT EXISTS `orders` (
   `idOrder` int(11) NOT NULL AUTO_INCREMENT,
   `idCustomer` int(11) NOT NULL DEFAULT '0',
-  `forwardingAddressOrder` varchar(32) DEFAULT NULL,
+  `forwardingAddressOrder` text,
   `deliveryDateOrder` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `costOrder` double DEFAULT NULL,
-  `statusOrder` enum('IN_PREPARATION','READY','DELIVERED') DEFAULT NULL,
+  `statusOrder` enum('READY','DELIVERED') DEFAULT NULL,
   PRIMARY KEY (`idOrder`,`idCustomer`),
   KEY `idCustomer` (`idCustomer`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
