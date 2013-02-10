@@ -14,20 +14,22 @@ public class Order {
 	private int id;
 	private int idCustomer;
 	private String forwardingAddress;
-	private Timestamp dateOrder;
-	private double costOrder;
+	private Timestamp date;
+	private double cost;
+	private String status;
 	
 	private Map<Product,Integer> productsOrdered;
 
 	public Order(int id, int idCustomer, String forwardingAddress,
-			Timestamp dateOrder, double costOrder) {
+			Timestamp dateOrder, double costOrder, String status) {
 		super();
 		this.id = id;
 		this.idCustomer = idCustomer;
 		this.forwardingAddress = forwardingAddress;
-		this.dateOrder = dateOrder;
-		this.costOrder = costOrder;
+		this.date = dateOrder;
+		this.cost = costOrder;
 		productsOrdered = new HashMap<Product,Integer>();
+		this.status = status;
 	}
 
 	public int getId() {
@@ -42,12 +44,12 @@ public class Order {
 		return forwardingAddress;
 	}
 
-	public Timestamp getDateOrder() {
-		return dateOrder;
+	public Timestamp getDate() {
+		return date;
 	}
 
-	public double getCostOrder() {
-		return costOrder;
+	public double getCost() {
+		return cost;
 	}
 
 	public Map<Product, Integer> getProductsOrdered() {
@@ -56,6 +58,18 @@ public class Order {
 	
 	public void add(Product p, int quantity) {
 		productsOrdered.put(p, quantity);
+	}
+
+	public String getStatus() {
+		return status;
+	}
+	
+	public boolean isReady() {
+		return status.equals("READY");
+	}
+	
+	public boolean isDelivered() {
+		return status.equals("DELIVERED");
 	}
 	
 }

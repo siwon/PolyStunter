@@ -37,7 +37,7 @@ public class DeliveryDAO {
 		int id, idCustomer;
 		Timestamp t;
 		double cost;
-		String forwardingAddress;
+		String forwardingAddress, status;
 		List<Order> l = null;
 		try {
 			preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("SELECT * FROM ORDERS WHERE statusOrder != 'DELIVERED'");
@@ -50,7 +50,8 @@ public class DeliveryDAO {
 				forwardingAddress = result.getString("forwardingAddressOrder");
 				t = result.getTimestamp("deliveryDateOrder");
 				cost = result.getDouble("costOrder");
-				order = new Order(id, idCustomer, forwardingAddress, t, cost);
+				status = result.getString("statusOrder");
+				order = new Order(id, idCustomer, forwardingAddress, t, cost, status);
 				preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("SELECT * FROM ORDEREDPRODUCTS WHERE idOrder = ?");
 				preparedStatement.setInt(1, id);
 				ResultSet rs2 = preparedStatement.executeQuery();

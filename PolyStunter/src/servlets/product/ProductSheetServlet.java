@@ -1,9 +1,7 @@
 package servlets.product;
 
 import java.io.IOException;
-import java.util.ResourceBundle;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,8 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import dao.BasketDAO;
 import dao.MarketDAO;
-import dao.UserDAO;
-
 import beans.Market;
 import beans.Product;
 import beans.User;

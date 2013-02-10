@@ -54,21 +54,19 @@
 				<div class="control-group">
 					<label class="control-label" for="login"><fmt:message key="login" /></label>
 					<div class="controls">
-						<input type="text" id="login" name="login" minlength="6" required  maxlength="10">
-						<p class="help-block"><fmt:message key="minSize" /> : 6</p>
+						<input type="text" id="login" name="login" required placeholder="<fmt:message key="login" />" maxlength="10">
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="password"><fmt:message key="password" /></label>
 					<div class="controls">
-						<input type="password" id="password" name="password" minlength="6" required >
-						<p class="help-block"><fmt:message key="minSize" /> : 6</p>
+						<input type="password" id="password" name="password" placeholder="<fmt:message key="password" />" required >
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="mail"><fmt:message key="mail" /></label>
 					<div class="controls">
-						<input type="email" id="mail" name="mail" required>
+						<input type="email" id="mail" name="mail" placeholder="<fmt:message key="mail" />" required>
 					</div>
 				</div>
 				<div class="control-group">

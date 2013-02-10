@@ -1,0 +1,15 @@
+bdd
+beans
+dao
+exceptions
+filters
+forms
+servlets
+servlets.basket
+servlets.connection
+servlets.delivery
+servlets.notification
+servlets.product
+servlets.store
+servlets.warehouse
+utils

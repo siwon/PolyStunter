@@ -49,7 +49,7 @@
 							<a class="btn btn-large btn-info" href="<c:url value="/store" />"><fmt:message key="manageMyStore" /> !</a>
 						</c:when>
 						<c:when test="${user.isDeliveryMan()}">
-							<a class="btn btn-large btn-info" href="<c:url value="#" />"><fmt:message key="manageMyDeliveries" /> !</a>
+							<a class="btn btn-large btn-info" href="<c:url value="/delivery" />"><fmt:message key="manageMyDeliveries" /> !</a>
 						</c:when>
 						<c:otherwise>
 							<a class="btn btn-large btn-info" href="<c:url value="/register" />"><fmt:message key="register" /> !</a>
