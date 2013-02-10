@@ -29,9 +29,9 @@
 			<c:if test="${not empty orders}">
 				<c:forEach var="o" items="${orders}">
 					<b><fmt:message key="orderFrom"/></b> ${o.dateOrder}<br/>
-					<i><fmt:message key="productsToDeliver"/></i>
-					<c:forEach var="e" items="o.productsOrdered.entrySet()">
-						Ref. ${e}
+					<i><fmt:message key="productsToDeliver"/></i> <br/>
+					<c:forEach var="e" items="${o.productsOrdered.entrySet()}">
+						Ref. ${e.getKey().reference} <br/>
 					</c:forEach>
 				
 				</c:forEach>
