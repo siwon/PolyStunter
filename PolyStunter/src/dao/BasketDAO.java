@@ -140,15 +140,16 @@ public class BasketDAO {
 			int id = rs.getInt(1);
 			if(success == 1) {
 				for (Entry<Product,Integer> e : basket.getProducts().entrySet()) {
+					ProductDAO.getInstance().setQuantity(e.getKey().getId(), e.getValue());
 					preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("INSERT INTO ORDEREDPRODUCTS VALUES (?,?,?)");
 					preparedStatement.setInt(1, id);
-					preparedStatement.setString(2, e.getKey().getReference());
+					preparedStatement.setInt(2, e.getKey().getId());
 					preparedStatement.setInt(3, e.getValue());
 					preparedStatement.executeUpdate();
 				}
 			}
+			
 		} catch (SQLException e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 		return success;

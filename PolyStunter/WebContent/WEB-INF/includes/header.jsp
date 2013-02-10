@@ -31,7 +31,7 @@
 						<c:when test="${user.isDeliveryMan()}">
 							<li class="active"><a href="<c:url value="/home"/>" ><fmt:message key="home" /></a></li>
 							<li class="active"><a href="<c:url value="/profile"/>" ><fmt:message key="profil" /></a></li>
-							<li class="active"><a href="<c:url value="#"/>" ><fmt:message key="deliverySpace" /></a></li>
+							<li class="active"><a href="<c:url value="/delivery"/>" ><fmt:message key="deliverySpace" /></a></li>
 							<li class="active"><a href="<c:url value="/notification"/>" ><fmt:message key="notifications" /></a></li>
 						</c:when>
 						
@@ -41,7 +41,7 @@
 							<li class="active"><a href="<c:url value="/products"/>" ><fmt:message key="products" /></a></li>
 							<li class="active"><a href="<c:url value="/basket"/>" ><fmt:message key="myBasket" /></a></li>
 							<li class="active"><a href="<c:url value="/store"/>" ><fmt:message key="myStore" /></a></li>
-							<li class="active"><a href="<c:url value="#"/>" ><fmt:message key="deliverySpace" /></a></li>
+							<li class="active"><a href="<c:url value="/delivery"/>" ><fmt:message key="deliverySpace" /></a></li>
 							<li class="active"><a href="<c:url value="/notification"/>" ><fmt:message key="notifications" /></a></li>
 						</c:when>
 						

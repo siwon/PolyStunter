@@ -153,4 +153,27 @@ public class ProductDAO {
 		}
 		return !exist;
 	}
+	
+	/**
+	 * Achat d'un produit
+	 * @param id Identifiant du produit
+	 * @param quantity Quantité commandée
+	 */
+	public void setQuantity(int id, int quantity) {
+		java.sql.PreparedStatement preparedStatement;
+		try {
+			preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("SELECT quantityProduct FROM PRODUCT WHERE idProduct = ?");
+			preparedStatement.setInt(1, id);
+			ResultSet rs = preparedStatement.executeQuery();
+			rs.next();
+			int q = rs.getInt(1);
+			
+			preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("UPDATE PRODUCT SET quantityProduct = ? WHERE idProduct = ?");
+			preparedStatement.setInt(1, id);
+			preparedStatement.setInt(2, q - quantity);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

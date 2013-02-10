@@ -23,7 +23,7 @@ import beans.User;
  */
 @WebFilter(
 		filterName = "/DeliveryManFilter",
-		urlPatterns = {"/notification"}
+		urlPatterns = {"/notification", "/delivery"}
 		)
 public class DeliveryManFilter implements Filter {
 
