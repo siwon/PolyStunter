@@ -167,10 +167,10 @@ public class ProductDAO {
 			ResultSet rs = preparedStatement.executeQuery();
 			rs.next();
 			int q = rs.getInt(1);
-			
+			int newQuantity = q - quantity;
 			preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("UPDATE PRODUCT SET quantityProduct = ? WHERE idProduct = ?");
 			preparedStatement.setInt(1, id);
-			preparedStatement.setInt(2, q - quantity);
+			preparedStatement.setInt(2, newQuantity);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
