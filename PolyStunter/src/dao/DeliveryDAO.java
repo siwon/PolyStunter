@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import java.util.*;
 
 import bdd.ConnectionBdd;
+import beans.Market;
 import beans.Order;
 
 /**
@@ -54,7 +55,7 @@ public class DeliveryDAO {
 				preparedStatement.setInt(1, id);
 				ResultSet rs2 = preparedStatement.executeQuery();
 				while(rs2.next()) {
-					order.add(rs2.getInt("idProduct"), rs2.getInt("quantityOrdered"));
+					order.add(Market.getInstance().getProduct(rs2.getInt("idProduct")), rs2.getInt("quantityOrdered"));
 				}
 				l.add(order);
 			}

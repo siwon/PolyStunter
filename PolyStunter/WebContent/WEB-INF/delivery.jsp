@@ -30,11 +30,16 @@
 				<c:forEach var="o" items="${orders}">
 					<b><fmt:message key="orderFrom"/></b> ${o.dateOrder}<br/>
 					<i><fmt:message key="productsToDeliver"/></i>
-					<c:forEach var="p" items="o.productsOrdered">
-						Ref. 
+					<c:forEach var="e" items="o.productsOrdered.entrySet()">
+						Ref. ${e}
 					</c:forEach>
 				
 				</c:forEach>
+			</c:if>
+			<c:if test="${empty orders}">
+				<div class="center">
+					<fmt:message key="noDelivery"/>
+				</div>
 			</c:if>
 			<hr>
 		</div>

@@ -17,7 +17,7 @@ public class Order {
 	private Timestamp dateOrder;
 	private double costOrder;
 	
-	private Map<Integer,Integer> productsOrdered;
+	private Map<Product,Integer> productsOrdered;
 
 	public Order(int id, int idCustomer, String forwardingAddress,
 			Timestamp dateOrder, double costOrder) {
@@ -27,7 +27,7 @@ public class Order {
 		this.forwardingAddress = forwardingAddress;
 		this.dateOrder = dateOrder;
 		this.costOrder = costOrder;
-		productsOrdered = new HashMap<Integer,Integer>();
+		productsOrdered = new HashMap<Product,Integer>();
 	}
 
 	public int getId() {
@@ -50,12 +50,12 @@ public class Order {
 		return costOrder;
 	}
 
-	public Map<Integer, Integer> getProductsOrdered() {
+	public Map<Product, Integer> getProductsOrdered() {
 		return productsOrdered;
 	}
 	
-	public void add(int idProduct, int quantity) {
-		productsOrdered.put(id, quantity);
+	public void add(Product p, int quantity) {
+		productsOrdered.put(p, quantity);
 	}
 	
 }
