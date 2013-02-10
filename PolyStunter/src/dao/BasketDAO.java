@@ -3,8 +3,10 @@
  */
 package dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Map.Entry;
 
 import bdd.ConnectionBdd;
@@ -121,5 +123,34 @@ public class BasketDAO {
 			}
 		}
 		return toReturn;
+	}
+
+	public int validate(Basket basket, String forwardingAddress) {
+		java.sql.PreparedStatement preparedStatement;
+		int success = 0;
+		try {
+			preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("INSERT INTO ORDERS VALUES (null,?,?,null,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+			preparedStatement.setInt(1, basket.getId());
+			preparedStatement.setString(2, forwardingAddress);
+			preparedStatement.setDouble(3, basket.getCost());
+			preparedStatement.setString(4, "READY");
+			success = preparedStatement.executeUpdate();
+			ResultSet rs = preparedStatement.getGeneratedKeys();
+			rs.next();
+			int id = rs.getInt(1);
+			if(success == 1) {
+				for (Entry<Product,Integer> e : basket.getProducts().entrySet()) {
+					preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("INSERT INTO ORDEREDPRODUCTS VALUES (?,?,?)");
+					preparedStatement.setInt(1, id);
+					preparedStatement.setString(2, e.getKey().getReference());
+					preparedStatement.setInt(3, e.getValue());
+					preparedStatement.executeUpdate();
+				}
+			}
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		return success;
 	}
 }

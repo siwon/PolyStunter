@@ -8,9 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import utils.Message;
-
-import dao.BasketDAO;
-
 import beans.User;
 
 /**
@@ -18,11 +15,11 @@ import beans.User;
 */
 
 @WebServlet(
-	    name = "BasketValidateServlet", 
-	    urlPatterns = {"/basketValidate"}
+	    name = "BasketSummaryServlet", 
+	    urlPatterns = {"/basketSummary"}
 	)
 
-public class BasketValidateServlet extends HttpServlet {
+public class BasketSummaryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -34,26 +31,26 @@ public class BasketValidateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Message message = new Message();
 		User user = (User) request.getSession().getAttribute("user");
 		if(user.getBasket().isEmpty())
 			response.sendRedirect("/PolyStunter/basket");
 		else {
 			if(request.getParameter("street") != null && request.getParameter("zipCode") != null && request.getParameter("city") != null) {
-				
-				String forwardingAddress = request.getParameter("street") + "<br/>" + request.getParameter("zipCode") + request.getParameter("city");
-				
-				if(BasketDAO.getInstance().validate(user.getBasket(),forwardingAddress) == 1) {
-					BasketDAO.getInstance().empty(user.getBasket());
-					message.addSuccess("Votre commande a été validée avec succès.");
-				} else {
-					message.addError("Erreur de traitement de votre commande.");
-				}
+				Message message = new Message();
+				message.addSuccess("Adresse de livraison enregistrée.");
+				request.setAttribute("basket", user.getBasket().getProducts().entrySet());
+				request.setAttribute("basketCost", user.getBasket().getCost());
+				request.setAttribute("street", request.getParameter("street"));
+				request.setAttribute("zipCode", request.getParameter("zipCode"));
+				request.setAttribute("city", request.getParameter("city"));
+				request.setAttribute("message",message);
+				getServletContext().getRequestDispatcher("/WEB-INF/orderSummary.jsp").forward(request, response);
 			} else {
+				Message message = new Message();
 				message.addError("Adresse de livraison non valide.");
+				request.setAttribute("message",message);
+				getServletContext().getRequestDispatcher("/WEB-INF/basket.jsp").forward(request, response);
 			}
-			request.setAttribute("message",message);
-			getServletContext().getRequestDispatcher("/basket").forward(request, response);
 		}
 	}
 

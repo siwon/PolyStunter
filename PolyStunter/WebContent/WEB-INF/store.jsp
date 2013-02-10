@@ -41,9 +41,44 @@
 			</div>
 			
 			<ul class="thumbnails market">
-				<%= request.getAttribute("products") %>
+				<c:if test="${not empty products}">
+					<c:forEach var="p" items="${products}">
+						<li class="span3">
+							<img src="/PolyStunter/products/${p.photo}" width="100px" height="100px"/><br/>
+							<c:choose>
+								<c:when test="${p.name.length() > 20}">
+									${p.name.substring(0,20)}...
+								</c:when>
+								<c:otherwise>
+									${p.name}
+								</c:otherwise>
+							</c:choose>
+							<br/>
+							<b>
+								<fmt:message key="unitPrice"/> :
+							</b>
+							${p.price} &euro;<br/>
+							<c:choose>
+								<c:when test="${p.inStock()}">
+									<span class="green">
+										<fmt:message key="inStock"/>
+									</span>
+								</c:when>
+								<c:otherwise>
+									<span class="red">
+										<fmt:message key="outOfStock"/>
+									</span>
+								</c:otherwise>
+							</c:choose>
+							<br/>
+							<div class="btn-group">
+								<a href="<c:url value="/removeProduct?id=${p.id}"/>" class='btn btn-danger btn-mini' onclick="return confirm('<fmt:message key="messageConfirmation"/>')"><fmt:message key="remove"/></a>");
+								<a href="<c:url value="/updateProduct?id=${p.id}" />" class='btn btn-warning btn-mini'><fmt:message key="update"/></a>
+							</div>
+						</li>
+					</c:forEach>
+				</c:if>
 			</ul>
-			
 			<div class="form-actions center">
 				<div class="controls">
 					<a href="<c:url value="/addProduct"/>"><button type="submit" class="btn btn-info"><fmt:message key="addAProduct" /></button></a>

@@ -38,4 +38,12 @@ public class BasketServlet extends HttpServlet {
 		request.setAttribute("basketCost", basket.getCost());
 		getServletContext().getRequestDispatcher("/WEB-INF/basket.jsp").forward(request, response);
 	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		doGet(req,resp);
+	}
+	
+	
 }

@@ -39,7 +39,7 @@ public class ProductDAO {
 	 * @param warehouse Dépôt 
 	 * @param photo Photo du produit
 	 */
-	public static int addProduct(int idSeller, double price, String name, String reference, int quantity, String information, int warehouse, String photo) {
+	public int addProduct(int idSeller, double price, String name, String reference, int quantity, String information, int warehouse, String photo) {
 		int success = 0;
 		java.sql.PreparedStatement preparedStatement;
 		try {
@@ -66,7 +66,7 @@ public class ProductDAO {
 	 * @param id Identification du produit à supprimer
 	 * @return 1 si l'opération s'est bien déroulée, 0 sinon
 	 */
-	public static int removeProduct(int id) {
+	public int removeProduct(int id) {
 		java.sql.PreparedStatement preparedStatement;
 		int success = 0;
 		try {
@@ -84,7 +84,7 @@ public class ProductDAO {
 	 * @param id Identifiant du produit concerné
 	 * @return Vrai si le produit n'est pas commandé, faux sinon
 	 */
-	public static boolean isOrdered(int id) {
+	public boolean isOrdered(int id) {
 		java.sql.PreparedStatement preparedStatement;
 		boolean ordered = false;
 		ResultSet result;
@@ -129,5 +129,28 @@ public class ProductDAO {
 			e.printStackTrace();
 		}
 		return success;
+	}
+	
+	/**
+	 * Vérifie si une référence n'existe pas déjà chez ce même vendeur
+	 * @param reference Référence à vérifier
+	 * @param idSeller Identifiant du vendeur
+	 * @return Vrai si la référence n'existe pas, faux sinon
+	 */
+	public boolean checkReference(String reference, int idSeller) {
+		java.sql.PreparedStatement preparedStatement;
+		boolean exist = false;
+		try {
+			preparedStatement = ConnectionBdd.getInstance().getConnection().prepareStatement("SELECT referenceProduct FROM PRODUCT WHERE idSeller = ?");
+			preparedStatement.setInt(1, idSeller);
+			ResultSet rs = preparedStatement.executeQuery();
+			while(rs.next() && !exist) {
+				if(rs.getString("referenceProduct").equals(reference))
+					exist = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return !exist;
 	}
 }

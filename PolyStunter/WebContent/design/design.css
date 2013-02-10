@@ -18,11 +18,11 @@ body {
 }
 
 .market {
-	text-align : center;
+	text-align: center;
 }
 
 .help-block {
-	color : #FF8000;
+	color: #FF8000;
 }
 
 .center {
@@ -30,47 +30,52 @@ body {
 }
 
 .custom-popup {
-    position: relative;
-    text-align: center;
+	position: relative;
+	text-align: center;
 }
+
 a.close-custom-popup {
-    display: block;
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    width: 16px;
-    height: 16px;
-    font: bold 12px arial;
-    text-decoration: none;
-    line-height: 15px;
-    text-align: center;
-    color: #FFF;
-    background-color: #A00;
+	display: block;
+	position: absolute;
+	top: -8px;
+	right: -8px;
+	width: 16px;
+	height: 16px;
+	font: bold 12px arial;
+	text-decoration: none;
+	line-height: 15px;
+	text-align: center;
+	color: #FFF;
+	background-color: #A00;
 }
+
 .custom-popup-content {
-    padding: 5px;
-    white-space: nowrap;
-    text-align: left;
-    border: solid 1px #666;
-    background-color: #FFF;
+	padding: 5px;
+	white-space: nowrap;
+	text-align: left;
+	border: solid 1px #666;
+	background-color: #FFF;
 }
+
 .custom-popup .beak {
-    position: relative;
-    top: -1px;
-    left: -5px;
-    margin: 0 auto;
-    width: 2px;
-    height: 20px;
-    border-right: solid 1px #666;
-    border-left: solid 1px #666;
-    border-bottom: solid 1px #666;
-    background-color: #FFF;
+	position: relative;
+	top: -1px;
+	left: -5px;
+	margin: 0 auto;
+	width: 2px;
+	height: 20px;
+	border-right: solid 1px #666;
+	border-left: solid 1px #666;
+	border-bottom: solid 1px #666;
+	background-color: #FFF;
 }
+
 .custom-popup-content h1 {
-    margin: 2px;
-    font: bold 14px arial;
+	margin: 2px;
+	font: bold 14px arial;
 }
+
 .custom-popup-content p {
-    margin: 2px;
-    font: 12px arial;
+	margin: 2px;
+	font: 12px arial;
 }

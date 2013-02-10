@@ -56,20 +56,21 @@ public class AddProductServlet extends HttpServlet {
 		
 		DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
 		ServletFileUpload uploadHandler = new ServletFileUpload(fileItemFactory);
+		UploadFileOnServer uploadFileOnServer = new UploadFileOnServer();
 		HttpSession session = request.getSession();
 		User u = (User)session.getAttribute("user");
 		
 		String name = "", information = "", reference = "", fileName = "", param = "", newName = "";
 		int quantity = 0, warehouse = 0;
 		double price = 0;
-		
+		boolean error = false;
 		try {
 			@SuppressWarnings("unchecked")
 			List<FileItem> items = (List<FileItem>) uploadHandler.parseRequest(request);
 			
 			Iterator<FileItem> itr = (Iterator<FileItem>) items.iterator();
 													
-			while (itr.hasNext()) {
+			while (itr.hasNext() && !error) {
 				FileItem item = (FileItem) itr.next();
 				if(item.isFormField()) {
 					param = item.getFieldName();
@@ -82,6 +83,8 @@ public class AddProductServlet extends HttpServlet {
 							break;
 						case "reference":
 							reference = item.getString();
+							if(!ProductDAO.getInstance().checkReference(reference, u.getId()))
+								error = true;
 							break;
 						case "quantity":
 							quantity = Integer.parseInt(item.getString());
@@ -97,23 +100,29 @@ public class AddProductServlet extends HttpServlet {
 					}						
 				} else {
 					newName = u.getId()+ "_" + reference;
-					UploadFileOnServer uploadFileOnServer = new UploadFileOnServer();
 					fileName = uploadFileOnServer.uploadFile(item, getServletContext().getRealPath("/") + "products", newName);
 				}
 			}
-			ProductDAO.addProduct(u.getId(),price,name,reference,quantity,information,warehouse,fileName);
+			if(!error)
+				ProductDAO.getInstance().addProduct(u.getId(),price,name,reference,quantity,information,warehouse,fileName);
+			else
+				message.addError("Cette référence existe déjà dans votre boutique.");
+			
 		} catch(ExtensionException e) {
 			message.addError(e.getMessage());
 		} catch (FileUploadException e) {
 			message.addError(e.getMessage());
 		}
 		
+		String forward = "";
+		
 		if(message.isEmpty()) {
-			response.sendRedirect("/PolyStunter/store");
+			forward = "/store";
 		} else {
 			request.setAttribute("message", message);
-			getServletContext().getRequestDispatcher("/WEB-INF/addProduct.jsp").forward(request, response);
+			forward = "/WEB-INF/addProduct.jsp";
 		}
+		getServletContext().getRequestDispatcher(forward).forward(request, response);
 	}
 }
 

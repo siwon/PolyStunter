@@ -23,7 +23,7 @@ import beans.User;
  */
 @WebFilter(
 		filterName = "/CustomerFilter",
-		urlPatterns = {"/basket", "/basketDecreaseQuantity", "/basketIncreaseQuantity", "/basketRemove", "/basketEmpty", "/basketValidate", "/products", "/productSheet"}
+		urlPatterns = {"/basket", "/basketDecreaseQuantity", "/basketIncreaseQuantity", "/basketSummary", "/basketRemove", "/basketEmpty", "/basketValidate", "/products", "/productSheet"}
 		)
 public class CustomerFilter implements Filter {
 
